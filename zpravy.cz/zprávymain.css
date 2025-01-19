@@ -1,0 +1,23 @@
+.h1-style {
+  font-size: 40px;
+  color:#BF211E;
+  width: 600px;
+  margin-left: 400px;
+  margin-right: auto;
+  padding: 20px;
+}
+.colored-punctuation {
+    color: #12355B; /* Choose your desired color */
+  }
+  .unorganized-list {
+    list-style-type: none;
+    margin: auto;
+    padding: 20px;
+    font-size: 25px;
+  }
+  .text-style {
+    padding: 20px;
+    font-size: 25px;
+    color: #604fbd;  
+text-decoration: none;
+  }
