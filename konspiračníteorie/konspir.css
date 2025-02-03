@@ -1,0 +1,66 @@
+/* General styles */
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #ff0000;
+    text-shadow: 2px 2px 4px #000000;
+    margin-top: 20px;
+}
+
+#newsContent {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+}
+
+p {
+    margin: 10px 0;
+}
+
+/* Button styles */
+.button {
+    background-color: #003366;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000; /* Ensure the button is above other elements */
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #ff0000;
+}
+
+.return-button {
+    display: inline-block;
+    transition: opacity 0.3s;
+    position: fixed;
+    top: 10px; /* Position it in the top-right corner */
+    right: 10px;
+    z-index: 1000;
+}
+
+.return-button img {
+    width: 160px; /* Adjust the size as needed */
+    height: auto;
+    vertical-align: middle;
+}
+
+.return-button:hover {
+    opacity: 0.7;
+}

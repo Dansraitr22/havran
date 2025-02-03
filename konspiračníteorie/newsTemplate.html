@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Title</title>
+    <link rel="stylesheet" href="./konspir.css">
+    <script src="./newsData.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsIndex = urlParams.get('newsIndex');
+            if (newsIndex !== null) {
+                const news = newsData[newsIndex];
+                if (news) {
+                    document.title = news.newsTitle; // Set the document title
+                    document.getElementById('newsTitle').textContent = news.newsTitle; // Set the <h1> content
+                    document.getElementById('newsContent').textContent = news.content; // Set the content
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1 id="newsTitle">News Title</h1>
+    <div id="newsContent">News content will be displayed here.</div>
+    <a href="konspirmain.html" class="return-button"><img src="../images/DALL·E 2025-01-25 17.09.47 - An Illuminati-style logo for 'Go Back to Main Site,' featuring a triangle as the central element, with an eye at its peak. The triangle incorporates a.webp"></a>
+</body>
+</html>

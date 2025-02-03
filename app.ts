@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (inputValue === "zprávy") {
             printtex.innerHTML='<p><a href="./zpravy.cz/zpravyhlavnistr.html">zprávy random</a></p></a></p>';
         } else {
-            console.log("peknej moula");
+            printtex.innerHTML="<p>Neznámé vyhledávání</p>";
         }
     }
 
