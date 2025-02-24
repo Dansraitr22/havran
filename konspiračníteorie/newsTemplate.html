@@ -19,15 +19,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const newsIndex = urlParams.get('newsIndex');
-            const newsItem = newsData[newsIndex];
-            const newsContent = document.getElementById('newsContent');
-            if (newsItem) {
+            if (newsIndex !== null && newsData[newsIndex]) {
+                const newsItem = newsData[newsIndex];
+                const newsContent = document.getElementById('newsContent');
                 newsContent.innerHTML = `
                     <h2>${newsItem.title}</h2>
                     <p>${newsItem.content}</p>
                 `;
             } else {
-                newsContent.innerHTML = '<p>Article not found</p>';
+                document.getElementById('newsContent').innerHTML = '<p>News item not found.</p>';
             }
         });
     </script>

@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zpravy.cz News</title>
-    <link rel="stylesheet" href="./konspirmain.css">
+    <title>Konspirační Teorie Main</title>
+    <link rel="stylesheet" href="./konspir.css">
 </head>
 <body>
     <header>
-        <h1>Zpravy.cz News</h1>
+        <h1>Konspirační teorie</h1>
     </header>
-    <main id="newsLinks"></main>
+    <main id="konspiraNewsLinks"></main>
     <script src="./newsData.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const newsLinks = document.getElementById('newsLinks');
-            newsData.forEach((news, index) => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'news-item';
-                newsElement.innerHTML = `
-                    <h2><a href="newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
-                    <p>${news.content.substring(0, 100)}...</p>
-                `;
-                newsLinks.appendChild(newsElement);
-            });
+            const konspiraNewsLinks = document.getElementById('konspiraNewsLinks');
+            if (konspiraNewsLinks && typeof konspiraNewsData !== 'undefined') {
+                konspiraNewsData.forEach((news, index) => {
+                    const newsElement = document.createElement('div');
+                    newsElement.className = 'news-item';
+                    newsElement.innerHTML = `
+                        <h2><a href="./newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
+                        <p>${news.content.substring(0, 100)}...</p>
+                    `;
+                    konspiraNewsLinks.appendChild(newsElement);
+                });
+            } else {
+                console.error('Element with ID "konspiraNewsLinks" not found or konspiraNewsData is not defined.');
+            }
         });
     </script>
 </body>
