@@ -1,0 +1,20 @@
+{
+  "name": "zpravy-cz-news",
+  "version": "1.0.0",
+  "description": "A news application tailored for the zpravy.cz platform.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src"
+  },
+  "keywords": [
+    "news",
+    "zpravy",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

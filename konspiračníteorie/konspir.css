@@ -5,6 +5,20 @@ body {
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
 }
 
 h1 {
@@ -12,6 +26,7 @@ h1 {
     color: #ff0000;
     text-shadow: 2px 2px 4px #000000;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #newsContent {
@@ -28,39 +43,72 @@ p {
     margin: 10px 0;
 }
 
-/* Button styles */
-.button {
-    background-color: #003366;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1000; /* Ensure the button is above other elements */
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: #ff0000;
-}
-
+/* Return button styles */
 .return-button {
-    display: inline-block;
-    transition: opacity 0.3s;
     position: fixed;
-    top: 10px; /* Position it in the top-right corner */
-    right: 10px;
+    top: 10px;
+    left: 10px;
     z-index: 1000;
 }
 
-.return-button img {
-    width: 160px; /* Adjust the size as needed */
-    height: auto;
-    vertical-align: middle;
+.return-image {
+    width: 200px;
+    height: 200px;
+    transition: opacity 0.3s;
 }
 
-.return-button:hover {
+.return-image:hover {
     opacity: 0.7;
+}
+
+/* News item styles */
+.news-item {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.news-item:hover {
+    background-color: #444;
+}
+
+.news-item a {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.news-item a:hover {
+    color: #ff0000;
+}
+
+.news-item p {
+    color: #ccc;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Background image styles */
+.background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 200px; /* Adjust the width as needed */
+    background: url('background.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+}
+
+.background.left {
+    left: 0;
+}
+
+.background.right {
+    right: 0;
 }

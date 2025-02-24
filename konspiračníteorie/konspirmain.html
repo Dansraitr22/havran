@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zprávy.cz</title>
+    <title>Zpravy.cz News</title>
     <link rel="stylesheet" href="./konspirmain.css">
-    <script src="./newsData.js" defer></script>
 </head>
 <body>
-    <div class="background left"><img src="../images/DALL·E 2025-01-25 17.29.13 - A single conspiratorial symbol featuring an all-seeing eye inside a triangle, surrounded by intricate geometric patterns and cryptic details. The desi.webp" alt=""></div>
-    <div class="background right"><img src="../images/DALL·E 2025-01-25 17.29.13 - A single conspiratorial symbol featuring an all-seeing eye inside a triangle, surrounded by intricate geometric patterns and cryptic details. The desi.webp" alt=""></div>
-    <div class="container">
-        <h1>zprávy.cz</h1>
-        <div id="newsLinks"></div>
-    </div>
+    <header>
+        <h1>Zpravy.cz News</h1>
+    </header>
+    <main id="newsLinks"></main>
+    <script src="./newsData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const newsLinks = document.getElementById('newsLinks');
+            newsData.forEach((news, index) => {
+                const newsElement = document.createElement('div');
+                newsElement.className = 'news-item';
+                newsElement.innerHTML = `
+                    <h2><a href="newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
+                    <p>${news.content.substring(0, 100)}...</p>
+                `;
+                newsLinks.appendChild(newsElement);
+            });
+        });
+    </script>
 </body>
 </html>

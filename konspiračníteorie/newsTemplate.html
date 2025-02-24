@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Title</title>
-    <link rel="stylesheet" href="./konspir.css">
-    <script src="./newsData.js" defer></script>
+    <title>News Detail</title>
+    <link rel="stylesheet" href="konspir.css">
+</head>
+<body>
+    <header>
+        <h1>News Detail</h1>
+        <a href="./konspirmain.html" class="return-button">
+            <img src="../images/iluminaty.webp" alt="Return to main page" class="return-image">
+        </a>
+    </header>
+    <main id="newsContent"></main>
+    <script src="./newsData.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const newsIndex = urlParams.get('newsIndex');
-            if (newsIndex !== null) {
-                const news = newsData[newsIndex];
-                if (news) {
-                    document.title = news.newsTitle; // Set the document title
-                    document.getElementById('newsTitle').textContent = news.newsTitle; // Set the <h1> content
-                    document.getElementById('newsContent').textContent = news.content; // Set the content
-                }
+            const newsItem = newsData[newsIndex];
+            const newsContent = document.getElementById('newsContent');
+            if (newsItem) {
+                newsContent.innerHTML = `
+                    <h2>${newsItem.title}</h2>
+                    <p>${newsItem.content}</p>
+                `;
+            } else {
+                newsContent.innerHTML = '<p>Article not found</p>';
             }
         });
     </script>
-</head>
-<body>
-    <h1 id="newsTitle">News Title</h1>
-    <div id="newsContent">News content will be displayed here.</div>
-    <a href="konspirmain.html" class="return-button"><img src="../images/DALL·E 2025-01-25 17.09.47 - An Illuminati-style logo for 'Go Back to Main Site,' featuring a triangle as the central element, with an eye at its peak. The triangle incorporates a.webp"></a>
 </body>
 </html>
