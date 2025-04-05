@@ -1,8 +1,7 @@
 [
-    "konspiračníteorie/konspirmain.html",
-    "konspiračníteorie/newsTemplate.html",
-    "gogol.html",
-    "bazar.html",
-    "index.html",
-    "newsTemplate.html"
+    { "path": "./konspiračníteorie/konspirmain.html", "name": "Konspirační Teorie Main" },
+    { "path": "./konspiračníteorie/newsTemplate.html", "name": "Konspirační Teorie News články" },
+    { "path": "./bazar/bazar.html", "name": "Bazar" },
+    { "path": "./zpravy.cz/zpravy-cz-news/src/index.html", "name": "Zpravy CZ" },
+    { "path": "./zpravy.cz/zpravy-cz-news/src/newsTemplate.html", "name": "Zpravy CZ články" }
 ]

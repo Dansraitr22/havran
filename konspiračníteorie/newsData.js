@@ -7,13 +7,17 @@ const konspiraNewsData = [
     { title: "9/11: Pravda o Teroristických Útocích", content: "Teroristické útoky z 11. září 2001 otřásly celým světem. Existují však teorie, které tvrdí, že útoky byly zinscenovány nebo umožněny vládou USA. Tento článek zkoumá důkazy a argumenty pro a proti těmto teoriím." },
     { title: "Reptiliáni: Mimozemské Bytosti mezi Námi", content: "Teorie o reptiliánech tvrdí, že mezi námi žijí mimozemské bytosti, které se maskují jako lidé. Tento článek zkoumá původ této teorie, její hlavní zastánce a důkazy, které ji podporují." }
 ];
+
+// This part seems to be for another context, possibly for displaying news items in a different part of the application
 const resultsContainer = document.getElementById('newsResults');
-newsData.forEach(news => {
-    const newsElement = document.createElement('div');
-    newsElement.className = 'news-item';
-    newsElement.innerHTML = `
-        <h2>${news.title}</h2>
-        <p>${news.content}</p>
-    `;
-    resultsContainer.appendChild(newsElement);
-});
+if (resultsContainer) {
+    konspiraNewsData.forEach(news => {
+        const newsElement = document.createElement('div');
+        newsElement.className = 'news-item';
+        newsElement.innerHTML = `
+            <h2>${news.title}</h2>
+            <p>${news.content}</p>
+        `;
+        resultsContainer.appendChild(newsElement);
+    });
+}

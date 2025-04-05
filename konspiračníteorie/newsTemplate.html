@@ -19,8 +19,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const newsIndex = urlParams.get('newsIndex');
-            if (newsIndex !== null && newsData[newsIndex]) {
-                const newsItem = newsData[newsIndex];
+            if (newsIndex !== null && typeof konspiraNewsData !== 'undefined' && konspiraNewsData[newsIndex]) {
+                const newsItem = konspiraNewsData[newsIndex];
                 const newsContent = document.getElementById('newsContent');
                 newsContent.innerHTML = `
                     <h2>${newsItem.title}</h2>
