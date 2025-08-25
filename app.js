@@ -80,8 +80,8 @@ function fetchKonspiraNewsData() {
         const script = document.createElement('script');
         script.src = './konspiračníteorie/newsData.js';
         script.onload = () => {
-            if (typeof konspiraNewsData !== 'undefined') {
-                resolve(konspiraNewsData);
+            if (typeof newsData !== 'undefined') {
+                resolve(newsData);
             } else {
                 reject(new Error('konspiraNewsData is not defined'));
             }
