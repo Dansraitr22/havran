@@ -10,19 +10,7 @@ const konspiraNewsData = [
     { title: "Reptiliáni: Mimozemské Bytosti mezi Námi", content: "Teorie o reptiliánech tvrdí, že mezi námi žijí mimozemské bytosti, které se maskují jako lidé. Tento článek zkoumá původ této teorie, její hlavní zastánce a důkazy, které ji podporují." }
 ];
 
-// This part seems to be for another context, possibly for displaying news items in a different part of the application
-// const resultsContainer = document.getElementById('newsResults');
-// if (resultsContainer) {
-//     konspiraNewsData.forEach(news => {
-//         const newsElement = document.createElement('div');
-//         newsElement.className = 'news-item';
-//         newsElement.innerHTML = `
-//             <h2>${news.title}</h2>
-//             <p>${news.content}</p>
-//         `;
-//         resultsContainer.appendChild(newsElement);
-//     });
-// }
+
 const resultsContainer = document.getElementById('newsResults');
 if (resultsContainer) {
     let newsData = fetch('../../newsdata.json');
