@@ -8,11 +8,30 @@
     <script src="./bazar.js" defer></script>
 </head>
 <body>
-    <h1>Bazar</h1>
+    <header>
+        <h1>Bazar</h1>
+        <div id="loggedInUser" class="user-info"></div>
+    </header>
+    <button class="button" onclick="openLoginModal()">Přihlásit se</button>
     <button class="button" onclick="openModal()">Přidat článek</button>
     <div id="itemsContainer"></div>
 
-    <!-- The Modal -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Přihlášení</h2>
+            <form id="loginForm">
+                <label for="username">Uživatelské jméno:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Heslo:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Přihlásit se</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>

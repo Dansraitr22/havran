@@ -1,7 +1,7 @@
 [
-    { "path": "./konspiračníteorie/konspirmain.html", "name": "Konspirační Teorie Main" },
-    { "path": "./konspiračníteorie/newsTemplate.html", "name": "Konspirační Teorie News články" },
-    { "path": "./bazar/bazar.html", "name": "Bazar" },
-    { "path": "./zpravy.cz/zpravy-cz-news/src/index.html", "name": "Zpravy CZ" },
-    { "path": "./zpravy.cz/zpravy-cz-news/src/newsTemplate.html", "name": "Zpravy CZ články" }
+    { "path": "./konspiračníteorie/konspirmain.html", "name": "Konspirační Teorie Main", "tags": ["konspirace", "teorie", "hlavní"] },
+    { "path": "./konspiračníteorie/newsTemplate.html", "name": "Konspirační Teorie News články", "tags": ["konspirace", "články", "novinky"] },
+    { "path": "./bazar/bazar.html", "name": "Bazar", "tags": ["bazar", "prodej", "zboží"] },
+    { "path": "./zpravy.cz/zpravy-cz-news/src/index.html", "name": "Zpravy CZ", "tags": ["zprávy", "novinky", "články"] },
+    { "path": "./zpravy.cz/zpravy-cz-news/src/newsTemplate.html", "name": "Zpravy CZ články", "tags": ["zprávy", "články", "novinky"] }
 ]

@@ -1,5 +1,3 @@
-const { url } = require("inspector");
-
 const konspiraNewsData = [
     { title: "Konec Světa v roce 2012: Co se Skutečně Stalo?", content: "Podle mayského kalendáře měl svět skončit v roce 2012. Tento článek se zaměřuje na původ této teorie, proč se nenaplnila a jaké byly reakce lidí po celém světě." },
     { title: "Chemtrails: Pravda o Kondenzovaných Stopách", content: "Teorie o chemtrails tvrdí, že vlády používají letadla k rozprašování chemikálií do atmosféry za účelem kontroly populace nebo klimatu. Tento článek zkoumá vědecké důkazy a názory odborníků na tuto kontroverzní teorii." },
@@ -10,11 +8,9 @@ const konspiraNewsData = [
     { title: "Reptiliáni: Mimozemské Bytosti mezi Námi", content: "Teorie o reptiliánech tvrdí, že mezi námi žijí mimozemské bytosti, které se maskují jako lidé. Tento článek zkoumá původ této teorie, její hlavní zastánce a důkazy, které ji podporují." }
 ];
 
-
 const resultsContainer = document.getElementById('newsResults');
 if (resultsContainer) {
-    let newsData = fetch('../../newsdata.json');
-    newsData.forEach(news => {
+    konspiraNewsData.forEach(news => {
         const newsElement = document.createElement('div');
         newsElement.className = 'news-item';
         newsElement.innerHTML = `

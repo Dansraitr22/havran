@@ -1,0 +1,22 @@
+[
+    { "name": "Horský kolo", "description": "Horský kolo ve výborném stavu, málo používané.", "price": 7500, "user": "admin" },
+    { "name": "Notebook", "description": "Notebook s 16GB RAM a 512GB SSD, ideální pro práci i zábavu.", "price": 15000, "user": "admin" },
+    { "name": "Chytrý telefon", "description": "Chytrý telefon s 64GB pamětí a výborným fotoaparátem.", "price": 5000, "user": "admin" },
+    { "name": "Televize", "description": "LED televize s úhlopříčkou 55 palců, 4K rozlišení.", "price": 12000, "user": "admin" },
+    { "name": "Pračka", "description": "Automatická pračka s kapacitou 7 kg, energetická třída A++.", "price": 8000, "user": "admin" },
+    { "name": "Lednice", "description": "Kombinovaná lednice s mrazákem, objem 300 litrů.", "price": 10000, "user": "admin" },
+    { "name": "Kávovar", "description": "Automatický kávovar na espresso a cappuccino.", "price": 3000, "user": "admin" },
+    { "name": "Gauč", "description": "Rozkládací gauč s úložným prostorem, šedá barva.", "price": 6000, "user": "admin" },
+    { "name": "Psací stůl", "description": "Dřevěný psací stůl s úložnými šuplíky.", "price": 2500, "user": "admin" },
+    { "name": "Kancelářská židle", "description": "Ergonomická kancelářská židle s nastavitelnou výškou.", "price": 2000, "user": "admin" },
+    { "name": "Mikrovlnná trouba", "description": "Mikrovlnná trouba s grilem, objem 25 litrů.", "price": 1500, "user": "admin" },
+    { "name": "Vysavač", "description": "Bezsáčkový vysavač s HEPA filtrem.", "price": 2500, "user": "admin" },
+    { "name": "Herní konzole", "description": "Herní konzole s dvěma ovladači a třemi hrami.", "price": 8000, "user": "admin" },
+    { "name": "Kytara", "description": "Akustická kytara, vhodná pro začátečníky.", "price": 3000, "user": "admin" },
+    { "name": "Lyže", "description": "Sjezdové lyže s vázáním, délka 170 cm.", "price": 5000, "user": "admin" },
+    { "name": "Stan", "description": "Rodinný stan pro 4 osoby, voděodolný.", "price": 4000, "user": "admin" },
+    { "name": "Kočárek", "description": "Dětský kočárek s polohovatelnou sedačkou.", "price": 3500, "user": "admin" },
+    { "name": "Hodinky", "description": "Chytré hodinky s měřením tepu a GPS.", "price": 2500, "user": "admin" },
+    { "name": "Kniha", "description": "Detektivní román od známého autora.", "price": 300, "user": "admin" },
+    { "name": "Sluchátka", "description": "Bezdrátová sluchátka s potlačením hluku.", "price": 2000, "user": "admin" }
+]

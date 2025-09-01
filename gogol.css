@@ -1,7 +1,5 @@
 .search-input {
   width: 400px;
-  margin-left: auto;
-  width: 400px;
   font-size: 16px;
   border: 1px solid;
   border-radius: 4px;
@@ -22,35 +20,82 @@
   margin-top: 20px;
 }
 
+/* General body styling */
 .body-style {
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 250px;
-  font-size: 16px;
+    background-color: #000000; /* Black background for retro look */
+    color: #00ff00; /* Bright green text for terminal-like appearance */
+    font-family: 'Courier New', Courier, monospace; /* Pixelated font */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Center all content */
+}
+
+/* Search results container */
+#searchResults {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 800px;
+    border: 2px dashed #00ffff; /* Dashed border for retro feel */
+    background-color: #111111; /* Slightly lighter black */
+    text-align: left; /* Align results to the left */
+}
+
+/* Individual result items */
+.result-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #00ff00; /* Bright green border */
+    background-color: #222222; /* Dark gray background for contrast */
+}
+
+.result-item h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+    color: #ff00ff; /* Bright magenta for titles */
+}
+
+.result-item p {
+    font-size: 1em;
+    color: #00ff00; /* Bright green for content */
+    margin: 0;
+}
+
+/* Styled links */
+.styled-url {
+    color: #00ffff; /* Bright cyan for links */
+    text-decoration: none;
+}
+
+.styled-url:hover {
+    color: #ff0000; /* Bright red on hover */
+    text-decoration: underline;
+}
+
+/* No results message */
+.no-results {
+    font-size: 1.2em;
+    color: #ff0000; /* Bright red for no results message */
+    text-align: center;
 }
 
 .div-style {
-  width: 400px;
-  margin-left: 300px;
-  margin-right: auto;
+  width: 100%;
+  margin: 0 auto;
   padding: 20px;
-  font-size: 16px;
+  text-align: center; /* Center the input field */
 }
 
 .div-style-2 {
-  width: 600px;
-  margin-left: 300px;
-  margin-right: auto;
+  width: 100%;
+  margin: 0 auto;
   padding: 20px;
-  font-size: 16px;
+  text-align: center; /* Center the button */
 }
 
 .h1-style {
   font-size: 40px;
   color: #333;
-  width: 600px;
-  margin-left: 400px;
-  margin-right: auto;
+  margin: 20px auto;
   padding: 20px;
+  text-align: center; /* Center the text */
 }

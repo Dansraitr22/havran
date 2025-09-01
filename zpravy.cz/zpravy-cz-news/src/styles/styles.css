@@ -1,38 +1,81 @@
+/* General body styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace; /* Pixelated retro font */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #000000; /* Black background for retro look */
+    color: #00ff00; /* Bright green text for terminal-like appearance */
 }
 
+/* Header styling */
+header {
+    background-color: #111111; /* Slightly lighter black */
+    color: #ff0000; /* Bright red for header text */
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid #00ff00; /* Green border for retro feel */
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px #000000; /* Subtle shadow for retro effect */
+}
+
+/* News links container */
 #newsLinks {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: white;
+    background-color: #111111; /* Slightly lighter black */
+    border: 2px dashed #00ffff; /* Dashed border for retro feel */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Cyan glow effect */
 }
 
+/* Individual news items */
 .news-item {
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 2px solid #00ff00; /* Bright green border */
+    background-color: #222222; /* Dark gray background for contrast */
     border-radius: 5px;
-    background-color: #fafafa;
+    transition: background-color 0.3s;
 }
 
+.news-item:hover {
+    background-color: #333333; /* Slightly lighter gray on hover */
+}
+
+/* News item titles */
 .news-item a {
     text-decoration: none;
-    color: #333;
+    color: #00ffff; /* Bright cyan for links */
+    font-size: 1.5em;
     font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s;
 }
 
 .news-item a:hover {
+    color: #ff0000; /* Bright red on hover */
     text-decoration: underline;
 }
 
+/* News item content */
 .news-item p {
-    color: #666;
-    font-size: 14px;
+    color: #00ff00; /* Bright green for content */
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Footer styling */
+footer {
+    background-color: #111111; /* Slightly lighter black */
+    color: #00ff00; /* Bright green text */
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid #00ff00; /* Green border for retro feel */
+    font-size: 0.9em;
 }

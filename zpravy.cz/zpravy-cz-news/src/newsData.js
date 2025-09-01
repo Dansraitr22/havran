@@ -23,3 +23,4 @@ if (zpravyResultsContainer) {
         zpravyResultsContainer.appendChild(newsElement);
     });
 }
+

@@ -1,17 +1,18 @@
 /* General styles */
 body {
-    background-color: #ffffff;
-    color: #000000;
-    font-family: 'Times New Roman', Times, serif;
+    background-color: #000000; /* Black background for retro look */
+    color: #00ff00; /* Bright green text for terminal-like appearance */
+    font-family: 'Courier New', Courier, monospace; /* Pixelated font */
     margin: 0;
     padding: 0;
 }
 
 h1 {
     text-align: center;
-    color: #0000ff;
+    color: #ff00ff; /* Bright magenta for retro vibe */
     margin-top: 20px;
     text-decoration: underline;
+    font-size: 2.5em;
 }
 
 #itemsContainer {
@@ -20,37 +21,60 @@ h1 {
     justify-content: center;
     margin: 20px auto;
     max-width: 1200px;
-    border: 2px solid #000000;
+    border: 2px dashed #00ffff; /* Dashed border for retro feel */
     padding: 10px;
+    background-color: #111111; /* Slightly lighter black */
 }
 
 .item {
-    background-color: #ffffe0;
-    border: 2px solid #000000;
+    background-color: #222222; /* Dark gray for contrast */
+    border: 2px solid #00ff00; /* Bright green border */
     margin: 10px;
     padding: 10px;
     width: 200px;
     text-align: center;
     font-size: 14px;
+    color: #00ff00; /* Green text */
 }
 
 .item h3 {
     font-size: 1.2em;
     margin: 10px 0;
-    color: #ff0000;
+    color: #ff0000; /* Bright red for item titles */
 }
 
 .item p {
-    color: #000000;
+    color: #00ff00; /* Green text for descriptions */
     font-size: 0.9em;
     margin: 5px 0;
 }
 
 .item .price {
-    color: #008000;
+    color: #ffff00; /* Bright yellow for prices */
     font-size: 1.1em;
     font-weight: bold;
     margin: 10px 0;
+}
+
+/* Button styles */
+button.button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #00ff00; /* Bright green background */
+    color: #000000; /* Black text */
+    border: 2px solid #00ff00; /* Green border */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+button.button:hover {
+    background-color: #ff0000; /* Bright red on hover */
+    color: #ffffff; /* White text */
+    border-color: #ff0000; /* Red border */
 }
 
 /* Modal styles */
@@ -63,21 +87,23 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
     padding-top: 60px;
 }
 
 .modal-content {
-    background-color: #ffffff;
+    background-color: #111111; /* Dark gray for modal background */
     margin: 5% auto;
     padding: 20px;
-    border: 2px solid #000000;
+    border: 2px solid #00ff00; /* Green border */
     width: 80%;
     max-width: 500px;
+    color: #00ff00; /* Green text */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .close {
-    color: #000000;
+    color: #ff0000; /* Bright red for close button */
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -85,7 +111,7 @@ h1 {
 
 .close:hover,
 .close:focus {
-    color: #ff0000;
+    color: #ffff00; /* Yellow on hover */
     text-decoration: none;
     cursor: pointer;
 }
@@ -93,6 +119,7 @@ h1 {
 form label {
     display: block;
     margin: 10px 0 5px;
+    color: #00ff00; /* Green text for labels */
 }
 
 form input,
@@ -100,17 +127,32 @@ form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #000000;
+    border: 2px solid #00ff00; /* Green border */
+    background-color: #000000; /* Black background */
+    color: #00ff00; /* Green text */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 form button {
-    background-color: #0000ff;
-    color: #ffffff;
+    background-color: #00ff00; /* Green button */
+    color: #000000; /* Black text */
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 form button:hover {
-    background-color: #ff0000;
+    background-color: #ff0000; /* Red on hover */
+    color: #ffffff; /* White text */
+}
+
+/* User info in the top-right corner */
+.user-info {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #00ff00; /* Bright green text */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
 }

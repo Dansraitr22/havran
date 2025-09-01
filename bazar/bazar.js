@@ -1,11 +1,22 @@
 const itemsForSale = JSON.parse(localStorage.getItem('itemsForSale')) || [];
-const currentUser = 'user123';
+let currentUser = localStorage.getItem('currentUser') || null;
+
+// Simulated user database (stored in localStorage for persistence)
+const users = JSON.parse(localStorage.getItem('users')) || {};
+
+function saveUsers() {
+    localStorage.setItem('users', JSON.stringify(users));
+}
 
 function saveItems() {
     localStorage.setItem('itemsForSale', JSON.stringify(itemsForSale));
 }
 
 function addItem(name, description, price) {
+    if (!currentUser) {
+        alert('Musíte se přihlásit, abyste mohli přidat článek.');
+        return;
+    }
     const item = { name, description, price, user: currentUser };
     itemsForSale.push(item);
     saveItems();
@@ -33,19 +44,79 @@ function displayItems() {
             <h3>${item.name}</h3>
             <p>${item.description}</p>
             <p class="price">${item.price} Kč</p>
-            ${item.user === currentUser ? `<button onclick="deleteItem(${index})">Delete</button>` : ''}
+            ${item.user === currentUser ? `<button onclick="deleteItem(${index})">Odebrat článek</button>` : ''}
         `;
         itemsContainer.appendChild(itemElement);
     });
+
+    // Display logged-in user in the top-right corner
+    const loggedInUserElement = document.getElementById('loggedInUser');
+    if (currentUser) {
+        loggedInUserElement.textContent = currentUser; // Display only the username
+    } else {
+        loggedInUserElement.textContent = '';
+    }
+}
+
+function loadDefaultItems() {
+    fetch('./defaultItems.json')
+        .then(response => response.json())
+        .then(defaultItems => {
+            defaultItems.forEach(defaultItem => {
+                const exists = itemsForSale.some(
+                    item => item.name === defaultItem.name && item.description === defaultItem.description
+                );
+                if (!exists) {
+                    itemsForSale.push(defaultItem);
+                }
+            });
+            saveItems();
+            displayItems();
+        })
+        .catch(error => console.error('Error loading default items:', error));
 }
 
 function openModal() {
+    if (!currentUser) {
+        alert('Musíte se přihlásit, abyste mohli přidat článek.');
+        return;
+    }
     document.getElementById('myModal').style.display = 'block';
 }
 
 function closeModal() {
     document.getElementById('myModal').style.display = 'none';
 }
+
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'block';
+}
+
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (!users[username]) {
+        // First-time login: save the username and password
+        users[username] = password;
+        saveUsers();
+        alert(`Účet vytvořen pro uživatele: ${username}`);
+    } else if (users[username] !== password) {
+        // Incorrect password
+        alert('Neplatné heslo.');
+        return;
+    }
+
+    // Successful login
+    currentUser = username;
+    localStorage.setItem('currentUser', currentUser);
+    location.reload(); // Reload the page after login
+});
 
 document.getElementById('addItemForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -60,4 +131,5 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
     }
 });
 
-document.addEventListener('DOMContentLoaded', displayItems);
+document.addEventListener('DOMContentLoaded', loadDefaultItems);
+
