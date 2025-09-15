@@ -1,0 +1,58 @@
+/* General body styling */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* Beige background */
+    color: #333333; /* Dark gray text */
+}
+
+/* Header styling */
+header {
+    background-color: #ffcc00; /* Bright yellow */
+    color: #000000; /* Black text */
+    text-align: center;
+    padding: 20px;
+    border-bottom: 4px solid #ff6600; /* Orange border */
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* Main content styling */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Zoo items */
+.zoo-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #ff6600; /* Orange border */
+    background-color: #ffffff; /* White background */
+    border-radius: 5px;
+}
+
+.zoo-item h2 {
+    font-size: 1.5em;
+    color: #ff6600; /* Orange text */
+}
+
+.zoo-item p {
+    font-size: 1em;
+    color: #666666; /* Gray text */
+}
+
+/* Footer styling */
+footer {
+    background-color: #ffcc00; /* Bright yellow for footer */
+    color: #000000; /* Black text for contrast */
+    text-align: center;
+    padding: 10px;
+    border-top: 4px solid #ff6600; /* Orange border for footer */
+    font-size: 0.9em;
+}

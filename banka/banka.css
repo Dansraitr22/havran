@@ -1,0 +1,17 @@
+.sidepic {
+    top: 0;
+    left: 0;
+    height: 2500px;
+    width: 250px;
+    background-color: aqua;
+
+}
+.logo {
+    
+    margin: 20px ;
+    width: 150px;
+    top: 0;
+    left: 0;
+    background-color: aqua;
+    mix-blend-mode: multiply;
+}

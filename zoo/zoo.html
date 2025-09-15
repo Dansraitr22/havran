@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Zoo</title>
+    <link rel="stylesheet" href="./zoo.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Local Zoo</h1>
+    </header>
+    <main id="zooContent"></main>
+    <script src="./zooData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const zooContent = document.getElementById('zooContent');
+            if (zooContent && typeof zooData !== 'undefined') {
+                zooData.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'zoo-item';
+                    itemElement.innerHTML = `
+                        <h2><a href="./zooTemplate.html?itemIndex=${index}">${item.name}</a></h2>
+                        <p>${item.description.substring(0, 100)}...</p>
+                    `;
+                    zooContent.appendChild(itemElement);
+                });
+            } else {
+                console.error('Element with ID "zooContent" not found or zooData is not defined.');
+            }
+        });
+    </script>
+    <footer>
+        <p>&copy; 1990 Local Zoo. All rights reserved.</p>
+    </footer>
+</body>
+</html>
