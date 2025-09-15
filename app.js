@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchZooData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './zoo/zooData.js';
+            script.src = './zoo/zoodata.js';
             script.onload = () => {
                 if (typeof zooData !== 'undefined') {
                     resolve(zooData.map((item, index) => ({
