@@ -159,7 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     reject(new Error('zooData is undefined.'));
                 }
             };
-            script.onerror = () => reject(new Error('Failed to load zooData.js.'));
+            script.onerror = () => {
+                console.error('Failed to load zooData.js from', script.src);
+                reject(new Error('Failed to load zooData.js.'));
+            };
             document.head.appendChild(script);
         });
     }
