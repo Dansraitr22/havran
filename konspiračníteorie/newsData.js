@@ -8,7 +8,7 @@ window.konspiraNewsData = [
     { title: "Reptiliáni: Mimozemské Bytosti mezi Námi", content: "Teorie o reptiliánech tvrdí, že mezi námi žijí mimozemské bytosti, které se maskují jako lidé. Tento článek zkoumá původ této teorie, její hlavní zastánce a důkazy, které ji podporují." }
 ];
 
-const resultsContainer = document.getElementById('newsResults');
+window.resultsContainer = document.getElementById('resultsContainer');
 if (resultsContainer) {
     konspiraNewsData.forEach(news => {
         const newsElement = document.createElement('div');

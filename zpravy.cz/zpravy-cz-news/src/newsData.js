@@ -11,7 +11,7 @@ window.zpravyNewsData = [
     { title: "Sportovní Události", content: "Dnes se konají významné sportovní události po celé zemi. V NBA probíhají play-off zápasy, zatímco v MLB začíná nová sezóna. Fanoušci se těší na napínavé zápasy a doufají, že jejich týmy dosáhnou úspěchu." }
 ];
 
-const zpravyResultsContainer = document.getElementById('zpravyNewsResults');
+window.zpravyResultsContainer = document.getElementById('zpravyResultsContainer');
 if (zpravyResultsContainer) {
     zpravyNewsData.forEach(news => {
         const newsElement = document.createElement('div');
