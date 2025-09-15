@@ -1,4 +1,4 @@
-const zpravyNewsData = [
+window.zpravyNewsData = [
     { title: "Prezident Clinton Navštívil Kalifornii", content: "Prezident Bill Clinton dnes navštívil Kalifornii, kde se setkal s místními představiteli a diskutoval o otázkách týkajících se životního prostředí a ekonomického rozvoje. Prezident také navštívil několik škol a setkal se s místními obyvateli." },
     { title: "NASA Oznámila Nové Mise na Mars", content: "NASA dnes oznámila plány na nové mise na Mars, které mají za cíl prozkoumat povrch planety a hledat známky života. Mise budou zahrnovat nové rovery a sondy, které budou vybaveny pokročilými vědeckými přístroji." },
     { title: "Zemětřesení v Kalifornii", content: "Silné zemětřesení zasáhlo dnes ráno jižní Kalifornii, způsobilo škody na budovách a infrastruktuře. Úřady hlásí několik zraněných, ale zatím žádné oběti na životech. Záchranné týmy jsou na místě a pomáhají postiženým obyvatelům." },

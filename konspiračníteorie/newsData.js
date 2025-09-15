@@ -1,4 +1,4 @@
-const konspiraNewsData = [
+window.konspiraNewsData = [
     { title: "Konec Světa v roce 2012: Co se Skutečně Stalo?", content: "Podle mayského kalendáře měl svět skončit v roce 2012. Tento článek se zaměřuje na původ této teorie, proč se nenaplnila a jaké byly reakce lidí po celém světě." },
     { title: "Chemtrails: Pravda o Kondenzovaných Stopách", content: "Teorie o chemtrails tvrdí, že vlády používají letadla k rozprašování chemikálií do atmosféry za účelem kontroly populace nebo klimatu. Tento článek zkoumá vědecké důkazy a názory odborníků na tuto kontroverzní teorii." },
     { title: "Area 51: Místo Setkání s Mimozemšťany?", content: "Area 51 je tajná vojenská základna v Nevadě, která je často spojována s mimozemskými aktivitami. Tento článek se zabývá historií Area 51, svědectvími o UFO a teoriemi o mimozemských technologiích." },

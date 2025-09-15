@@ -1,4 +1,4 @@
-const zooData = [
+window.zooData = [
     {
         name: "Lvi",
         description: "Lvi jsou známí jako králové džungle. Jsou to majestátní tvorové s mocným řevem a krásnou hřívou."
