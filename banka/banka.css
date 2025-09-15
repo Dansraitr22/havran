@@ -28,11 +28,11 @@ body {
 
 .logo {
     display: block;
-    margin: 40px auto 20px auto;
-    width: 90px;
+    margin: 10px 0 20px 30px; /* 10px from top, 30px from left */
+    width: 160px;
     opacity: 0.85;
     filter: drop-shadow(0 2px 8px #222266);
-    background: none; /* Ensure no background is set */
+    background: none;
 }
 
 .logo:hover {
