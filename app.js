@@ -83,17 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Display search results
     function displayResults(results) {
-        if (results.length === 0) {
-            resultsContainer.innerHTML = '<p>Nebyly nalezeny žádné výsledky.</p>';
+        const resultsContainer = document.getElementById('searchResults');
+        if (!results.length) {
+            resultsContainer.innerHTML = '<p>Žádné výsledky.</p>';
             return;
         }
-
         resultsContainer.innerHTML = results.map(result => `
-            <div class="result-item">
-                <h2><a href="${result.link}" class="styled-url">${result.title}</a></h2>
-                <p>${result.content.substring(0, 200)}...</p>
-                <p><strong>Zdroj:</strong> ${result.source}</p>
-                <p><strong>Klíčová slova:</strong> ${result.tags.join(', ')}</p>
+            <div class="search-result">
+                <a href="${result.link}" target="_blank">${result.title}</a>
+                <p>${result.content}</p>
             </div>
         `).join('');
     }
