@@ -1,19 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href=".\banka.css">
+    <title>eBanka - Klientský systém</title>
+    <link rel="stylesheet" href="./banka.css">
 </head>
 
 <body>
-        <div class="sidepic">
-            <img src=".\banka img\logo.png" alt="logo" class="logo">
+    <div class="sidebar">
+        <img src="../images/logo.png" class="logo" alt="eBanka logo">
+        <div class="sidepic"></div>
+    </div>
+    <div class="main">
+        <button class="top-btn">Uložit na výhodný termínovaný vklad</button>
+        <div class="login-box">
+            <div class="login-title">
+                Vstupujete do Klientského systému eBanky. Vyplňte prosím následující údaje:
+            </div>
+            <form>
+                <label for="client-id" class="form-label">KLIENTSKÉ ČÍSLO</label>
+                <input type="text" id="client-id" value="782014595" class="input-field">
+                <label for="auth-code" class="form-label">AUTENTIZAČNÍ KÓD</label>
+                <input type="password" id="auth-code" class="input-field">
+                <button type="button" class="auth-btn">Autentizační kód</button>
+                <button type="submit" class="ok-btn">OK</button>
+                <button type="button" class="sms-btn">Autentizační kód přes SMS</button>
+            </form>
+            <div class="instructions">
+                <ol>
+                    <li>Do prvního pole vložte své KLIENTSKÉ ČÍSLO.</li>
+                    <li>Stiskněte na tlačítku Autentizační kód.</li>
+                    <li>Do bankovní aplikace vašeho mobilního telefonu bude zaslán autentizační kód, který zadejte do pole AUTENTIZAČNÍ KÓD.</li>
+                    <li>Klikněte myší na tlačítko OK a vyčkejte načtení dalších stránek.</li>
+                </ol>
+            </div>
         </div>
-    <div><a href=""></a></div>
-    <div></div>
+        <img src="banka img/phone.png" class="phone-img" alt="Phone">
+    </div>
 </body>
 
 </html>

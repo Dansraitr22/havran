@@ -1,101 +1,105 @@
+/* --- 2000s Style --- */
+body.body-style {
+    background: linear-gradient(90deg, #e0e7ef 0%, #c3d9ff 100%);
+    color: #222;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.h1-style {
+    font-size: 48px;
+    color: #0033cc;
+    margin: 30px auto 10px auto;
+    padding: 10px;
+    text-shadow: 2px 2px 4px #aaa;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+
+.div-style, .div-style-2 {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
 .search-input {
-  width: 400px;
-  font-size: 16px;
-  border: 1px solid;
-  border-radius: 4px;
+    width: 350px;
+    font-size: 18px;
+    border: 2px inset #0033cc;
+    border-radius: 8px;
+    padding: 8px;
+    background: #f8f8ff;
+    box-shadow: 2px 2px 8px #bbb;
 }
 
 .button {
-  width: 400px;
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #f2f2f2;
-  border: 1px solid;
-  border-radius: 4px;
-  font-size: 20px;
-  cursor: pointer;
+    width: 200px;
+    padding: 10px 20px;
+    margin: 5px;
+    background: linear-gradient(180deg, #e0e7ef 0%, #c3d9ff 100%);
+    border: 2px outset #0033cc;
+    border-radius: 8px;
+    font-size: 22px;
+    color: #0033cc;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px #bbb;
 }
 
-.buttons {
-  margin-top: 20px;
+.button:hover {
+    background: #c3d9ff;
+    color: #ff6600;
+    border-color: #ff6600;
 }
 
-/* General body styling */
-.body-style {
-    background-color: #000000; /* Black background for retro look */
-    color: #00ff00; /* Bright green text for terminal-like appearance */
-    font-family: 'Courier New', Courier, monospace; /* Pixelated font */
-    margin: 0;
-    padding: 0;
-    text-align: center; /* Center all content */
-}
-
-/* Search results container */
 #searchResults {
-    margin: 20px auto;
-    padding: 10px;
-    max-width: 800px;
-    border: 2px dashed #00ffff; /* Dashed border for retro feel */
-    background-color: #111111; /* Slightly lighter black */
-    text-align: left; /* Align results to the left */
+    margin: 30px auto;
+    padding: 16px;
+    max-width: 700px;
+    border: 2px solid #0033cc;
+    background: #f8f8ff;
+    text-align: left;
+    box-shadow: 2px 2px 12px #bbb;
 }
 
-/* Individual result items */
 .result-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 2px solid #00ff00; /* Bright green border */
-    background-color: #222222; /* Dark gray background for contrast */
+    margin-bottom: 18px;
+    padding: 12px;
+    border: 1px solid #0033cc;
+    background: #e0e7ef;
+    border-radius: 6px;
+    box-shadow: 1px 1px 6px #ccc;
 }
 
 .result-item h2 {
-    font-size: 1.5em;
-    margin: 0 0 10px;
-    color: #ff00ff; /* Bright magenta for titles */
+    font-size: 1.3em;
+    margin: 0 0 8px;
+    color: #0033cc;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
 }
 
 .result-item p {
     font-size: 1em;
-    color: #00ff00; /* Bright green for content */
+    color: #222;
     margin: 0;
 }
 
-/* Styled links */
 .styled-url {
-    color: #00ffff; /* Bright cyan for links */
-    text-decoration: none;
+    color: #0033cc;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .styled-url:hover {
-    color: #ff0000; /* Bright red on hover */
+    color: #ff6600;
     text-decoration: underline;
 }
 
-/* No results message */
 .no-results {
     font-size: 1.2em;
-    color: #ff0000; /* Bright red for no results message */
+    color: #ff0000;
     text-align: center;
-}
-
-.div-style {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center; /* Center the input field */
-}
-
-.div-style-2 {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center; /* Center the button */
-}
-
-.h1-style {
-  font-size: 40px;
-  color: #333;
-  margin: 20px auto;
-  padding: 20px;
-  text-align: center; /* Center the text */
+    font-weight: bold;
 }

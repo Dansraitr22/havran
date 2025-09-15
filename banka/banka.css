@@ -1,17 +1,181 @@
-.sidepic {
-    top: 0;
-    left: 0;
-    height: 2500px;
-    width: 250px;
-    background-color: aqua;
-
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background: #0a0a3c;
+    color: #fff;
+    height: 100vh;
 }
-.logo {
-    
-    margin: 20px ;
-    width: 150px;
-    top: 0;
+
+.header {
+    background: #1a1a5c;
+    color: #fff;
+    padding: 12px 0;
+    text-align: left;
+    font-size: 1.2em;
+    border-bottom: 2px solid #fff;
+}
+
+.sidebar {
+    position: fixed;
     left: 0;
-    background-color: aqua;
-    mix-blend-mode: multiply;
+    top: 0;
+    width: 220px;
+    height: 100vh;
+    background: #0a0a3c;
+    border-right: 2px solid #222266;
+}
+
+.logo {
+    display: block;
+    margin: 40px auto 20px auto;
+    width: 90px;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 8px #222266);
+    background: none; /* Ensure no background is set */
+}
+
+.logo:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+
+.container {
+    max-width: 500px;
+    margin: 60px auto 0 auto;
+    background: rgba(10,10,60,0.95);
+    padding: 32px 32px 24px 32px;
+    border-radius: 8px;
+    box-shadow: 0 0 24px #222;
+    border: 2px solid #1a1a5c;
+}
+
+h2 {
+    color: #fff;
+    font-size: 1.1em;
+    margin-bottom: 24px;
+    font-weight: normal;
+}
+
+.top-btn {
+    display: block;
+    margin: 30px auto 20px auto;
+    background: #222266;
+    color: #fff;
+    border: 2px outset #fff;
+    border-radius: 4px;
+    font-size: 1em;
+    padding: 8px 24px;
+    font-weight: bold;
+    box-shadow: 1px 1px 6px #222;
+    width: 400px;
+    text-align: center;
+}
+
+.login-box {
+    background: #18185c;
+    border: 2px solid #222266;
+    border-radius: 8px;
+    box-shadow: 0 0 24px #222;
+    width: 480px;
+    margin: 0 auto;
+    padding: 32px 32px 24px 32px;
+    position: relative;
+    top: 0;
+}
+
+.login-title {
+    font-size: 1.1em;
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.form-label {
+    display: inline-block;
+    width: 180px;
+    color: #fff;
+    font-size: 1em;
+    margin-bottom: 8px;
+    vertical-align: middle;
+}
+
+input[type="text"], input[type="password"] {
+    width: 220px;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+    border: 2px inset #fff;
+    background: #222266;
+    color: #fff;
+    font-size: 1em;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.input-field {
+    width: 180px;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+    border: 2px inset #fff;
+    background: #222266;
+    color: #fff;
+    font-size: 1em;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.button, .auth-btn, .ok-btn, .sms-btn {
+    background: linear-gradient(180deg, #e0e7ef 0%, #c3d9ff 100%);
+    color: #222;
+    border: 2px outset #fff;
+    border-radius: 6px;
+    font-size: 1em;
+    padding: 6px 18px;
+    margin: 0 6px 12px 0;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 1px 1px 6px #222;
+}
+
+.auth-btn {
+    position: relative;
+    left: 4px;
+}
+
+.ok-btn {
+    margin-top: 12px;
+    width: 120px;
+}
+
+.sms-btn {
+    position: relative;
+    left: 4px;
+}
+
+.button:hover, .auth-btn:hover {
+    background: #c3d9ff;
+    color: #0033cc;
+}
+
+.instructions {
+    color: #fff;
+    font-size: 0.95em;
+    margin-top: 18px;
+    padding-left: 10px;
+}
+
+.phone-img {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    width: 180px;
+    opacity: 0.95;
+}
+
+.sidepic {
+    position: absolute;
+    left: 0;
+    top: 120px;
+    width: 220px;
+    height: 400px;
+    background: url('../images/iluminaty.webp') no-repeat center left;
+    opacity: 0.25;
 }
