@@ -34,6 +34,7 @@ function deleteItem(index) {
 }
 
 function displayItems() {
+    console.log('Items for sale:', itemsForSale);
     const itemsContainer = document.getElementById('itemsContainer');
     itemsContainer.innerHTML = ''; // Clear the container
 
