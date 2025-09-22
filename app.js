@@ -51,22 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...konspiraData.map(article => ({
                     ...article,
                     source: 'Konspirační Teorie',
-                    tags: ['konspirace', 'mimozemšťané', 'záhady', 'teorie'] // Keywords for Konspirační Teorie
+                    tags: ['konspirace', 'mimozemšťané', 'záhady', 'teorie']
                 })),
                 ...zpravyData.map(article => ({
                     ...article,
                     source: 'Zpravy.cz',
-                    tags: ['zprávy', 'politika', 'svět', 'ekonomika'] // Keywords for Zpravy.cz
+                    tags: ['zprávy', 'politika', 'svět', 'ekonomika']
                 })),
                 ...zooData.map(article => ({
                     ...article,
                     source: 'Místní Zoo',
-                    tags: ['zvířata', 'zoo', 'příroda', 'akce'] // Keywords for Local Zoo
+                    tags: ['zvířata', 'zoo', 'příroda', 'akce']
                 })),
                 ...bazarData.map(article => ({
                     ...article,
                     source: 'Bazar',
-                    tags: ['prodej', 'předměty', 'tržiště', 'nakupování'] // Keywords for Bazar
+                    tags: ['prodej', 'předměty', 'tržiště', 'nakupování']
                 })),
                 ...htmlFiles.map(file => ({
                     title: file.name,
@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     resolve(konspiraNewsData.map((news, index) => ({
                         title: news.title,
                         content: news.content,
-                        link: `./sites/konspiračníteorie/newsTemplate.html?newsIndex=${index}`, // Updated path
-                        tags: news.tags || [] // Use tags if available
+                        link: `./sites/konspiračníteorie/newsTemplate.html?newsIndex=${index}`,
+                        tags: news.tags || []
                     })));
                 } else {
                     reject(new Error('konspiraNewsData is undefined.'));
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     resolve(zpravyNewsData.map((news, index) => ({
                         title: news.title,
                         content: news.content,
-                        link: `./sites/zpravy.cz/zpravy-cz-news/src/newsTemplate.html?newsIndex=${index}`, // Updated path
-                        tags: news.tags || [] // Use tags if available
+                        link: `./sites/zpravy.cz/zpravy-cz-news/src/newsTemplate.html?newsIndex=${index}`,
+                        tags: news.tags || []
                     })));
                 } else {
                     reject(new Error('zpravyNewsData is undefined.'));
@@ -168,8 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     resolve(zooData.map((item, index) => ({
                         title: item.name,
                         content: item.description,
-                        link: `./sites/zoo/zooTemplate.html?itemIndex=${index}`, // Updated path
-                        tags: [] // Add tags if available
+                        link: `./sites/zoo/zooTemplate.html?itemIndex=${index}`,
+                        tags: []
                     })));
                 } else {
                     reject(new Error('zooData is undefined.'));
@@ -185,13 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch Bazar articles
     function fetchBazarData() {
-        return fetch('./sites/bazar/defaultitems.json') // Updated path
+        return fetch('./sites/bazar/defaultitems.json')
             .then(response => response.json())
             .then(items => items.map((item, index) => ({
                 title: item.name,
                 content: item.description,
-                link: `./sites/bazar/bazar.html#item-${index}`, // Updated path
-                tags: ['bazar', 'prodej', 'předměty'] // Example tags
+                link: `./sites/bazar/bazar.html#item-${index}`,
+                tags: ['bazar', 'prodej', 'předměty']
             })))
             .catch(error => {
                 console.error('Failed to fetch Bazar data:', error);
