@@ -142,18 +142,15 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
 document.addEventListener('DOMContentLoaded', () => {
     const currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
     const loginButton = document.getElementById('loginButton');
-    const addItemButton = document.getElementById('addItemButton');
     const loggedInUserElement = document.getElementById('loggedInUser');
 
     if (currentUser) {
         // User is logged in
         loginButton.style.display = 'none'; // Hide "Přihlásit se" button
-        addItemButton.style.display = 'inline-block'; // Show "Přidat článek" button
         loggedInUserElement.textContent = `Přihlášen jako: ${currentUser}`;
     } else {
         // User is not logged in
         loginButton.style.display = 'inline-block'; // Show "Přihlásit se" button
-        addItemButton.style.display = 'none'; // Hide "Přidat článek" button
         loggedInUserElement.textContent = '';
     }
 });
