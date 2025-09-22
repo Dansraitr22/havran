@@ -34,7 +34,7 @@ function deleteItem(index) {
 }
 
 function displayItems() {
-    console.log('Items for sale:', itemsForSale);
+    console.log('Items for sale:', itemsForSale); // Debugging log
     const itemsContainer = document.getElementById('itemsContainer');
     itemsContainer.innerHTML = ''; // Clear the container
 
@@ -53,7 +53,7 @@ function displayItems() {
     // Display logged-in user in the top-right corner
     const loggedInUserElement = document.getElementById('loggedInUser');
     if (currentUser) {
-        loggedInUserElement.textContent = currentUser; // Display only the username
+        loggedInUserElement.textContent = `Přihlášen jako: ${currentUser}`;
     } else {
         loggedInUserElement.textContent = '';
     }
@@ -140,18 +140,23 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
     const loginButton = document.getElementById('loginButton');
+    const addItemButton = document.getElementById('addItemButton');
     const loggedInUserElement = document.getElementById('loggedInUser');
 
     if (currentUser) {
         // User is logged in
         loginButton.style.display = 'none'; // Hide "Přihlásit se" button
+        addItemButton.style.display = 'inline-block'; // Show "Přidat článek" button
         loggedInUserElement.textContent = `Přihlášen jako: ${currentUser}`;
     } else {
         // User is not logged in
         loginButton.style.display = 'inline-block'; // Show "Přihlásit se" button
+        addItemButton.style.display = 'none'; // Hide "Přidat článek" button
         loggedInUserElement.textContent = '';
     }
+
+    // Display items for sale
+    displayItems();
 });
 
