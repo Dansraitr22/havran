@@ -60,9 +60,16 @@ function displayItems() {
 }
 
 function loadDefaultItems() {
-    fetch('./defaultItems.json')
-        .then(response => response.json())
+    fetch('./defaultitems.json')
+        .then(response => {
+            console.log('Fetch response:', response);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(defaultItems => {
+            console.log('Default items:', defaultItems);
             defaultItems.forEach(defaultItem => {
                 const exists = itemsForSale.some(
                     item => item.name === defaultItem.name && item.description === defaultItem.description
