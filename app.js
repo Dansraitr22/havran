@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchKonspiraNewsData(),
             fetchZpravyNewsData(),
             fetchZooData(),
-            fetchBazarData()
-        ]).then(([konspiraData, zpravyData, zooData, bazarData]) => {
+            fetchBazarData(),
+            fetchHtmlFiles() // Fetch links from htmlFiles.json
+        ]).then(([konspiraData, zpravyData, zooData, bazarData, htmlFiles]) => {
             return [
                 ...konspiraData.map(article => ({
                     ...article,
@@ -66,9 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...article,
                     source: 'Bazar',
                     tags: ['prodej', 'předměty', 'tržiště', 'nakupování'] // Keywords for Bazar
+                })),
+                ...htmlFiles.map(file => ({
+                    title: file.name,
+                    content: `Tags: ${file.tags.join(', ')}`,
+                    link: file.path,
+                    tags: file.tags
                 }))
             ];
         });
+    }
+
+    // Fetch links from htmlFiles.json
+    function fetchHtmlFiles() {
+        return fetch('./htmlFiles.json')
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => {
+                console.error('Failed to fetch htmlFiles.json:', error);
+                return [];
+            });
     }
 
     // Search articles based on query
