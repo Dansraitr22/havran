@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchKonspiraNewsData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './sites/konspiračníteorie/newsData.js'; // Updated path
+            script.src = './sites/konspiračníteorie/newsData.js';
             script.onload = () => {
                 if (typeof konspiraNewsData !== 'undefined') {
                     resolve(konspiraNewsData.map((news, index) => ({
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchZpravyNewsData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './sites/zpravy.cz/zpravy-cz-news/src/newsData.js'; // Updated path
+            script.src = './sites/zpravy.cz/zpravy-cz-news/src/newsData.js';
             script.onload = () => {
                 if (typeof zpravyNewsData !== 'undefined') {
                     resolve(zpravyNewsData.map((news, index) => ({
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchZooData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './sites/zoo/zoodata.js'; // Updated path
+            script.src = './sites/zoo/zoodata.js';
             script.onload = () => {
                 if (typeof zooData !== 'undefined') {
                     resolve(zooData.map((item, index) => ({
