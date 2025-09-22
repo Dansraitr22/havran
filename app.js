@@ -100,13 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchKonspiraNewsData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './konspiračníteorie/newsData.js';
+            script.src = './sites/konspiračníteorie/newsData.js'; // Updated path
             script.onload = () => {
                 if (typeof konspiraNewsData !== 'undefined') {
                     resolve(konspiraNewsData.map((news, index) => ({
                         title: news.title,
                         content: news.content,
-                        link: `./konspiračníteorie/newsTemplate.html?newsIndex=${index}`,
+                        link: `./sites/konspiračníteorie/newsTemplate.html?newsIndex=${index}`, // Updated path
                         tags: news.tags || [] // Use tags if available
                     })));
                 } else {
@@ -122,13 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchZpravyNewsData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './zpravy.cz/zpravy-cz-news/src/newsData.js';
+            script.src = './sites/zpravy.cz/zpravy-cz-news/src/newsData.js'; // Updated path
             script.onload = () => {
                 if (typeof zpravyNewsData !== 'undefined') {
                     resolve(zpravyNewsData.map((news, index) => ({
                         title: news.title,
                         content: news.content,
-                        link: `./zpravy.cz/zpravy-cz-news/src/newsTemplate.html?newsIndex=${index}`,
+                        link: `./sites/zpravy.cz/zpravy-cz-news/src/newsTemplate.html?newsIndex=${index}`, // Updated path
                         tags: news.tags || [] // Use tags if available
                     })));
                 } else {
@@ -144,13 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchZooData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = './zoo/zoodata.js';
+            script.src = './sites/zoo/zoodata.js'; // Updated path
             script.onload = () => {
                 if (typeof zooData !== 'undefined') {
                     resolve(zooData.map((item, index) => ({
                         title: item.name,
                         content: item.description,
-                        link: `./zoo/zooTemplate.html?itemIndex=${index}`,
+                        link: `./sites/zoo/zooTemplate.html?itemIndex=${index}`, // Updated path
                         tags: [] // Add tags if available
                     })));
                 } else {
@@ -167,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch Bazar articles
     function fetchBazarData() {
-        return fetch('./bazar/defaultitems.json')
+        return fetch('./sites/bazar/defaultitems.json') // Updated path
             .then(response => response.json())
             .then(items => items.map((item, index) => ({
                 title: item.name,
                 content: item.description,
-                link: `./bazar/bazar.html#item-${index}`,
+                link: `./sites/bazar/bazar.html#item-${index}`, // Updated path
                 tags: ['bazar', 'prodej', 'předměty'] // Example tags
             })))
             .catch(error => {

@@ -201,4 +201,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize UI
     updateUI();
+
+    // Fetch and display the discussion thread
+    fetch('./discussionThread.json')
+        .then(response => response.json())
+        .then(data => {
+            const threadTitle = document.createElement('h2');
+            threadTitle.textContent = data.title;
+            postList.appendChild(threadTitle);
+
+            data.posts.forEach(post => {
+                const postItem = document.createElement('div');
+                postItem.classList.add('post');
+                postItem.innerHTML = `<strong>${post.author}:</strong> ${post.message}`;
+                postList.appendChild(postItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading discussion thread:', error);
+            postList.innerHTML = '<p>Failed to load discussion thread.</p>';
+        });
 });

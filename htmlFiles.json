@@ -1,7 +1,16 @@
 [
-    { "path": "./konspiračníteorie/konspirmain.html", "name": "Konspirační Teorie Main", "tags": ["konspirace", "teorie", "hlavní"] },
-    { "path": "./konspiračníteorie/newsTemplate.html", "name": "Konspirační Teorie News články", "tags": ["konspirace", "články", "novinky"] },
-    { "path": "./bazar/bazar.html", "name": "Bazar", "tags": ["bazar", "prodej", "zboží"] },
-    { "path": "./zpravy.cz/zpravy-cz-news/src/index.html", "name": "Zpravy CZ", "tags": ["zprávy", "novinky", "články"] },
-    { "path": "./zpravy.cz/zpravy-cz-news/src/newsTemplate.html", "name": "Zpravy CZ články", "tags": ["zprávy", "články", "novinky"] }
+    { "path": "./sites/konspiračníteorie/konspirmain.html", "name": "Konspirační Teorie Main", "tags": ["konspirace", "teorie", "hlavní"] },
+    { "path": "./sites/konspiračníteorie/newsTemplate.html", "name": "Konspirační Teorie News články", "tags": ["konspirace", "články", "novinky"] },
+    { "path": "./sites/bazar/bazar.html", "name": "Bazar", "tags": ["bazar", "prodej", "zboží"] },
+    { "path": "./sites/zpravy.cz/zpravy-cz-news/src/index.html", "name": "Zpravy CZ", "tags": ["zprávy", "novinky", "články"] },
+    { "path": "./sites/zpravy.cz/zpravy-cz-news/src/newsTemplate.html", "name": "Zpravy CZ články", "tags": ["zprávy", "články", "novinky"] },
+    { "path": "./sites/banka/banka.html", "name": "Banka", "tags": ["finance", "bankovnictví", "peníze"] },
+    { "path": "./sites/congregate.sup/congregate.html", "name": "Congregate", "tags": ["společenství", "setkání", "diskuze"] },
+    { "path": "./sites/diskusion forum/forum.html", "name": "Diskusní Fórum", "tags": ["diskuze", "fórum", "komunita"] },
+    { "path": "./sites/police/police.html", "name": "Police", "tags": ["policie", "zákon", "bezpečnost"] },
+    { "path": "./sites/police.sub/policepub.html", "name": "Police Public", "tags": ["policie", "veřejnost", "informace"] },
+    { "path": "./sites/vatican corp/vatican.html", "name": "Vatican Corp", "tags": ["vatikán", "organizace", "náboženství"] },
+    { "path": "./sites/wiki.sub/wiki.html", "name": "Wiki", "tags": ["encyklopedie", "informace", "wiki"] },
+    { "path": "./sites/zoo/zoo.html", "name": "Zoo", "tags": ["zvířata", "příroda", "zoo"] },
+    { "path": "./sites/zoo/zootemplate.html", "name": "Zoo Template", "tags": ["zvířata", "šablona", "zoo"] }
 ]
