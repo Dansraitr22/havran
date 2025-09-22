@@ -12,8 +12,8 @@
         <h1>Bazar</h1>
         <div id="loggedInUser" class="user-info"></div>
     </header>
-    <button class="button" onclick="openLoginModal()">Přihlásit se</button>
-    <button class="button" onclick="openModal()">Přidat článek</button>
+    <button id="loginButton" class="button" onclick="openLoginModal()">Přihlásit se</button>
+    <button id="addItemButton" class="button" onclick="openModal()" style="display: none;">Přidat článek</button>
     <div id="itemsContainer"></div>
 
     <!-- Login Modal -->

@@ -44,7 +44,7 @@ function displayItems() {
         itemElement.innerHTML = `
             <h3>${item.name}</h3>
             <p>${item.description}</p>
-            <p class="price">${item.price} Kč</p>
+            <p class="price">${item.price} $</p>
             ${item.user === currentUser ? `<button onclick="deleteItem(${index})">Odebrat článek</button>` : ''}
         `;
         itemsContainer.appendChild(itemElement);
@@ -139,5 +139,22 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
     }
 });
 
-document.addEventListener('DOMContentLoaded', loadDefaultItems);
+document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
+    const loginButton = document.getElementById('loginButton');
+    const addItemButton = document.getElementById('addItemButton');
+    const loggedInUserElement = document.getElementById('loggedInUser');
+
+    if (currentUser) {
+        // User is logged in
+        loginButton.style.display = 'none'; // Hide "Přihlásit se" button
+        addItemButton.style.display = 'inline-block'; // Show "Přidat článek" button
+        loggedInUserElement.textContent = `Přihlášen jako: ${currentUser}`;
+    } else {
+        // User is not logged in
+        loginButton.style.display = 'inline-block'; // Show "Přihlásit se" button
+        addItemButton.style.display = 'none'; // Hide "Přidat článek" button
+        loggedInUserElement.textContent = '';
+    }
+});
 
