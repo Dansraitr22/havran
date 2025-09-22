@@ -140,23 +140,36 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
     const loginButton = document.getElementById('loginButton');
     const addItemButton = document.getElementById('addItemButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const profileIcon = document.getElementById('profileIcon');
     const loggedInUserElement = document.getElementById('loggedInUser');
 
     if (currentUser) {
         // User is logged in
         loginButton.style.display = 'none'; // Hide "Přihlásit se" button
         addItemButton.style.display = 'inline-block'; // Show "Přidat článek" button
+        logoutButton.style.display = 'inline-block'; // Show "Odhlásit se" button
+        profileIcon.style.display = 'inline-block'; // Show profile icon
         loggedInUserElement.textContent = `Přihlášen jako: ${currentUser}`;
     } else {
         // User is not logged in
         loginButton.style.display = 'inline-block'; // Show "Přihlásit se" button
         addItemButton.style.display = 'none'; // Hide "Přidat článek" button
+        logoutButton.style.display = 'none'; // Hide "Odhlásit se" button
+        profileIcon.style.display = 'none'; // Hide profile icon
         loggedInUserElement.textContent = '';
     }
 
     // Display items for sale
     displayItems();
 });
+
+// Sign out function
+function signOut() {
+    localStorage.removeItem('currentUser'); // Remove the current user from localStorage
+    location.reload(); // Reload the page to update the UI
+}
 

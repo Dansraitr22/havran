@@ -10,7 +10,11 @@
 <body>
     <header>
         <h1>Bazar</h1>
-        <div id="loggedInUser" class="user-info"></div>
+        <div id="userControls" class="user-controls">
+            <div id="loggedInUser" class="user-info"></div>
+            <img id="profileIcon" class="profile-icon" src="./profile-icon.png" alt="Profile" style="display: none;" />
+            <button id="logoutButton" class="button" onclick="signOut()" style="display: none;">Odhlásit se</button>
+        </div>
     </header>
     <button id="loginButton" class="button" onclick="openLoginModal()">Přihlásit se</button>
     <button id="addItemButton" class="button" onclick="openModal()" style="display: none;">Přidat článek</button>
