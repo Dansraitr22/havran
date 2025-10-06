@@ -12,5 +12,8 @@
     { "path": "./sites/vatican corp/vatican.html", "name": "Vatican Corp", "tags": ["vatikán", "organizace", "náboženství"] },
     { "path": "./sites/wiki.sub/wiki.html", "name": "Wiki", "tags": ["encyklopedie", "informace", "wiki"] },
     { "path": "./sites/zoo/zoo.html", "name": "Zoo", "tags": ["zvířata", "příroda", "zoo"] },
-    { "path": "./sites/zoo/zootemplate.html", "name": "Zoo Template", "tags": ["zvířata", "šablona", "zoo"] }
+    { "path": "./sites/zoo/zootemplate.html", "name": "Zoo Template", "tags": ["zvířata", "šablona", "zoo"] },
+    { "path": "./sites/Čsfd/csfd.html", "name": "ČSFD - Filmové Recenze", "tags": ["filmy", "recenze", "čsfd"] },
+    { "path": "./sites/fleemarket.sup/fleemarket.html", "name": "Fleemarket", "tags": ["bleší trh", "prodej", "zboží"] },
+    { "path": "./sites/bordel.sup/bordel.html", "name": "Bordel", "tags": ["bordel", "zábava", "noční život"] }
 ]
