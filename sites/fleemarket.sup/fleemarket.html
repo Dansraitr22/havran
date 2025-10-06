@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bleší Trh</title>    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="./fleemarket.css">
+</head>
+<body>
+    <header>
+        <h1>Bleší Trh</h1>
+        <div id="infoControls" class="info-controls">
+            <button id="infoButton" class="info-button">
+                <img id="infoIcon" class="info-icon" src="../images/profile-icon-new-256x300-90.jpg" alt="Info">
+                <span>Where and When</span>
+            </button>
+            <div id="infoMenu" class="info-menu" style="display: none;">
+                <p><strong>Location:</strong> 123 Fleemarket St, Cityville</p>
+                <p><strong>Opening Hours:</strong> Mon-Sat, 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#wherecanyoufindus">Where can you find us?</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We offer a variety of second-hand goods at affordable prices. Our mission is to promote sustainability and provide quality items to our community.</p>
+        </section>
+
+        <section id="wherecanyoufindus">
+            <h2>Where can you find us?</h2>
+            <p>We are located in the heart of the city, easily accessible by public transport. Visit us at 123 Fleemarket St, Cityville.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: <a href="mailto:info@fleemarket.com">info@fleemarket.com</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 1990 Bleší Trh. All rights reserved.</p>
+    </footer>
+    <script>
+        // Toggle the info menu
+        document.getElementById('infoButton').addEventListener('click', () => {
+            const menu = document.getElementById('infoMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
