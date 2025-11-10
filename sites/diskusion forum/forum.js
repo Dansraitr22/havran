@@ -11,6 +11,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser') || null;
     const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
 
+    // Configuration: set this to the deployed server URL that will commit updates to GitHub
+    // Example: const SYNC_ENDPOINT = 'https://my-sync-server.example.com/api/thread'
+    // You must deploy the server included in /server and set its SERVER_SECRET; the client
+    // will send the SECRET in the 'x-server-secret' header. Replace the placeholder below.
+    const SYNC_ENDPOINT = ''; // <-- set to your server URL when deployed
+    const SERVER_SECRET_HEADER_NAME = 'x-server-secret';
+    const SERVER_SECRET = ''; // <-- set this to match the server's SERVER_SECRET when testing
+
+    // Debounced sync: schedule a server sync after local changes
+    let __syncTimer = null;
+    function scheduleSync() {
+        if (!SYNC_ENDPOINT) return; // no-op if not configured
+        if (__syncTimer) clearTimeout(__syncTimer);
+        __syncTimer = setTimeout(syncToServer, 1000);
+    }
+
+    async function syncToServer() {
+        if (!SYNC_ENDPOINT) return;
+        try {
+            const payload = {
+                title: document.querySelector('#posts h2') ? document.querySelector('#posts h2').textContent : 'Discussion Thread',
+                posts
+            };
+            await fetch(SYNC_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(SERVER_SECRET ? { [SERVER_SECRET_HEADER_NAME]: SERVER_SECRET } : {})
+                },
+                body: JSON.stringify(payload)
+            });
+            console.log('Synced forum to server');
+        } catch (err) {
+            console.error('Failed to sync to server:', err);
+        }
+    }
+
     // Function to render posts
     function renderPosts() {
         postList.innerHTML = '';
@@ -31,15 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="comment-section">
                     <h4>Comments:</h4>
                     <div class="comments">
-                        ${post.comments.map((comment, commentIndex) => `
-                            <div class="comment">
-                                <h4>${comment.username}</h4>
-                                <p>${comment.message}</p>
-                                ${comment.username === currentUser ? `
-                                    <button class="delete-comment" data-post-index="${postIndex}" data-comment-index="${commentIndex}">Delete Comment</button>
-                                ` : ''}
-                            </div>
-                        `).join('')}
+                                ${post.comments.map((comment, commentIndex) => `
+                                        <div class="comment">
+                                            <h4>${comment.username}</h4>
+                                            <p>${comment.message}</p>
+                                            ${comment.username === currentUser ? `
+                                                <button class="delete-comment" data-post-index="${postIndex}" data-comment-index="${commentIndex}">Delete Comment</button>
+                                            ` : ''}
+                                            ${comment.replies && comment.replies.length ? `
+                                                <div class="replies">
+                                                    ${comment.replies.map((reply, replyIndex) => `
+                                                        <div class="reply">
+                                                            <strong>${reply.username}</strong>: ${reply.message}
+                                                            ${reply.username === currentUser ? `<button class="delete-reply" data-post-index="${postIndex}" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">Delete Reply</button>` : ''}
+                                                        </div>
+                                                    `).join('')}
+                                                </div>
+                                            ` : ''}
+                                            ${currentUser ? `<button class="reply-button" data-post-index="${postIndex}" data-comment-index="${commentIndex}">Reply</button>` : ''}
+                                            <div class="reply-form-container" data-post-index="${postIndex}" data-comment-index="${commentIndex}"></div>
+                                        </div>
+                                    `).join('')}
                     </div>
                     ${currentUser ? `
                         <form class="commentForm" data-post-index="${postIndex}">
@@ -84,9 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Add the comment to the post
-                if (commentMessage) {
+                    if (commentMessage) {
                     posts[postIndex].comments.push({ username: currentUser, message: commentMessage });
                     localStorage.setItem('forumPosts', JSON.stringify(posts));
+                    scheduleSync();
                     renderPosts(); // Re-render posts
                 }
             });
@@ -108,6 +158,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 deleteComment(postIndex, commentIndex);
             });
         });
+
+        // Add event listeners for reply buttons (show inline reply form)
+        document.querySelectorAll('.reply-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const postIndex = parseInt(button.getAttribute('data-post-index'), 10);
+                const commentIndex = parseInt(button.getAttribute('data-comment-index'), 10);
+                const container = document.querySelector(`.reply-form-container[data-post-index="${postIndex}"][data-comment-index="${commentIndex}"]`);
+                if (container) {
+                    container.innerHTML = `
+                        <form class="replyForm" data-post-index="${postIndex}" data-comment-index="${commentIndex}">
+                            <textarea required placeholder="Write a reply..."></textarea>
+                            <button type="submit">Reply</button>
+                        </form>
+                    `;
+
+                    // attach listener for this reply form
+                    const rf = container.querySelector('.replyForm');
+                    rf.addEventListener('submit', (ev) => {
+                        ev.preventDefault();
+                        const replyMessage = rf.querySelector('textarea').value.trim();
+                        if (!currentUser) { alert('You must be logged in to reply.'); return; }
+                        if (replyMessage) {
+                            addReply(postIndex, commentIndex, { username: currentUser, message: replyMessage });
+                            container.innerHTML = '';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Add event listeners for delete reply buttons
+        document.querySelectorAll('.delete-reply').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const postIndex = parseInt(button.getAttribute('data-post-index'), 10);
+                const commentIndex = parseInt(button.getAttribute('data-comment-index'), 10);
+                const replyIndex = parseInt(button.getAttribute('data-reply-index'), 10);
+                deleteReply(postIndex, commentIndex, replyIndex);
+            });
+        });
     }
 
     // Function to delete a post
@@ -115,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (posts[index].username === currentUser) {
             posts.splice(index, 1); // Remove the post
             localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
+            scheduleSync();
             renderPosts(); // Re-render posts
         } else {
             console.error("You can only delete your own posts.");
@@ -127,12 +217,42 @@ document.addEventListener('DOMContentLoaded', () => {
             if (posts[postIndex].comments[commentIndex].username === currentUser) {
                 posts[postIndex].comments.splice(commentIndex, 1); // Remove the comment
                 localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
+                scheduleSync();
                 renderPosts(); // Re-render posts
             } else {
                 console.error("You can only delete your own comments.");
             }
         } else {
             console.error("Comment not found.");
+        }
+    }
+
+    // Function to add a reply to a comment
+    function addReply(postIndex, commentIndex, reply) {
+        if (!posts[postIndex]) { console.error('Post not found for reply'); return; }
+        if (!posts[postIndex].comments[commentIndex]) { console.error('Comment not found for reply'); return; }
+        if (!posts[postIndex].comments[commentIndex].replies) posts[postIndex].comments[commentIndex].replies = [];
+        posts[postIndex].comments[commentIndex].replies.push(reply);
+        localStorage.setItem('forumPosts', JSON.stringify(posts));
+        scheduleSync();
+        renderPosts();
+    }
+
+    // Function to delete a reply
+    function deleteReply(postIndex, commentIndex, replyIndex) {
+        if (!posts[postIndex] || !posts[postIndex].comments[commentIndex] || !posts[postIndex].comments[commentIndex].replies) {
+            console.error('Reply not found.');
+            return;
+        }
+        const reply = posts[postIndex].comments[commentIndex].replies[replyIndex];
+        if (!reply) { console.error('Reply not found.'); return; }
+        if (reply.username === currentUser) {
+            posts[postIndex].comments[commentIndex].replies.splice(replyIndex, 1);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            scheduleSync();
+            renderPosts();
+        } else {
+            console.error('You can only delete your own replies.');
         }
     }
 
@@ -170,6 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const message = document.getElementById('message').value.trim();
 
+        if (!currentUser) {
+            alert('You must be logged in to post.');
+            return;
+        }
+
         if (message) {
             posts.push({ username: currentUser, message, comments: [] });
             localStorage.setItem('forumPosts', JSON.stringify(posts));
@@ -202,23 +327,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize UI
     updateUI();
 
-    // Fetch and display the discussion thread
+    // Fetch and merge the discussion thread (merge into local posts array so comments/replies work)
     fetch('./discussionThread.json')
         .then(response => response.json())
         .then(data => {
+            // Merge title into page (optional)
             const threadTitle = document.createElement('h2');
             threadTitle.textContent = data.title;
-            postList.appendChild(threadTitle);
+            // Insert at top of posts section
+            postList.insertAdjacentElement('afterbegin', threadTitle);
 
-            data.posts.forEach(post => {
-                const postItem = document.createElement('div');
-                postItem.classList.add('post');
-                postItem.innerHTML = `<strong>${post.author}:</strong> ${post.message}`;
-                postList.appendChild(postItem);
+            // Merge posts from JSON into our posts array if not already present.
+            data.posts.forEach(jsonPost => {
+                // Convert jsonPost.author -> username and ensure comments array exists
+                const candidate = {
+                    username: jsonPost.author,
+                    message: jsonPost.message,
+                    comments: jsonPost.comments || []
+                };
+
+                // Avoid duplicates by checking for same author+message
+                const exists = posts.some(p => p.username === candidate.username && p.message === candidate.message);
+                if (!exists) {
+                    posts.push(candidate);
+                }
             });
+
+            // Persist merged posts
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            renderPosts();
         })
         .catch(error => {
             console.error('Error loading discussion thread:', error);
-            postList.innerHTML = '<p>Failed to load discussion thread.</p>';
         });
+
+    // Note: automatic syncing to GitHub Pages is not possible from client-side JS alone
+    // without a backend or authenticated GitHub API usage. To enable automatic
+    // persistence across users we need one of the following:
+    // 1) A small server or serverless endpoint that accepts thread updates and
+    //    commits them to the repository using a GitHub token.
+    // 2) A GitHub App / OAuth flow that allows the client to commit directly (complex).
+    // If you'd like, I can help implement option (1) (Node/Express) or outline
+    // a secure GitHub Actions + webhook approach.
 });

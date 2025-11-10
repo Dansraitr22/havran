@@ -140,7 +140,8 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
+    // Refresh the global currentUser from localStorage (don't shadow the outer variable)
+    currentUser = localStorage.getItem('currentUser'); // Check if a user is logged in
     const loginButton = document.getElementById('loginButton');
     const addItemButton = document.getElementById('addItemButton');
     const logoutButton = document.getElementById('logoutButton');
@@ -163,8 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedInUserElement.textContent = '';
     }
 
-    // Display items for sale
-    displayItems();
+    // Load default items (if any) and then display items for sale
+    // This ensures defaultitems.json is merged into local storage when the page first loads.
+    loadDefaultItems();
 });
 
 // Sign out function

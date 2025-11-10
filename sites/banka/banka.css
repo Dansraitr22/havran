@@ -1,181 +1,122 @@
+/* Retro early-2000s bank theme */
 body {
     margin: 0;
-    padding: 0;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    background: #0a0a3c;
+    padding: 12px;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    background: #cfe8ff; /* pale sky */
+    color: #000;
+}
+
+.layout {
+    width: 900px;
+    background: #f2f7ff;
+    border: 3px solid #004080;
+    border-collapse: collapse;
+    box-shadow: 6px 6px 0 #888;
+}
+
+.banner {
+    background: linear-gradient(#004080, #003060);
     color: #fff;
-    height: 100vh;
-}
-
-.header {
-    background: #1a1a5c;
-    color: #fff;
-    padding: 12px 0;
-    text-align: left;
-    font-size: 1.2em;
-    border-bottom: 2px solid #fff;
-}
-
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 220px;
-    height: 100vh;
-    background: #0a0a3c;
-    border-right: 2px solid #222266;
-}
-
-.logo {
-    display: block;
-    margin: 10px 0 20px 30px; /* 10px from top, 30px from left */
-    width: 160px;
-    opacity: 0.85;
-    filter: drop-shadow(0 2px 8px #222266);
-    background: none;
-}
-
-.logo:hover {
-    opacity: 1; /* Full opacity on hover */
-}
-
-.container {
-    max-width: 500px;
-    margin: 60px auto 0 auto;
-    background: rgba(10,10,60,0.95);
-    padding: 32px 32px 24px 32px;
-    border-radius: 8px;
-    box-shadow: 0 0 24px #222;
-    border: 2px solid #1a1a5c;
-}
-
-h2 {
-    color: #fff;
-    font-size: 1.1em;
-    margin-bottom: 24px;
-    font-weight: normal;
-}
-
-.top-btn {
-    display: block;
-    margin: 30px auto 20px auto;
-    background: #222266;
-    color: #fff;
-    border: 2px outset #fff;
-    border-radius: 4px;
-    font-size: 1em;
-    padding: 8px 24px;
+    padding: 12px;
     font-weight: bold;
-    box-shadow: 1px 1px 6px #222;
-    width: 400px;
-    text-align: center;
-}
-
-.login-box {
-    background: #18185c;
-    border: 2px solid #222266;
-    border-radius: 8px;
-    box-shadow: 0 0 24px #222;
-    width: 480px;
-    margin: 0 auto;
-    padding: 32px 32px 24px 32px;
-    position: relative;
-    top: 0;
-}
-
-.login-title {
     font-size: 1.1em;
-    margin-bottom: 24px;
-    color: #fff;
+    vertical-align: middle;
 }
 
-.form-label {
+.banner .logo {
+    height: 48px;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+.banner-text {
     display: inline-block;
-    width: 180px;
-    color: #fff;
-    font-size: 1em;
-    margin-bottom: 8px;
     vertical-align: middle;
+    margin-left: 6px;
 }
 
-input[type="text"], input[type="password"] {
-    width: 220px;
-    padding: 6px 10px;
-    margin-bottom: 12px;
-    border: 2px inset #fff;
-    background: #222266;
-    color: #fff;
-    font-size: 1em;
-    border-radius: 4px;
-    vertical-align: middle;
-}
-
-.input-field {
-    width: 180px;
-    padding: 6px 10px;
-    margin-bottom: 12px;
-    border: 2px inset #fff;
-    background: #222266;
-    color: #fff;
-    font-size: 1em;
-    border-radius: 4px;
-    vertical-align: middle;
-}
-
-.button, .auth-btn, .ok-btn, .sms-btn {
-    background: linear-gradient(180deg, #e0e7ef 0%, #c3d9ff 100%);
-    color: #222;
-    border: 2px outset #fff;
-    border-radius: 6px;
-    font-size: 1em;
-    padding: 6px 18px;
-    margin: 0 6px 12px 0;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 1px 1px 6px #222;
-}
-
-.auth-btn {
-    position: relative;
-    left: 4px;
-}
-
-.ok-btn {
-    margin-top: 12px;
-    width: 120px;
-}
-
-.sms-btn {
-    position: relative;
-    left: 4px;
-}
-
-.button:hover, .auth-btn:hover {
-    background: #c3d9ff;
-    color: #0033cc;
-}
-
-.instructions {
-    color: #fff;
+.leftcol, .rightcol {
+    background: #e6eefc;
+    border-right: 2px solid #c0d8ff;
+    padding: 8px;
     font-size: 0.95em;
-    margin-top: 18px;
-    padding-left: 10px;
 }
 
-.phone-img {
-    position: absolute;
-    left: 40px;
-    bottom: 40px;
-    width: 180px;
-    opacity: 0.95;
+.centercol {
+    padding: 12px;
 }
 
-.sidepic {
-    position: absolute;
-    left: 0;
-    top: 120px;
-    width: 220px;
-    height: 400px;
-    background: url('../images/iluminaty.webp') no-repeat center left;
-    opacity: 0.25;
+.nav {
+    text-align: left;
+}
+
+.nav-btn {
+    display: block;
+    width: 100%;
+    margin: 4px 0;
+    padding: 6px 4px;
+    background: linear-gradient(#fff,#cfe8ff);
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #9fbfe6;
+    border-bottom: 2px solid #9fbfe6;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.small-img { width: 140px; display:block; margin:6px 0 }
+
+.ticker {
+    background: #fff8d6;
+    padding: 6px;
+    border: 1px solid #ffdf80;
+    color: #003060;
+    font-weight: bold;
+}
+
+.login-panel {
+    background: linear-gradient(#ffffff,#e6f0ff);
+    border: 2px solid #9fbfe6;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.login-panel h2 { margin: 6px 0 10px 0 }
+
+.text-input {
+    width: 240px;
+    padding: 4px;
+    border: 2px inset #cfe8ff;
+}
+
+.label { font-weight: bold; padding-right: 6px; }
+
+.action {
+    padding: 4px 8px;
+    margin-right: 6px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #7aa0d6;
+    border-right: 2px solid #7aa0d6;
+    background: linear-gradient(#fff,#cfe8ff);
+    cursor: pointer;
+}
+
+.action.primary { background: linear-gradient(#ffd,#f7d07a); font-weight: bold }
+
+.help { font-size: 0.9em; margin-top: 10px }
+
+.news-box { background: #fff; border: 1px solid #ddd; padding: 8px; margin-top: 12px }
+
+.right-box a { color: #003060; text-decoration: none }
+
+.visitor { font-size: 0.95em; margin-top: 8px }
+
+.footer { text-align: center; padding: 8px; background: #f0f4ff; border-top: 2px solid #cfe8ff }
+
+/* small-screen fallback */
+@media (max-width: 940px) {
+    body { padding: 6px }
+    .layout { width: 100%; }
 }
