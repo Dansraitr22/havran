@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mysticism News</title>
-    <link rel="stylesheet" href="./mysticism.css"> <!-- Corrected path -->
+    <title>Mysticism Articles</title>
+    <link rel="stylesheet" href="../mysticism.css"> <!-- Corrected path -->
 </head>
 <body>
     <header>
-        <h1>Mysticism News</h1>
+        <h1>Mysticism Articles</h1>
     </header>
     <main id="newsContent"></main>
     <script>
         // Corrected fetch path to mysticsim.json
-        fetch('./mysticsim.json')
+        fetch('../mysticsim.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

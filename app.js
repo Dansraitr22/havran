@@ -108,7 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         resultsContainer.innerHTML = results.map(result => `
             <div class="search-result">
-                <a href="${result.link}" target="_blank">${result.title}</a>
+                <a href="${result.link}" target="_blank">
+                ${result.title}</a>
                 <p>${result.content}</p>
             </div>
         `).join('');
