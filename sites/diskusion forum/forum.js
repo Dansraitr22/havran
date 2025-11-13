@@ -15,9 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Example: const SYNC_ENDPOINT = 'https://my-sync-server.example.com/api/thread'
     // You must deploy the server included in /server and set its SERVER_SECRET; the client
     // will send the SECRET in the 'x-server-secret' header. Replace the placeholder below.
-    const SYNC_ENDPOINT = ''; // <-- set to your server URL when deployed
+    let SYNC_ENDPOINT = ''; // <-- set to your server URL when deployed
     const SERVER_SECRET_HEADER_NAME = 'x-server-secret';
     const SERVER_SECRET = ''; // <-- set this to match the server's SERVER_SECRET when testing
+
+    // If running on localhost and no SYNC_ENDPOINT configured, default to local server
+    try {
+        const hostname = window && window.location && window.location.hostname;
+        if (!SYNC_ENDPOINT && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+            SYNC_ENDPOINT = 'http://localhost:3000/api/thread';
+            console.log('[forum] SYNC_ENDPOINT auto-set to', SYNC_ENDPOINT);
+        }
+    } catch (e) {
+        // ignore - environment may be non-browser during build
+    }
 
     // Compute the repository file path for this site's discussion thread.
     // The server expects paths like: "sites/<folder>/discussionThread.json"
