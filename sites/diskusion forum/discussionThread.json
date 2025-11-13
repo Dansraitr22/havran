@@ -6,7 +6,16 @@
       "createdAt": "2025-11-13T00:00:01Z",
       "author": "Tomik89",
       "message": "Hele, slyšel jsem, že se něco stalo u nějaký vědmy, co dělala seance. Prej tam byl rámus a pak sanitka. Nevíte někdo víc?",
-      "comments": []
+      "comments": [
+        {
+          "username": "deron22",
+          "message": "ahoj",
+          "replies": [],
+          "id": "c_mhxua81p_clif24r",
+          "createdAt": "2025-11-13T19:45:59.101Z",
+          "author": "deron22"
+        }
+      ]
     },
     {
       "id": "p_init_02",
