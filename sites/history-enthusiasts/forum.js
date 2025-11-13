@@ -23,14 +23,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser') || null;
     let posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || [];
 
-    // Start with empty forum
-    if (THREAD_ID === 'default' && posts.length === 0) {
-        posts = [];
-        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+    // Load posts from JSON file on first load
+    async function loadInitialPosts() {
+        try {
+            const response = await fetch('./posts.json');
+            if (response.ok) {
+                const serverPosts = await response.json();
+                if (serverPosts.length > 0) {
+                    // Merge with local posts
+                    const merged = mergePosts(posts, serverPosts);
+                    posts = merged;
+                    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                }
+            }
+        } catch (error) {
+            console.log('No posts.json found or error loading:', error);
+        }
+        updateUI();
     }
 
-    // Update UI based on login state
-    updateUI();
+    function mergePosts(local, remote) {
+        const map = new Map();
+        const sig = (p) => `${p.username}::${p.message}`;
+        local.forEach(p => map.set(sig(p), p));
+        remote.forEach(p => {
+            if (!map.has(sig(p))) map.set(sig(p), p);
+        });
+        return Array.from(map.values());
+    }
+
+    loadInitialPosts();
 
     // Login button click
     loginButton.addEventListener('click', () => {

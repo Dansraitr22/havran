@@ -87,29 +87,34 @@ function displayItems() {
     }
 }
 
-function loadDefaultItems() {
-    fetch('./defaultitems.json')
-        .then(response => {
-            console.log('Fetch response:', response); // Debugging log
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+async function loadDefaultItems() {
+    try {
+        const response = await fetch('./defaultitems.json');
+        console.log('Fetch response:', response); // Debugging log
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const defaultItems = await response.json();
+        console.log('Default items:', defaultItems); // Debugging log
+        
+        // Merge server items with local items
+        const itemSig = (item) => `${item.name}::${item.description}`;
+        const map = new Map();
+        itemsForSale.forEach(item => map.set(itemSig(item), item));
+        defaultItems.forEach(item => {
+            if (!map.has(itemSig(item))) {
+                map.set(itemSig(item), item);
             }
-            return response.json();
-        })
-        .then(defaultItems => {
-            console.log('Default items:', defaultItems); // Debugging log
-            defaultItems.forEach(defaultItem => {
-                const exists = itemsForSale.some(
-                    item => item.name === defaultItem.name && item.description === defaultItem.description
-                );
-                if (!exists) {
-                    itemsForSale.push(defaultItem);
-                }
-            });
-            saveItems();
-            displayItems();
-        })
-        .catch(error => console.error('Error loading default items:', error));
+        });
+        
+        itemsForSale.length = 0;
+        itemsForSale.push(...Array.from(map.values()));
+        saveItems();
+        displayItems();
+    } catch (error) {
+        console.error('Error loading default items:', error);
+        displayItems();
+    }
 }
 
 function openModal() {
