@@ -17,6 +17,26 @@ header {
     padding: 30px 20px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.return-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 12px;
+    border: 1px solid white;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.return-btn:hover {
+    background: white;
+    color: #667eea;
 }
 
 header h1 {

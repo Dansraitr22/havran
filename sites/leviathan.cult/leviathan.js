@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loginError.style.display = 'block';
             setTimeout(() => {
                 loginError.style.display = 'none';
-            }, 3000);
+            }, 10000);
         }
     });
     

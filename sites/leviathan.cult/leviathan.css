@@ -140,6 +140,24 @@ body {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+}
+
+.return-btn {
+    position: absolute;
+    left: 0;
+    color: #00ff88;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 12px;
+    border: 1px solid #00ff88;
+    transition: all 0.3s;
+}
+
+.return-btn:hover {
+    background: #00ff88;
+    color: #000;
 }
 
 .logo-small {

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         const hostname = window && window.location && window.location.hostname;
         if (!SYNC_ENDPOINT && (hostname === 'localhost' || hostname === '127.0.0.1')) {
-            SYNC_ENDPOINT = 'http://localhost:3000/api/thread';
+            SYNC_ENDPOINT = 'http://localhost:10000/api/thread';
             console.log('[forum] SYNC_ENDPOINT auto-set to', SYNC_ENDPOINT);
         }
     } catch (e) {
