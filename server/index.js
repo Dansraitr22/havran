@@ -157,10 +157,10 @@ app.post('/api/thread', async (req, res) => {
     const incomingCount = Array.isArray(incoming.posts) ? incoming.posts.length : 0;
     console.log(`[sync] filePath=${filePath} existingPosts=${existingCount} incomingPosts=${incomingCount}`);
 
-    // Safety: if client sent an empty posts array but there are existing posts, do not overwrite with empty
+    // Safety: if client sent an empty posts array but there are existing posts, reject to avoid accidental overwrite
     if (incomingCount === 0 && existingCount > 0) {
-      console.log('[sync] incoming posts empty and existing posts present — skipping write to avoid data loss');
-      return res.json({ ok: true, message: 'no-op: incoming posts empty' });
+      console.warn('[sync] incoming posts empty and existing posts present — rejecting to avoid data loss');
+      return res.status(409).json({ error: 'Conflict: incoming posts empty while remote has posts. Use merge or provide posts.' });
     }
 
     let merged = { title: incoming.title, posts: incoming.posts };
