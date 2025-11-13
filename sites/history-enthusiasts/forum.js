@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function syncToServer() {
+        console.log('[History Forum] Attempting to sync', posts.length, 'posts to server...');
         try {
             const response = await fetch(SYNC_ENDPOINT, {
                 method: 'POST',
@@ -144,12 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                console.error('Sync failed:', response.statusText);
+                console.error('[History Forum] Sync failed:', response.status, response.statusText);
+                const errorText = await response.text();
+                console.error('[History Forum] Error details:', errorText);
             } else {
-                console.log('Synced to server successfully');
+                console.log('[History Forum] Synced to server successfully');
             }
         } catch (error) {
-            console.error('Error syncing to server:', error);
+            console.error('[History Forum] Error syncing to server:', error);
         }
     }
 
