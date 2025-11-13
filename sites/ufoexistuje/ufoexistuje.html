@@ -6,6 +6,7 @@
     <title>UFO Existuje - Secrets and Conspiracies</title>
     <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="./ufoexistuje.css">
+    <script src="./ufoexistuje.js" defer></script>
 </head>
 <body>
     <div class="background left"></div>
@@ -29,34 +30,44 @@
         </section>
 
         <section id="sightings" class="news-item">
-            <h2>Známá Pozorování</h2>
-            <div class="sub-entry">
-                <h3>Roswell Incident (1947)</h3>
-                <p>Oficiálně meteorologický balón. Neoficiálně zadržený objekt s neznámými materiály. Dodnes neuzavřená debata.</p>
+            <div class="section-header">
+                <h2>Známá Pozorování</h2>
+                <button class="add-btn" onclick="openModal('sightings')">+ Přidat Pozorování</button>
             </div>
-            <div class="sub-entry">
-                <h3>Rendlesham Forest (1980)</h3>
-                <p>Vojenské hlášení světelných jevů a kovové struktury. Dokumentace částečně redigovaná, zdroje pokračují v nezávislém sběru dat.</p>
-            </div>
-            <div class="sub-entry">
-                <h3>Phoenix Lights (1997)</h3>
-                <p>Tisíce svědků. Formace světel ve tvaru V. Žádné definitivní vysvětlení. Radiové záznamy fragmentované.</p>
+            <div id="sightings-list">
+                <div class="sub-entry">
+                    <h3>Roswell Incident (1947)</h3>
+                    <p>Oficiálně meteorologický balón. Neoficiálně zadržený objekt s neznámými materiály. Dodnes neuzavřená debata.</p>
+                </div>
+                <div class="sub-entry">
+                    <h3>Rendlesham Forest (1980)</h3>
+                    <p>Vojenské hlášení světelných jevů a kovové struktury. Dokumentace částečně redigovaná, zdroje pokračují v nezávislém sběru dat.</p>
+                </div>
+                <div class="sub-entry">
+                    <h3>Phoenix Lights (1997)</h3>
+                    <p>Tisíce svědků. Formace světel ve tvaru V. Žádné definitivní vysvětlení. Radiové záznamy fragmentované.</p>
+                </div>
             </div>
         </section>
 
         <section id="theories" class="news-item">
-            <h2>Teorie & Hypotézy</h2>
-            <div class="sub-entry">
-                <h3>Area 51</h3>
-                <p>Uzavřený komplex. Testování leteckých prototypů nebo dekontaminace exotických artefaktů? Satelitní snímky naznačují strukturální expanzi.</p>
+            <div class="section-header">
+                <h2>Teorie & Hypotézy</h2>
+                <button class="add-btn" onclick="openModal('theories')">+ Přidat Teorii</button>
             </div>
-            <div class="sub-entry">
-                <h3>Vládní Utajení</h3>
-                <p>Motivy: kontrola informačního toku, zabránění panice, vojenská převaha. Úniky dokumentů vykazují opakující se vzory redakcí.</p>
-            </div>
-            <div class="sub-entry">
-                <h3>Únosy</h3>
-                <p>Nahlášené anomální výpadky času, identické popisy světelných komor. Psychologické faktory nelze ignorovat, ale korelace je neobvykle vysoká.</p>
+            <div id="theories-list">
+                <div class="sub-entry">
+                    <h3>Area 51</h3>
+                    <p>Uzavřený komplex. Testování leteckých prototypů nebo dekontaminace exotických artefaktů? Satelitní snímky naznačují strukturální expanzi.</p>
+                </div>
+                <div class="sub-entry">
+                    <h3>Vládní Utajení</h3>
+                    <p>Motivy: kontrola informačního toku, zabránění panice, vojenská převaha. Úniky dokumentů vykazují opakující se vzory redakcí.</p>
+                </div>
+                <div class="sub-entry">
+                    <h3>Únosy</h3>
+                    <p>Nahlášené anomální výpadky času, identické popisy světelných komor. Psychologické faktory nelze ignorovat, ale korelace je neobvykle vysoká.</p>
+                </div>
             </div>
         </section>
 
@@ -69,5 +80,22 @@
     <footer class="site-footer">
         <p>&copy; 2025 UFO Existuje • Replikace přísně monitorována</p>
     </footer>
+
+    <!-- Add Entry Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Přidat Položku</h2>
+            <form id="addEntryForm">
+                <label for="entryTitle">Název:</label>
+                <input type="text" id="entryTitle" name="entryTitle" required>
+                <label for="entryDescription">Popis:</label>
+                <textarea id="entryDescription" name="entryDescription" rows="4" required></textarea>
+                <label for="entryAuthor">Autor (volitelné):</label>
+                <input type="text" id="entryAuthor" name="entryAuthor" placeholder="Anonymní">
+                <button type="submit">Přidat</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
