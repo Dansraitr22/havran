@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/forum';
+    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/thread';
     const SERVER_SECRET = 'ilovekatie';
     
     // Multi-thread support via URL parameter ?thread=<id>
@@ -135,6 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const payload = {
                 filePath: 'sites/history-enthusiasts/posts.json',
+                // optional title for /api/thread endpoint
+                title: 'History Enthusiasts Thread',
                 posts: posts
             };
             console.log('[History Forum] Payload:', payload);
