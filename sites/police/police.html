@@ -1,11 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>    <link rel="stylesheet" href="../../normalize.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>State Police — Public Portal (Demo)</title>
+    <link rel="stylesheet" href="police.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="header">
+            <h1>STATE POLICE — PUBLIC PORTAL</h1>
+            <div class="small">Serving the public since 2001 &nbsp;|&nbsp; Contact: (555) 123-0000</div>
+        </div>
+
+        <div class="nav">
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#notices">Notices</a>
+            <a href="#reports">File a Report</a>
+            <a href="#contacts">Contacts</a>
+        </div>
+
+        <div class="disclaimer">THIS IS A DEMONSTRATION PAGE — NOT AN OFFICIAL GOVERNMENT OR LAW ENFORCEMENT SITE</div>
+
+        <div class="columns">
+            <div class="left">
+                <div class="box">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Traffic updates</a></li>
+                        <li><a href="#">Warrants</a></li>
+                        <li><a href="#">Crime stats</a></li>
+                        <li><a href="#">Wanted persons</a></li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3>Office Hours</h3>
+                    <p class="small">Mon–Fri: 08:00–16:00<br>Sat: 09:00–12:00</p>
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="marquee"><marquee behavior="scroll" direction="left">Community Notice: Remember to lock your vehicles. Report suspicious activity to (555) 123-0000.</marquee></div>
+
+                <div class="box">
+                    <h2 id="news">Latest News</h2>
+                    <p><strong>2003-05-12</strong> — Police launch new community outreach program. Volunteers welcome.</p>
+                    <p><strong>2002-11-01</strong> — Winter driving safety campaign begins.</p>
+                </div>
+
+                <div class="box">
+                    <h2 id="notices">Public Notices</h2>
+                    <ol>
+                        <li>Road closure on Route 5 from 14:00 to 18:00 on 2025-11-20.</li>
+                        <li>Fingerprinting events held monthly at the downtown office.</li>
+                    </ol>
+                </div>
+
+                <div class="box">
+                    <h2 id="reports">File a Report</h2>
+                    <p>This demo includes a sample report form (non-operational). For real reports, contact your local station.</p>
+                    <form>
+                        <label for="rname">Your name:</label><br>
+                        <input id="rname" name="rname" style="width:100%"><br><br>
+                        <label for="desc">Description:</label><br>
+                        <textarea id="desc" name="desc" rows="4" style="width:100%"></textarea><br><br>
+                        <a class="btn" href="#">Submit (demo)</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="box">
+                    <h3>Contacts</h3>
+                    <p class="small">Non-emergency: (555) 123-0001<br>Emergency: 112</p>
+                </div>
+                <div class="box">
+                    <h3>Announcements</h3>
+                    <p class="small">New community meeting on 2025-12-01 at Town Hall.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="small">© State Police — Public Portal Demo • Designed in retro 2000s style</div>
+        </div>
+    </div>
 </body>
 </html>

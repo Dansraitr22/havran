@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentUser = localStorage.getItem('currentUser') || null;
     const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+    // Track deletions so they can be propagated to the server
+    let deletedPosts = JSON.parse(localStorage.getItem('deletedPosts')) || [];
+    let deletedComments = JSON.parse(localStorage.getItem('deletedComments')) || [];
+    let deletedReplies = JSON.parse(localStorage.getItem('deletedReplies')) || [];
 
     // Configuration: set `SYNC_ENDPOINT` to the deployed server URL that will commit updates to GitHub
     // Example: const SYNC_ENDPOINT = 'https://my-sync-server.example.com/api/thread'
@@ -149,10 +153,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Convert local schema (`username`) to repo schema (`author`) so creator names are preserved
+            function copyAuthorFields(post) {
+                const p = Object.assign({}, post);
+                if (p.username && !p.author) p.author = p.username;
+                if (Array.isArray(p.comments)) {
+                    p.comments = p.comments.map(comment => {
+                        const c = Object.assign({}, comment);
+                        if (c.username && !c.author) c.author = c.username;
+                        if (Array.isArray(c.replies)) {
+                            c.replies = c.replies.map(reply => {
+                                const r = Object.assign({}, reply);
+                                if (r.username && !r.author) r.author = r.username;
+                                return r;
+                            });
+                        }
+                        return c;
+                    });
+                }
+                return p;
+            }
+
             const payload = {
                 title: document.querySelector('#posts h2') ? document.querySelector('#posts h2').textContent : (remote && remote.title) || 'Discussion Thread',
-                posts: mergedPosts,
-                filePath: FILE_PATH
+                posts: (mergedPosts || []).map(copyAuthorFields),
+                filePath: FILE_PATH,
+                deleted: {
+                    posts: Array.isArray(deletedPosts) ? deletedPosts : [],
+                    comments: Array.isArray(deletedComments) ? deletedComments : [],
+                    replies: Array.isArray(deletedReplies) ? deletedReplies : []
+                }
             };
 
             const res = await fetch(SYNC_ENDPOINT, {
@@ -168,6 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.warn('Sync server responded with', res.status, txt);
             } else {
                 console.log('Synced forum to server');
+                // Clear propagated deletions after successful sync
+                deletedPosts = [];
+                deletedComments = [];
+                deletedReplies = [];
+                localStorage.removeItem('deletedPosts');
+                localStorage.removeItem('deletedComments');
+                localStorage.removeItem('deletedReplies');
             }
         } catch (err) {
             console.error('Failed to sync to server:', err);
@@ -329,6 +366,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to delete a post
     function deletePost(index) {
         if (posts[index].username === currentUser) {
+            try {
+                const id = posts[index].id;
+                if (id) {
+                    deletedPosts.push(id);
+                    localStorage.setItem('deletedPosts', JSON.stringify(deletedPosts));
+                }
+            } catch (e) { console.warn('Failed to record deleted post id', e); }
             posts.splice(index, 1); // Remove the post
             localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
             scheduleSync();
@@ -342,6 +386,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function deleteComment(postIndex, commentIndex) {
         if (posts[postIndex] && posts[postIndex].comments[commentIndex]) {
             if (posts[postIndex].comments[commentIndex].username === currentUser) {
+                try {
+                    const postId = posts[postIndex].id;
+                    const commentId = posts[postIndex].comments[commentIndex].id;
+                    if (postId && commentId) {
+                        deletedComments.push({ postId, commentId });
+                        localStorage.setItem('deletedComments', JSON.stringify(deletedComments));
+                    }
+                } catch (e) { console.warn('Failed to record deleted comment', e); }
                 posts[postIndex].comments.splice(commentIndex, 1); // Remove the comment
                 localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
                 scheduleSync();
@@ -374,6 +426,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const reply = posts[postIndex].comments[commentIndex].replies[replyIndex];
         if (!reply) { console.error('Reply not found.'); return; }
         if (reply.username === currentUser) {
+            try {
+                const postId = posts[postIndex].id;
+                const commentId = posts[postIndex].comments[commentIndex].id;
+                const replyId = reply.id;
+                if (postId && commentId && replyId) {
+                    deletedReplies.push({ postId, commentId, replyId });
+                    localStorage.setItem('deletedReplies', JSON.stringify(deletedReplies));
+                }
+            } catch (e) { console.warn('Failed to record deleted reply', e); }
             posts[postIndex].comments[commentIndex].replies.splice(replyIndex, 1);
             localStorage.setItem('forumPosts', JSON.stringify(posts));
             scheduleSync();

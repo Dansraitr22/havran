@@ -10,7 +10,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_OWNER = 'Dansraitr22';
 const GITHUB_REPO ='Havran';
 const GITHUB_BRANCH = 'main';
-const SERVER_SECRET = 'ilovekatie';
+const SERVER_SECRET = process.env.SERVER_SECRET || '';
 const ALLOWED_ORIGIN = 'https://dansraitr22.github.io';
 
 if (!GITHUB_TOKEN) {
