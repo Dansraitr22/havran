@@ -152,6 +152,17 @@ app.post('/api/thread', async (req, res) => {
       posts: Array.isArray(payload.posts) ? payload.posts : []
     };
 
+    // Debug logging to help determine why overwrites occur
+    const existingCount = existing && Array.isArray(existing.posts) ? existing.posts.length : 0;
+    const incomingCount = Array.isArray(incoming.posts) ? incoming.posts.length : 0;
+    console.log(`[sync] filePath=${filePath} existingPosts=${existingCount} incomingPosts=${incomingCount}`);
+
+    // Safety: if client sent an empty posts array but there are existing posts, do not overwrite with empty
+    if (incomingCount === 0 && existingCount > 0) {
+      console.log('[sync] incoming posts empty and existing posts present — skipping write to avoid data loss');
+      return res.json({ ok: true, message: 'no-op: incoming posts empty' });
+    }
+
     let merged = { title: incoming.title, posts: incoming.posts };
     if (existing && Array.isArray(existing.posts)) {
       merged.posts = mergePosts(existing.posts, incoming.posts);

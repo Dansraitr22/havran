@@ -48,14 +48,102 @@ document.addEventListener('DOMContentLoaded', () => {
         __syncTimer = setTimeout(syncToServer, 1000);
     }
 
+    // Small util to create stable-ish IDs for posts/comments/replies
+    function makeId(prefix = 'id') {
+        return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 9);
+    }
+
+    // Ensure object and nested items have ids and timestamps
+    function ensureIdsForReply(reply) {
+        if (!reply.id) reply.id = makeId('r');
+        if (!reply.createdAt) reply.createdAt = new Date().toISOString();
+        return reply;
+    }
+
+    function ensureIdsForComment(comment) {
+        if (!comment.id) comment.id = makeId('c');
+        if (!comment.createdAt) comment.createdAt = new Date().toISOString();
+        if (!Array.isArray(comment.replies)) comment.replies = [];
+        comment.replies = comment.replies.map(ensureIdsForReply);
+        return comment;
+    }
+
+    function ensureIdsForPost(post) {
+        if (!post.id) post.id = makeId('p');
+        if (!post.createdAt) post.createdAt = new Date().toISOString();
+        if (!Array.isArray(post.comments)) post.comments = [];
+        post.comments = post.comments.map(ensureIdsForComment);
+        return post;
+    }
+
+    // Merge arrays by id (preferred) or by author+message signature fallback
+    function sig(obj) {
+        if (!obj) return '';
+        const a = (obj.author || obj.username || '').toString();
+        const m = (obj.message || obj.msg || '').toString();
+        return `${a}::${m}`;
+    }
+
+    function mergeArraysByIdOrSig(existing = [], incoming = []) {
+        const map = new Map();
+        // prefer ids if present
+        existing.forEach(item => {
+            const key = item.id ? `id:${item.id}` : `s:${sig(item)}`;
+            map.set(key, item);
+        });
+        incoming.forEach(item => {
+            const key = item.id ? `id:${item.id}` : `s:${sig(item)}`;
+            if (!map.has(key)) map.set(key, item);
+            else {
+                const ex = map.get(key);
+                // merge deeper where necessary (comments/replies)
+                if (ex.comments || item.comments) {
+                    ex.comments = mergeArraysByIdOrSig(ex.comments || [], item.comments || []).map(ensureIdsForComment);
+                }
+                if (ex.replies || item.replies) {
+                    ex.replies = mergeArraysByIdOrSig(ex.replies || [], item.replies || []).map(ensureIdsForReply);
+                }
+            }
+        });
+        return Array.from(map.values());
+    }
+
     async function syncToServer() {
         if (!SYNC_ENDPOINT) return;
         try {
+            // Fetch remote canonical thread for this site (relative path)
+            let remote = null;
+            try {
+                const r = await fetch('./discussionThread.json', { cache: 'no-store' });
+                if (r.ok) remote = await r.json();
+            } catch (e) {
+                // ignore fetch errors; remote may not exist yet
+                remote = null;
+            }
+
+            // ensure local posts have ids and timestamps
+            for (let i = 0; i < posts.length; i++) posts[i] = ensureIdsForPost(posts[i]);
+
+            // If remote exists, ensure its posts also have ids
+            if (remote && Array.isArray(remote.posts)) {
+                remote.posts = remote.posts.map(ensureIdsForPost);
+            }
+
+            // Merge remote and local posts (remote first, then local incoming)
+            const mergedPosts = mergeArraysByIdOrSig((remote && remote.posts) || [], posts || []).map(ensureIdsForPost);
+
+            // Guard: avoid sending an empty posts array if there are existing remote posts
+            if ((!mergedPosts || mergedPosts.length === 0) && remote && Array.isArray(remote.posts) && remote.posts.length > 0) {
+                console.log('Not sending empty merged posts (remote has posts)');
+                return;
+            }
+
             const payload = {
-                title: document.querySelector('#posts h2') ? document.querySelector('#posts h2').textContent : 'Discussion Thread',
-                posts,
+                title: document.querySelector('#posts h2') ? document.querySelector('#posts h2').textContent : (remote && remote.title) || 'Discussion Thread',
+                posts: mergedPosts,
                 filePath: FILE_PATH
             };
+
             const res = await fetch(SYNC_ENDPOINT, {
                 method: 'POST',
                 headers: {
