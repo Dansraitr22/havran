@@ -1,3 +1,6 @@
+const SYNC_ENDPOINT = 'http://localhost:10000/api/bazar';
+const SERVER_SECRET = 'ilovekatie';
+
 const itemsForSale = JSON.parse(localStorage.getItem('itemsForSale')) || [];
 let currentUser = localStorage.getItem('currentUser') || null;
 
@@ -10,6 +13,30 @@ function saveUsers() {
 
 function saveItems() {
     localStorage.setItem('itemsForSale', JSON.stringify(itemsForSale));
+    syncToServer();
+}
+
+async function syncToServer() {
+    try {
+        const response = await fetch(SYNC_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Server-Secret': SERVER_SECRET
+            },
+            body: JSON.stringify({
+                items: itemsForSale
+            })
+        });
+
+        if (!response.ok) {
+            console.error('Sync failed:', response.statusText);
+        } else {
+            console.log('Synced to server successfully');
+        }
+    } catch (error) {
+        console.error('Error syncing to server:', error);
+    }
 }
 
 function addItem(name, description, price, contact) {

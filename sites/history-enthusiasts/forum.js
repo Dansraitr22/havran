@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const SYNC_ENDPOINT = 'http://localhost:10000/api/forum';
+    const SERVER_SECRET = 'ilovekatie';
+    
     // Multi-thread support via URL parameter ?thread=<id>
     function getThreadId() {
         try {
@@ -83,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             posts.unshift(newPost);
             localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+            syncToServer();
             document.getElementById('message').value = '';
             renderPosts();
         }
@@ -101,6 +105,30 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('postForm').style.display = 'none';
         }
         renderPosts();
+    }
+
+    async function syncToServer() {
+        try {
+            const response = await fetch(SYNC_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Server-Secret': SERVER_SECRET
+                },
+                body: JSON.stringify({
+                    filePath: 'sites/history-enthusiasts/posts.json',
+                    posts: posts
+                })
+            });
+
+            if (!response.ok) {
+                console.error('Sync failed:', response.statusText);
+            } else {
+                console.log('Synced to server successfully');
+            }
+        } catch (error) {
+            console.error('Error syncing to server:', error);
+        }
     }
 
     function renderPosts() {
@@ -202,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!post.comments) post.comments = [];
                 post.comments.push(newComment);
                 localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                syncToServer();
                 input.value = '';
                 renderPosts();
             }
@@ -212,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm('Delete this post?')) {
             posts = posts.filter(p => p.id !== postId);
             localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+            syncToServer();
             renderPosts();
         }
     }

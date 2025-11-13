@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const SYNC_ENDPOINT = 'http://localhost:10000/api/leviathan';
+    const SERVER_SECRET = 'ilovekatie';
+    
     const loginForm = document.getElementById('loginForm');
     const loginScreen = document.getElementById('loginScreen');
     const mainForum = document.getElementById('mainForum');
@@ -91,10 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 posts.unshift(newPost);
                 localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                syncToServer();
                 document.getElementById('message').value = '';
                 renderPosts();
             }
         });
+        
+        async function syncToServer() {
+            try {
+                const response = await fetch(SYNC_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Server-Secret': SERVER_SECRET
+                    },
+                    body: JSON.stringify({
+                        filePath: 'sites/leviathan.cult/posts.json',
+                        posts: posts
+                    })
+                });
+
+                if (!response.ok) {
+                    console.error('Sync failed:', response.statusText);
+                } else {
+                    console.log('Synced to server successfully');
+                }
+            } catch (error) {
+                console.error('Error syncing to server:', error);
+            }
+        }
         
         function renderPosts() {
             postList.innerHTML = '';
@@ -195,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!post.comments) post.comments = [];
                     post.comments.push(newComment);
                     localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                    syncToServer();
                     input.value = '';
                     renderPosts();
                 }
@@ -205,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm('Delete this post?')) {
                 posts = posts.filter(p => p.id !== postId);
                 localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                syncToServer();
                 renderPosts();
             }
         }

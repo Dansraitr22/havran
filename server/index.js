@@ -190,6 +190,265 @@ app.post('/api/thread', async (req, res) => {
   }
 });
 
+// Endpoint to sync bazar items
+app.post('/api/bazar', async (req, res) => {
+  try {
+    // Rate limiting by IP
+    const ip = req.ip || req.connection.remoteAddress || 'unknown';
+    const now = Date.now();
+    const entry = rateMap.get(ip) || { count: 0, first: now };
+    if (now - entry.first > RATE_LIMIT_WINDOW_MS) {
+      entry.count = 0; entry.first = now;
+    }
+    entry.count += 1;
+    rateMap.set(ip, entry);
+    if (entry.count > RATE_LIMIT_MAX) {
+      return res.status(429).json({ error: 'Rate limit exceeded' });
+    }
+
+    // Optional server-side secret check
+    if (SERVER_SECRET) {
+      const incoming = req.headers['x-server-secret'];
+      if (!incoming || incoming !== SERVER_SECRET) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
+    const payload = req.body;
+    if (!payload || !Array.isArray(payload.items)) {
+      return res.status(400).json({ error: 'Invalid payload, expected { items: [] }' });
+    }
+
+    const filePath = 'sites/bazar/defaultitems.json';
+
+    // Get existing file
+    let sha = undefined;
+    let existing = [];
+    try {
+      const getRes = await octokit.repos.getContent({
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        path: filePath,
+        ref: GITHUB_BRANCH
+      });
+      sha = getRes.data.sha;
+      if (getRes.data && getRes.data.content) {
+        const decoded = Buffer.from(getRes.data.content, 'base64').toString('utf8');
+        try { existing = JSON.parse(decoded); } catch (e) { existing = []; }
+      }
+    } catch (err) {
+      if (err.status !== 404) throw err;
+    }
+
+    console.log(`[bazar-sync] existingItems=${existing.length} incomingItems=${payload.items.length}`);
+
+    // Merge items by signature (name + description)
+    function itemSig(item) {
+      return `${item.name || ''}::${item.description || ''}`;
+    }
+
+    const map = new Map();
+    existing.forEach(item => map.set(itemSig(item), item));
+    payload.items.forEach(item => {
+      const key = itemSig(item);
+      if (!map.has(key)) {
+        map.set(key, item);
+      }
+    });
+
+    const merged = Array.from(map.values());
+    const contentBase64 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
+
+    // Create or update file
+    await octokit.repos.createOrUpdateFileContents({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      message: `Update bazar items via sync server`,
+      content: contentBase64,
+      sha,
+      branch: GITHUB_BRANCH
+    });
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Error syncing bazar:', err);
+    return res.status(500).json({ error: err.message || String(err) });
+  }
+});
+
+// Endpoint for history-enthusiasts forum
+app.post('/api/forum', async (req, res) => {
+  try {
+    const ip = req.ip || req.connection.remoteAddress || 'unknown';
+    const now = Date.now();
+    const entry = rateMap.get(ip) || { count: 0, first: now };
+    if (now - entry.first > RATE_LIMIT_WINDOW_MS) {
+      entry.count = 0; entry.first = now;
+    }
+    entry.count += 1;
+    rateMap.set(ip, entry);
+    if (entry.count > RATE_LIMIT_MAX) {
+      return res.status(429).json({ error: 'Rate limit exceeded' });
+    }
+
+    if (SERVER_SECRET) {
+      const incoming = req.headers['x-server-secret'];
+      if (!incoming || incoming !== SERVER_SECRET) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
+    const payload = req.body;
+    if (!payload || !Array.isArray(payload.posts)) {
+      return res.status(400).json({ error: 'Invalid payload, expected { posts: [] }' });
+    }
+
+    const filePath = payload.filePath || 'sites/history-enthusiasts/posts.json';
+    
+    if (filePath.includes('..') || !filePath.startsWith('sites/') || !filePath.endsWith('.json')) {
+      return res.status(400).json({ error: 'Invalid filePath' });
+    }
+
+    let sha = undefined;
+    let existing = [];
+    try {
+      const getRes = await octokit.repos.getContent({
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        path: filePath,
+        ref: GITHUB_BRANCH
+      });
+      sha = getRes.data.sha;
+      if (getRes.data && getRes.data.content) {
+        const decoded = Buffer.from(getRes.data.content, 'base64').toString('utf8');
+        try { existing = JSON.parse(decoded); } catch (e) { existing = []; }
+      }
+    } catch (err) {
+      if (err.status !== 404) throw err;
+    }
+
+    console.log(`[forum-sync] filePath=${filePath} existingPosts=${existing.length} incomingPosts=${payload.posts.length}`);
+
+    function postSig(post) {
+      return `${post.username || ''}::${post.message || ''}`;
+    }
+
+    const map = new Map();
+    existing.forEach(post => map.set(postSig(post), post));
+    payload.posts.forEach(post => {
+      const key = postSig(post);
+      if (!map.has(key)) {
+        map.set(key, post);
+      }
+    });
+
+    const merged = Array.from(map.values());
+    const contentBase64 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
+
+    await octokit.repos.createOrUpdateFileContents({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      message: `Update forum posts via sync server`,
+      content: contentBase64,
+      sha,
+      branch: GITHUB_BRANCH
+    });
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Error syncing forum:', err);
+    return res.status(500).json({ error: err.message || String(err) });
+  }
+});
+
+// Endpoint for leviathan forum
+app.post('/api/leviathan', async (req, res) => {
+  try {
+    const ip = req.ip || req.connection.remoteAddress || 'unknown';
+    const now = Date.now();
+    const entry = rateMap.get(ip) || { count: 0, first: now };
+    if (now - entry.first > RATE_LIMIT_WINDOW_MS) {
+      entry.count = 0; entry.first = now;
+    }
+    entry.count += 1;
+    rateMap.set(ip, entry);
+    if (entry.count > RATE_LIMIT_MAX) {
+      return res.status(429).json({ error: 'Rate limit exceeded' });
+    }
+
+    if (SERVER_SECRET) {
+      const incoming = req.headers['x-server-secret'];
+      if (!incoming || incoming !== SERVER_SECRET) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
+    const payload = req.body;
+    if (!payload || !Array.isArray(payload.posts)) {
+      return res.status(400).json({ error: 'Invalid payload, expected { posts: [] }' });
+    }
+
+    const filePath = payload.filePath || 'sites/leviathan.cult/posts.json';
+    
+    if (filePath.includes('..') || !filePath.startsWith('sites/') || !filePath.endsWith('.json')) {
+      return res.status(400).json({ error: 'Invalid filePath' });
+    }
+
+    let sha = undefined;
+    let existing = [];
+    try {
+      const getRes = await octokit.repos.getContent({
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        path: filePath,
+        ref: GITHUB_BRANCH
+      });
+      sha = getRes.data.sha;
+      if (getRes.data && getRes.data.content) {
+        const decoded = Buffer.from(getRes.data.content, 'base64').toString('utf8');
+        try { existing = JSON.parse(decoded); } catch (e) { existing = []; }
+      }
+    } catch (err) {
+      if (err.status !== 404) throw err;
+    }
+
+    console.log(`[leviathan-sync] filePath=${filePath} existingPosts=${existing.length} incomingPosts=${payload.posts.length}`);
+
+    function postSig(post) {
+      return `${post.username || ''}::${post.message || ''}`;
+    }
+
+    const map = new Map();
+    existing.forEach(post => map.set(postSig(post), post));
+    payload.posts.forEach(post => {
+      const key = postSig(post);
+      if (!map.has(key)) {
+        map.set(key, post);
+      }
+    });
+
+    const merged = Array.from(map.values());
+    const contentBase64 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
+
+    await octokit.repos.createOrUpdateFileContents({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      message: `Update leviathan forum via sync server`,
+      content: contentBase64,
+      sha,
+      branch: GITHUB_BRANCH
+    });
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Error syncing leviathan:', err);
+    return res.status(500).json({ error: err.message || String(err) });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Sync server listening on port ${PORT}`);
 });
