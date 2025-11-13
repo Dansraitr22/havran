@@ -5,13 +5,13 @@ const cors = require('cors');
 const { Octokit } = require('@octokit/rest');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_OWNER = process.env.GITHUB_OWNER || 'Dansraitr22';
-const GITHUB_REPO = process.env.GITHUB_REPO || 'Havran';
-const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
-const SERVER_SECRET = process.env.SERVER_SECRET || '';
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+const GITHUB_OWNER = 'Dansraitr22';
+const GITHUB_REPO ='Havran';
+const GITHUB_BRANCH = 'main';
+const SERVER_SECRET = 'ilovekatie';
+const ALLOWED_ORIGIN = 'https://dansraitr22.github.io';
 
 if (!GITHUB_TOKEN) {
   console.error('Missing GITHUB_TOKEN environment variable. Create a fine-grained token and set GITHUB_TOKEN.');
