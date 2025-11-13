@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Enthusiasts Forum</title>
+    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="forum.css">
+</head>
+<body>
+    <header>
+        <h1>History Enthusiasts Forum</h1>
+        <p class="subtitle">Discussing historical events, theories, and research</p>
+        <div id="loggedInUser" class="user-info"></div>
+        <button id="loginButton" class="button">Login</button>
+        <button id="logoutButton" class="button" style="display: none;">Logout</button>
+    </header>
+    <main>
+        <section id="postForm" style="display: none;">
+            <h2>Create a Post</h2>
+            <form id="newPostForm">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </section>
+        <section id="posts">
+            <h2>Posts</h2>
+            <div id="postList"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 History Enthusiasts Forum. All rights reserved.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="forum.js"></script>
+</body>
+</html>

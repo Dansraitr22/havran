@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>*** RESTRICTED ACCESS *** - Leviathan Network</title>
+    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="leviathan.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo">🐙</div>
+                <h1>LEVIATHAN NETWORK</h1>
+                <p class="tagline">Corporate Evolution • Global Control</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Access Code:</label>
+                        <input type="password" id="accessCode" placeholder="Enter authorization code" required>
+                    </div>
+                    <button type="submit" class="login-btn">◆ ACCESS NETWORK ◆</button>
+                </form>
+                <div id="loginError" class="error-msg"></div>
+                <div class="warning">
+                    ⚠ UNAUTHORIZED ACCESS WILL BE REPORTED ⚠
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Forum (hidden until login) -->
+    <div id="mainForum" style="display:none;">
+        <header class="forum-header">
+            <div class="header-content">
+                <div class="logo-small">🐙</div>
+                <h1>LEVIATHAN NETWORK</h1>
+                <div class="user-info">
+                    <span id="loggedInUser"></span>
+                    <button id="logoutButton" class="logout-btn">Logout</button>
+                </div>
+            </div>
+            <nav class="nav-bar">
+                <a href="forum_index.html">◆ Discussion Hub</a> |
+                <a href="#directives">◆ Directives</a> |
+                <a href="#operations">◆ Operations</a>
+            </nav>
+        </header>
+
+        <main class="forum-main">
+            <section id="postForm" style="display: none;">
+                <h2>Create a Post</h2>
+                <form id="newPostForm">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Post</button>
+                </form>
+            </section>
+            <section id="posts">
+                <h2>Network Communications</h2>
+                <div id="postList"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© LEVIATHAN CORP. - All organisms serve the evolution</p>
+        </footer>
+    </div>
+
+    <script src="leviathan.js"></script>
+</body>
+</html>
