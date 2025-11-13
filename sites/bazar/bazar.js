@@ -1,4 +1,4 @@
-const SYNC_ENDPOINT = 'http://localhost:10000/api/bazar';
+const SYNC_ENDPOINT = 'https://havran.onrender.com/api/bazar';
 const SERVER_SECRET = 'ilovekatie';
 
 const itemsForSale = JSON.parse(localStorage.getItem('itemsForSale')) || [];

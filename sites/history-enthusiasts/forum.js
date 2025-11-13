@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const SYNC_ENDPOINT = 'http://localhost:10000/api/forum';
+    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/forum';
     const SERVER_SECRET = 'ilovekatie';
     
     // Multi-thread support via URL parameter ?thread=<id>

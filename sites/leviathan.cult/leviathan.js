@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const SYNC_ENDPOINT = 'http://localhost:10000/api/leviathan';
+    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/leviathan';
     const SERVER_SECRET = 'ilovekatie';
     
     const loginForm = document.getElementById('loginForm');
