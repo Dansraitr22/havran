@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diskusní Hub</title>
+  <link rel="stylesheet" href="../../normalize.css" />
+  <link rel="stylesheet" href="./forum.css" />
+</head>
+<body>
+  <div class="hub-container">
+    <h1>Diskusní Hub</h1>
+    <p class="hub-tagline">Vyber existující diskusi nebo založ novou.</p>
+    <section class="new-thread-section">
+      <h2>Nová Diskuse</h2>
+      <form id="newThreadForm">
+        <input type="text" id="threadTitle" placeholder="Název diskuse" required />
+        <button type="submit">Vytvořit</button>
+      </form>
+    </section>
+    <section class="thread-list-section">
+      <h2>Dostupné Diskuse</h2>
+      <div id="threadList"></div>
+    </section>
+  </div>
+  <script src="./forum_index.js" defer></script>
+</body>
+</html>

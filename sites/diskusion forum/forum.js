@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Multi-thread support via URL parameter ?thread=<id>
+    function getThreadId() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('thread') || 'default';
+        } catch (e) { return 'default'; }
+    }
+    const THREAD_ID = getThreadId();
+    const POSTS_KEY = 'forumPosts_' + THREAD_ID;
     const postForm = document.getElementById('newPostForm');
     const postList = document.getElementById('postList');
     const loginModal = document.getElementById('loginModal');
@@ -9,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
 
     let currentUser = localStorage.getItem('currentUser') || null;
-    const posts = (JSON.parse(localStorage.getItem('forumPosts')) || []).map(p => {
+    let posts = (JSON.parse(localStorage.getItem(POSTS_KEY)) || []).map(p => {
         // Normalize legacy objects that used 'author' instead of 'username'
         if (!p.username && p.author) p.username = p.author;
         // Defensive repair: if both missing, set placeholder only (will be replaced on server merge)
@@ -29,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return p;
     });
     // Persist any repairs immediately
-    localStorage.setItem('forumPosts', JSON.stringify(posts));
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
     // Track deletions so they can be propagated to the server
     let deletedPosts = JSON.parse(localStorage.getItem('deletedPosts')) || [];
     let deletedComments = JSON.parse(localStorage.getItem('deletedComments')) || [];
@@ -332,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (commentMessage) {
                     const newComment = ensureIdsForComment({ username: currentUser, message: commentMessage, replies: [] });
                     posts[postIndex].comments.push(newComment);
-                    localStorage.setItem('forumPosts', JSON.stringify(posts));
+                    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
                     scheduleSync();
                     renderPosts(); // Re-render posts
                 }
@@ -408,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (e) { console.warn('Failed to record deleted post id', e); }
             posts.splice(index, 1); // Remove the post
-            localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
+            localStorage.setItem(POSTS_KEY, JSON.stringify(posts)); // Save updated posts
             scheduleSync();
             renderPosts(); // Re-render posts
         } else {
@@ -430,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } catch (e) { console.warn('Failed to record deleted comment', e); }
                 posts[postIndex].comments.splice(commentIndex, 1); // Remove the comment
-                localStorage.setItem('forumPosts', JSON.stringify(posts)); // Save updated posts
+                localStorage.setItem(POSTS_KEY, JSON.stringify(posts)); // Save updated posts
                 scheduleSync();
                 renderPosts(); // Re-render posts
             } else {
@@ -447,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!posts[postIndex].comments[commentIndex]) { console.error('Comment not found for reply'); return; }
         if (!posts[postIndex].comments[commentIndex].replies) posts[postIndex].comments[commentIndex].replies = [];
         posts[postIndex].comments[commentIndex].replies.push(ensureIdsForReply(reply));
-        localStorage.setItem('forumPosts', JSON.stringify(posts));
+        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
         scheduleSync();
         renderPosts();
     }
@@ -472,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (e) { console.warn('Failed to record deleted reply', e); }
             posts[postIndex].comments[commentIndex].replies.splice(replyIndex, 1);
-            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
             scheduleSync();
             renderPosts();
         } else {
@@ -522,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (message) {
             const newPost = ensureIdsForPost({ username: currentUser, message, comments: [] });
             posts.push(newPost);
-            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
             scheduleSync();
             renderPosts();
             postForm.reset();
@@ -547,13 +556,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize posts
     if (!posts.length) {
-        localStorage.setItem('forumPosts', JSON.stringify(posts));
+        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
     }
 
     // Initialize UI
     updateUI();
 
     // Fetch and merge the discussion thread (merge into local posts array so comments/replies work)
+    if (THREAD_ID === 'default') {
     fetch('./discussionThread.json')
         .then(response => response.json())
         .then(data => {
@@ -580,12 +590,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Persist merged posts
-            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
             renderPosts();
         })
         .catch(error => {
             console.error('Error loading discussion thread:', error);
         });
+    } else {
+        // Non-default thread: set title element from stored thread list
+        const threadTitle = document.createElement('h2');
+        const threads = JSON.parse(localStorage.getItem('forumThreads')) || [];
+        const thisThread = threads.find(t => t.id === THREAD_ID);
+        threadTitle.textContent = thisThread ? thisThread.title : 'Diskuse';
+        postList.insertAdjacentElement('afterbegin', threadTitle);
+    }
 
     // Note: automatic syncing to GitHub Pages is not possible from client-side JS alone
     // without a backend or authenticated GitHub API usage. To enable automatic

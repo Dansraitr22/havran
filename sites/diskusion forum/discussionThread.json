@@ -2,186 +2,160 @@
   "title": "Posts",
   "posts": [
     {
+      "id": "p_init_01",
+      "createdAt": "2025-11-13T00:00:01Z",
       "author": "Tomik89",
       "message": "Hele, slyšel jsem, že se něco stalo u nějaký vědmy, co dělala seance. Prej tam byl rámus a pak sanitka. Nevíte někdo víc?",
       "comments": []
     },
     {
+      "id": "p_init_02",
+      "createdAt": "2025-11-13T00:00:02Z",
       "author": "PavlaK",
       "message": "Já slyšela jen od známý, že tam fakt byla policie. Ale jestli šlo o přepadení nebo něco jinýho, to nikdo pořádně neví.",
       "comments": []
     },
     {
+      "id": "p_init_03",
+      "createdAt": "2025-11-13T00:00:03Z",
       "author": "Oli22",
       "message": "Sousedi prý slyšeli křik a pak sirény. Ale víte jak, lidi si rádi přibarví. Možná to byla jen hádka.",
       "comments": []
     },
     {
+      "id": "p_init_04",
+      "createdAt": "2025-11-13T00:00:04Z",
       "author": "GhostFan",
       "message": "No a co to tělo, co našli minulý týden? Kamarád pracuje v nemocnici a říkal, že se tam povídá něco o fakt divný smrti. Prej to nevypadalo normálně.",
       "comments": []
     },
     {
+      "id": "p_init_05",
+      "createdAt": "2025-11-13T00:00:05Z",
       "author": "Zdenek82",
       "message": "To je ale jen drb. Vždycky se něco stane a hned se vykládají pohádky.",
       "comments": []
     },
     {
+      "id": "p_init_06",
+      "createdAt": "2025-11-13T00:00:06Z",
       "author": "LenkaM",
       "message": "Možná jo, ale divný je, že se tyhle věci dějou tak nějak po sobě. Vědma, pak nějaký chlap a ještě někdo psal, že zvířata v zoo dělala bordel uprostřed noci.",
       "comments": []
     },
     {
+      "id": "p_init_07",
+      "createdAt": "2025-11-13T00:00:07Z",
       "author": "Ota23",
       "message": "Jo, kámoš říkal, že šel kolem a slyšel, jak tam něco vyje. Ale to bych v zoo klidně i čekal :D.",
       "comments": []
     },
     {
+      "id": "p_init_08",
+      "createdAt": "2025-11-13T00:00:08Z",
       "author": "MartinaK",
       "message": "Taky jsem to slyšela, ale spíš bych řekla, že si lidi všechno spojujou. Jedna bába povídala a najednou je z toho celá historka o duchách.",
       "comments": []
     },
     {
+      "id": "p_init_09",
+      "createdAt": "2025-11-13T00:00:09Z",
       "author": "david.ghost",
       "message": "Já teda nevím, ale přijde mi zvláštní, že policie nic pořádně neříká. Kdyby to bylo normální, už to někde oficiálně zveřejní, ne?",
       "comments": []
     },
     {
+      "id": "p_init_10",
+      "createdAt": "2025-11-13T00:00:10Z",
       "author": "Tomik89",
       "message": "Nebo to nechtějí říct, aby nebyla panika.",
       "comments": []
     },
     {
+      "id": "p_init_11",
+      "createdAt": "2025-11-13T00:00:11Z",
       "author": "PavlaK",
       "message": "Haha, spiknutí! Ale fakt, je to divný. Nikdy se tu toho tolik nedělo a najednou hned několik věcí.",
       "comments": []
     },
     {
+      "id": "p_init_12",
+      "createdAt": "2025-11-13T00:00:12Z",
       "author": "GhostFan",
       "message": "A ještě jsem slyšel, že prý se u nás někdo zajímá o nějaký kult. To už je fakt jak z filmu.",
       "comments": []
     },
     {
+      "id": "p_init_13",
+      "createdAt": "2025-11-13T00:00:13Z",
       "author": "Zdenek82",
       "message": "Kult? To si děláte srandu. Tohle není Amerika, tady žádný sekty s rituálama nejsou.",
       "comments": []
     },
     {
+      "id": "p_init_14",
+      "createdAt": "2025-11-13T00:00:14Z",
       "author": "Oli22",
       "message": "No, a co když jo? Nikdo to nikdy nebere vážně, dokud se něco nestane.",
       "comments": []
     },
     {
+      "id": "p_init_15",
+      "createdAt": "2025-11-13T00:00:15Z",
       "author": "Tomik89",
       "message": "Hele ale kult… nebyl někde článek o nějaký partě, prej něco o divných symbolech? Někdo to sdílel na FB, už to nemůžu najít.",
       "comments": []
     },
     {
+      "id": "p_init_16",
+      "createdAt": "2025-11-13T00:00:16Z",
       "author": "PavlaK",
       "message": "Jojo, taky jsem to zahlídla. Bylo tam něco o „starých znacích“ nebo tak. Ale jestli to byl fakt článek, nebo jen nějakej blázen, těžko říct.",
       "comments": []
     },
     {
+      "id": "p_init_17",
+      "createdAt": "2025-11-13T00:00:17Z",
       "author": "Oli22",
       "message": "To je právě ono. Jeden to napíše, druhej to přepíše, a než se nadějem, tak z toho máme „sekty v našem městě“.",
       "comments": []
     },
     {
+      "id": "p_init_18",
+      "createdAt": "2025-11-13T00:00:18Z",
       "author": "GhostFan",
       "message": "No a co když na tom fakt něco je? Třeba to tělo s těma „podivnejma zraněníma“ (říkejme tomu tak, když nechcete drby). To není normální.",
       "comments": []
     },
     {
+      "id": "p_init_19",
+      "createdAt": "2025-11-13T00:00:19Z",
       "author": "Zdenek82",
       "message": "Podivný zranění má kdekdo. Všechno nemusí být hned konspirace. A navíc, kdyby šlo o něco velkýho, už by to bylo v televizi.",
       "comments": []
     },
     {
+      "id": "p_init_20",
+      "createdAt": "2025-11-13T00:00:20Z",
       "author": "LenkaM",
       "message": "Ale v novinách o tom byla zmínka, jen to bylo napsaný strašně neurčitě. „Incident v soukromém bytě“, „nestandardní okolnosti úmrtí“… To je na zamyšlení.",
       "comments": []
     },
     {
+      "id": "p_init_21",
+      "createdAt": "2025-11-13T00:00:21Z",
       "author": "Ota23",
       "message": "Přesně. A k tomu ta zoo. Zvířata prej byla fakt nervózní. Kdyby to byla jen náhoda, proč tam hned posilovali hlídky?",
       "comments": []
     },
     {
+      "id": "p_init_22",
+      "createdAt": "2025-11-13T00:00:22Z",
       "author": "MartinaK",
       "message": "To může být cokoliv – od hlučnejch návštěvníků po bouřku. Ale jo, chápu, že když se sečte tolik věcí dohromady, vypadá to zvláštně.",
       "comments": []
     },
-    {
-      "author": "david.ghost",
-      "message": "Já si stejně myslím, že nám jenom neříkají všechno. Možná to fakt není pro veřejnost. A nebo je to tak bizarní, že si to sami neumí vysvětlit.",
-      "comments": []
-    },
-    {
-      "author": "Tomik89",
-      "message": "Každopádně já už se po setmění sám nikam netáhnu. 😅",
-      "comments": []
-    },
-    {
-      "author": "PavlaK",
-      "message": "Haha, hlavně ať z toho nevznikne další městská legenda. Už vidím ty historky pro děti: „nechoď ven, jinak si tě odnese sekta.“",
-      "comments": []
-    },
-    {
-      "author": "GhostFan",
-      "message": "No, uvidíme, jestli bude další „náhoda“. Jestli jo, tak už to legenda nebude, ale realita.",
-      "comments": []
-    },
-    {
-      "author": "sitebot",
-      "message": "Test post — hello everyone! This post was added as a sample by the local assistant.",
-      "comments": []
-    },
-    {
-      "username": "pepa",
-      "message": "pepa ho og",
-      "comments": [],
-      "id": "p_mhwrradg_n4i0z8t",
-      "createdAt": "2025-11-13T01:47:30.244Z"
-    },
-    {
-      "username": "pepa",
-      "message": "ahoj jsem halala",
-      "comments": [],
-      "id": "p_mhwrsv1w_ziu7n02",
-      "createdAt": "2025-11-13T01:48:43.700Z"
-    },
-    {
-      "message": "pepa ho og",
-      "comments": [],
-      "id": "p_mhxosqx4_kqlgspn",
-      "createdAt": "2025-11-13T17:12:25.672Z"
-    },
-    {
-      "message": "ahoj jsem halala",
-      "comments": [],
-      "id": "p_mhxosqx4_k4nwpwx",
-      "createdAt": "2025-11-13T17:12:25.672Z"
-    },
-    {
-      "username": "pepa",
-      "message": "ahoj tady pepa",
-      "comments": [],
-      "id": "p_mhxp4cj9_llan3wr",
-      "createdAt": "2025-11-13T17:21:26.901Z"
-    },
-    {
-      "message": "ahoj tady pepa",
-      "comments": [],
-      "id": "p_mhxqed23_7kjtcxu",
-      "createdAt": "2025-11-13T17:57:13.755Z"
-    },
-    {
-      "username": "deron22",
-      "message": "pepa pepa peapa",
-      "comments": [],
-      "id": "p_mhxqwdk3_djoyknv",
-      "createdAt": "2025-11-13T18:11:14.211Z",
-      "author": "deron22"
-    }
+
+    
   ]
 }
