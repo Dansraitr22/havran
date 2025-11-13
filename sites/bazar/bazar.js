@@ -12,12 +12,12 @@ function saveItems() {
     localStorage.setItem('itemsForSale', JSON.stringify(itemsForSale));
 }
 
-function addItem(name, description, price) {
+function addItem(name, description, price, contact) {
     if (!currentUser) {
         alert('Musíte se přihlásit, abyste mohli přidat článek.');
         return;
     }
-    const item = { name, description, price, user: currentUser };
+    const item = { name, description, price, contact, user: currentUser };
     itemsForSale.push(item);
     saveItems();
     displayItems();
@@ -45,6 +45,7 @@ function displayItems() {
             <h3>${item.name}</h3>
             <p>${item.description}</p>
             <p class="price">${item.price} $</p>
+            <p class="contact"><strong>Kontakt:</strong> ${item.contact || 'Neuvedeno'}</p>
             ${item.user === currentUser ? `<button onclick="deleteItem(${index})">Odebrat článek</button>` : ''}
         `;
         itemsContainer.appendChild(itemElement);
@@ -131,8 +132,9 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
     const name = document.getElementById('itemName').value;
     const description = document.getElementById('itemDescription').value;
     const price = parseFloat(document.getElementById('itemPrice').value);
+    const contact = document.getElementById('itemContact').value;
     if (!isNaN(price)) {
-        addItem(name, description, price);
+        addItem(name, description, price, contact);
         closeModal();
     } else {
         console.error("Invalid price entered.");
