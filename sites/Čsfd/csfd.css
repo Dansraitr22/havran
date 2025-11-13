@@ -1,3 +1,38 @@
+body {
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  background: #efece6;
+  color: #111;
+  margin: 0;
+  padding: 20px;
+}
+.layout { background: #fffbe6; border: 3px solid #8b6a2f; width: 980px; }
+.banner { background: linear-gradient(#ffd27a, #ffb84d); text-align: left; padding: 10px; }
+.logo { height: 60px; vertical-align: middle; margin-right: 12px; }
+.banner-text { display: inline-block; font-family: 'Courier New', monospace; font-size: 20px; color: #2b2b2b; vertical-align: middle; }
+.leftcol { background:#f6f3ef; padding:10px; font-size:14px; }
+.centercol { padding: 12px; }
+.rightcol { background:#f6f3ef; padding:10px; font-size:14px; }
+.search-input { width: 120px; padding: 4px; border:1px solid #aaa; }
+.search-btn { padding:4px 8px; background:#d9d0b6; border:1px solid #8b6a2f; cursor:pointer; }
+.nav-btn { display:block; width:100%; margin:6px 0; padding:6px; background:#fff2d9; border:1px solid #d0b58b; cursor:pointer; text-align:left; }
+.ticker { background:#fff; color:#4a2f00; padding:6px; border:1px solid #e0caa2; }
+h2 { font-family: 'Georgia', serif; color:#2b2b2b; margin-top:0; }
+.review-item { border-bottom:1px dotted #c9b79a; padding:8px 0; }
+.review-item h3 { margin:0 0 4px 0; font-size:18px; }
+.rating { color:#b85c3b; font-weight:bold; margin-left:8px; }
+.meta { color:#666; font-size:12px; margin-bottom:6px; }
+.read { color:#0645ad; text-decoration:underline; cursor:pointer; }
+.quick-list { list-style: square; padding-left: 18px; }
+.footer { text-align:center; font-size:12px; color:#555; padding:8px; }
+.small-note { font-size:13px; }
+
+/* Retro touches */
+body, .layout { box-shadow: 0 4px 0 rgba(0,0,0,0.08); }
+.review-item p { margin:6px 0; }
+
+@media (max-width:1000px){
+  .layout { width: 98%; }
+}
 /* General Styles */
 body {
     font-family: "Times New Roman", serif;

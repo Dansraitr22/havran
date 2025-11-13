@@ -1,8 +1,24 @@
-[
-
-
-
-
-
-    
-]
+[{
+	"id": 1,
+	"title": "Community Picnic & Fellowship",
+	"date": "2003-08-17T10:00:00Z",
+	"author": "Pastor John",
+	"excerpt": "Join us for our annual summer picnic at Riverside Park. Food, games, and fellowship for the whole family.",
+	"content": "Everyone is welcome to our annual Community Picnic at Riverside Park. We will have a potluck lunch, games for kids, and an evening of worship. Bring a blanket and a dish to share. Services next Sunday will be at 9:00 and 11:00 as usual."
+},
+{
+	"id": 2,
+	"title": "Vacation Bible School Sign-ups Open",
+	"date": "2003-07-01T09:00:00Z",
+	"author": "Children's Ministry",
+	"excerpt": "VBS this year will be the week of July 21st — register your children today.",
+	"content": "Vacation Bible School will run Monday through Friday, 9am to 12pm. Ages 4-12 welcome. Volunteers needed for crafts and snack station. Contact the church office to register."
+},
+{
+	"id": 3,
+	"title": "Food Drive for Local Shelter",
+	"date": "2003-06-15T08:00:00Z",
+	"author": "Outreach Team",
+	"excerpt": "We're collecting non-perishables for the county shelter — drop-off in the foyer.",
+	"content": "Please bring canned goods and dry staples to church foyer during office hours. Volunteers will sort and deliver items to the shelter on Saturday. Thank you for supporting our neighbors in need."
+}]

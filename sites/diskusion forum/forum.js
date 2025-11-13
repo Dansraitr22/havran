@@ -11,13 +11,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser') || null;
     const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
 
-    // Configuration: set this to the deployed server URL that will commit updates to GitHub
+    // Configuration: set `SYNC_ENDPOINT` to the deployed server URL that will commit updates to GitHub
     // Example: const SYNC_ENDPOINT = 'https://my-sync-server.example.com/api/thread'
     // You must deploy the server included in /server and set its SERVER_SECRET; the client
     // will send the SECRET in the 'x-server-secret' header. Replace the placeholder below.
     const SYNC_ENDPOINT = ''; // <-- set to your server URL when deployed
     const SERVER_SECRET_HEADER_NAME = 'x-server-secret';
     const SERVER_SECRET = ''; // <-- set this to match the server's SERVER_SECRET when testing
+
+    // Compute the repository file path for this site's discussion thread.
+    // The server expects paths like: "sites/<folder>/discussionThread.json"
+    function computeSiteFilePath() {
+        try {
+            const pathname = window.location.pathname || '';
+            const decoded = decodeURIComponent(pathname);
+            const sitesIndex = decoded.indexOf('/sites/');
+            if (sitesIndex !== -1) {
+                // capture from 'sites/.../page.html' -> 'sites/...'
+                const endIndex = decoded.lastIndexOf('/');
+                const sitePath = decoded.substring(sitesIndex + 1, endIndex);
+                return sitePath + '/discussionThread.json';
+            }
+        } catch (e) {
+            console.warn('Could not compute site file path, falling back to diskusion forum');
+        }
+        // fallback to this folder's discussion file
+        return 'sites/diskusion forum/discussionThread.json';
+    }
+    const FILE_PATH = computeSiteFilePath();
 
     // Debounced sync: schedule a server sync after local changes
     let __syncTimer = null;
@@ -32,9 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const payload = {
                 title: document.querySelector('#posts h2') ? document.querySelector('#posts h2').textContent : 'Discussion Thread',
-                posts
+                posts,
+                filePath: FILE_PATH
             };
-            await fetch(SYNC_ENDPOINT, {
+            const res = await fetch(SYNC_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(payload)
             });
-            console.log('Synced forum to server');
+            if (!res.ok) {
+                const txt = await res.text();
+                console.warn('Sync server responded with', res.status, txt);
+            } else {
+                console.log('Synced forum to server');
+            }
         } catch (err) {
             console.error('Failed to sync to server:', err);
         }

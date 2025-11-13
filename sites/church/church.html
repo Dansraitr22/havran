@@ -3,10 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Grace Community Church</title>
     <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="./church.css">
 </head>
 <body>
-    
+    <table class="layout" align="center" cellpadding="8" cellspacing="0">
+        <tr class="banner-row">
+            <td colspan="3" class="banner">
+                <img src="../images/church-logo.png" alt="Grace Community Church" class="logo">
+                <div class="banner-text">Grace Community Church — Small Town, Big Heart</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="leftcol" width="180" valign="top">
+                <div class="nav">
+                    <button class="nav-btn">Home</button>
+                    <button class="nav-btn">About Us</button>
+                    <button class="nav-btn">Ministries</button>
+                    <button class="nav-btn">Events</button>
+                    <button class="nav-btn">Contact</button>
+                </div>
+                <hr>
+                <div class="small">
+                    <strong>Service Times</strong>
+                    <p>Sun: 9:00am & 11:00am<br>Wed: 7:00pm</p>
+                </div>
+            </td>
+            <td class="centercol" valign="top">
+                <marquee class="ticker">Welcome to Grace Community — Vacation Bible School sign-ups open now! Church picnic next Sunday.</marquee>
+
+                <div class="content">
+                    <h2>Latest News</h2>
+                    <div id="newsList">Loading news...</div>
+                </div>
+            </td>
+            <td class="rightcol" width="200" valign="top">
+                <div class="right-box">
+                    <h4>Upcoming Events</h4>
+                    <ul id="eventsList">
+                        <li>Sunday School restart — Aug 10</li>
+                        <li>Community Picnic — Aug 17</li>
+                        <li>Food Drive — Sep 5</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="contact">
+                    <strong>Contact</strong>
+                    <p>Pastor John<br>Phone: (555) 123-4567<br>Email: info@gracechurch.example</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="footer">&copy; 2003 Grace Community Church — All rights reserved</td>
+        </tr>
+    </table>
+
+    <script>
+        // Load news from church.json and render list
+        function formatDate(d){
+            const dt = new Date(d);
+            return dt.toLocaleDateString();
+        }
+        fetch('./church.json')
+            .then(r => r.json())
+            .then(data => {
+                const newsList = document.getElementById('newsList');
+                if (!data || !data.length) {
+                    newsList.innerHTML = '<p>No news available.</p>';
+                    return;
+                }
+                const html = data.map(item => `
+                    <div class="news-item">
+                        <h3>${item.title}</h3>
+                        <div class="meta">${formatDate(item.date)} — ${item.author}</div>
+                        <p>${item.excerpt || (item.content.substring(0,200) + '...')}</p>
+                        <a href="#" class="readmore" data-id="${item.id}">Read more</a>
+                    </div>
+                `).join('\n');
+                newsList.innerHTML = html;
+
+                document.querySelectorAll('.readmore').forEach(a => {
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const id = a.getAttribute('data-id');
+                        const article = data.find(x => String(x.id) === String(id));
+                        if (article) {
+                            const win = window.open('', '_blank');
+                            win.document.write(`<html><head><title>${article.title}</title><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="./church.css"></head><body><h1>${article.title}</h1><div class=\"meta\">${formatDate(article.date)} — ${article.author}</div><div>${article.content}</div></body></html>`);
+                            win.document.close();
+                        }
+                    });
+                });
+            })
+            .catch(err => { document.getElementById('newsList').innerHTML = '<p>Failed to load news.</p>'; console.error(err); });
+    </script>
 </body>
 </html>

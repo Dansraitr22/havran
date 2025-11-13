@@ -8,15 +8,4 @@ window.konspiraNewsData = [
     { title: "Reptiliáni: Mimozemské Bytosti mezi Námi", content: "Teorie o reptiliánech tvrdí, že mezi námi žijí mimozemské bytosti, které se maskují jako lidé. Tento článek zkoumá původ této teorie, její hlavní zastánce a důkazy, které ji podporují." }
 ];
 
-window.resultsContainer = document.getElementById('resultsContainer');
-if (resultsContainer) {
-    konspiraNewsData.forEach(news => {
-        const newsElement = document.createElement('div');
-        newsElement.className = 'news-item';
-        newsElement.innerHTML = `
-            <h2>${news.title}</h2>
-            <p>${news.content}</p>
-        `;
-        resultsContainer.appendChild(newsElement);
-    });
-}
+// Note: Rendering of this data should be handled by the pages (konspirmain.html / newsTemplate.html)

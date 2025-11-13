@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Hvězdný koráb: Návrat špachtle",
+    "rating": 7,
+    "date": "2003-04-12T00:00:00Z",
+    "author": "Karel P.",
+    "excerpt": "Galaktická parodie, kde hrdina zachrání vesmír… a omylem smaží palačinky.",
+    "content": "Čistá radost z absurdity. Režisér záměrně přehání klišé sci-fi, výsledkem je film, který je zároveň poctou i výsměchem. Hudba připomíná synth-pop z 80. let a špachtle se stává symbolem naděje. Doporučeno s velkým popcornem."
+  },
+  {
+    "id": 2,
+    "title": "Pán prstenů: Náušnice",
+    "rating": 6,
+    "date": "2004-06-01T00:00:00Z",
+    "author": "Lenka M.",
+    "excerpt": "Epické fantasy, které si s prvky originálu dělá legraci—těsněji než prsten padne náušnice.",
+    "content": "Snímek přijímá napětí a epiku, ale zároveň ji rozmělní do komedie. Některé scény jsou brilantní; jiné bohužel sklouznou do gagů. Přesto stojí za zhlédnutí pro fanoušky parodií."
+  },
+  {
+    "id": 3,
+    "title": "Kocour v botách 2: Útok ponožek",
+    "rating": 5,
+    "date": "2001-11-15T00:00:00Z",
+    "author": "Tomáš V.",
+    "excerpt": "Dětská pohádka pro odrostlejší diváky — tentokrát s nebezpečnými ponožkami.",
+    "content": "Snímek nabízí pár pěkných gagů, ale táhne ho nepříliš konzistentní děj. Nejzábavnější jsou vizuální nápady a animace, které občas překvapí noblesou."
+  },
+  {
+    "id": 4,
+    "title": "Rychle a zběsile: Parkovací manévry",
+    "rating": 4,
+    "date": "2005-03-03T00:00:00Z",
+    "author": "Jana R.",
+    "excerpt": "Akční film, kde jsou hlavními souboji řidiči v nákupním centru.",
+    "content": "Film překvapivě nedrží rytmus; šílené kaskadérské kousky střídají pomalé dialogy. Jako zábava večera s přáteli ale funguje dobře."
+  },
+  {
+    "id": 5,
+    "title": "Žralok v kanceláři",
+    "rating": 6,
+    "date": "2002-08-20T00:00:00Z",
+    "author": "Pavel S.",
+    "excerpt": "Thriller, který kombinuje horor a byrokracii—když šéf není nejhorší predátor.",
+    "content": "Tato černá komedie vytěží maximum z absurdní premise: obrovský žralok uvízl v otevřeném prostoru kanceláře. Tvůrci vědí, jak gradovat napětí i ironii."
+  },
+  {
+    "id": 6,
+    "title": "Snílkovy ponožky",
+    "rating": 8,
+    "date": "2000-12-05T00:00:00Z",
+    "author": "Alena K.",
+    "excerpt": "Kouzelná road movie o páru ponožek, které zachrání den jednoho ponurého města.",
+    "content": "Film okouzlí fantazií a poetikou. Skvělá práce s kamerou a tichými momenty dělá z tohoto filmu nečekaný klenot."
+  },
+  {
+    "id": 7,
+    "title": "Matrix Reloaded: Restart systému",
+    "rating": 7,
+    "date": "2001-07-07T00:00:00Z",
+    "author": "Michal Z.",
+    "excerpt": "Akční sci-fi, které se místo vysvětlování raději rozhodne znovu spustit systém.",
+    "content": "Pokračování, které se nebojí být hlučné a vizuálně překotné. Některé scény jsou geniální, jiné zase zanechávají otázky bez odpovědi — což u parodie ani tak nevadí."
+  },
+  {
+    "id": 8,
+    "title": "Tichá noc: remix",
+    "rating": 3,
+    "date": "2006-01-02T00:00:00Z",
+    "author": "Dana L.",
+    "excerpt": "Hororová parodie s tanečními breaky přímo uprostřed ztemnělého kostela.",
+    "content": "Nápad sám o sobě je skvělý, avšak provedení je místy chaotické. Přesto film nabízí pár skvělých momentů a výbornou atmosféru."
+  }
+]

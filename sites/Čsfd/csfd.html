@@ -1,55 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ČSFD - Filmové Recenze</title>
+    <title>ČSFD — Filmové recenze (classic)</title>
     <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="./csfd.css">
+    <meta name="robots" content="noindex">
 </head>
 <body>
-    <header>
-        <h1>ČSFD - Filmové Recenze</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">O nás</a></li>
-                <li><a href="#reviews">Recenze</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="about">
-            <h2>O nás</h2>
-            <p>Vítejte na ČSFD, místě, kde najdete recenze na vaše oblíbené filmy. Naším cílem je poskytovat upřímné a podrobné hodnocení filmů z celého světa.</p>
-        </section>
+    <table class="layout" align="center" cellpadding="8" cellspacing="0">
+        <tr>
+            <td colspan="3" class="banner">
+                <img src="../images/csfd-logo.png" alt="ČSFD" class="logo">
+                <div class="banner-text">Československá filmová databáze — Recenze & Novinky</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="leftcol" width="200" valign="top">
+                <div class="search">
+                    <input type="text" placeholder="Hledat film..." class="search-input">
+                    <button class="search-btn">Hledat</button>
+                </div>
+                <hr>
+                <div class="menu">
+                    <button class="nav-btn">Novinky</button>
+                    <button class="nav-btn">Recenze</button>
+                    <button class="nav-btn">Žebříčky</button>
+                    <button class="nav-btn">Top 100</button>
+                    <button class="nav-btn">Kontakt</button>
+                </div>
+            </td>
+            <td class="centercol" valign="top">
+                <marquee class="ticker">Nové recenze dnes: "Návštěva u sousedů" — 4/5 ★ | "Temné vody" — 3/5 ★</marquee>
 
-        <section id="reviews">
-            <h2>Recenze</h2>
-            <article class="review">
-                <h3>Titanic (1997)</h3>
-                <p><strong>Hodnocení:</strong> 9/10</p>
-                <p>Epický romantický film Jamese Camerona, který sleduje osud lásky mezi Jackem a Rose na palubě osudného Titanicu. Skvělá hudba, výprava a herecké výkony.</p>
-            </article>
-            <article class="review">
-                <h3>Matrix (1999)</h3>
-                <p><strong>Hodnocení:</strong> 10/10</p>
-                <p>Revoluční sci-fi film, který změnil pohled na akční žánr. Wachowští vytvořili svět plný filozofie, akce a vizuálních efektů, které dodnes inspirují.</p>
-            </article>
-            <article class="review">
-                <h3>Gladiátor (2000)</h3>
-                <p><strong>Hodnocení:</strong> 8/10</p>
-                <p>Historický epos Ridleyho Scotta s Russellem Crowem v hlavní roli. Příběh o pomstě, cti a boji za svobodu. Skvělá hudba Hanse Zimmera.</p>
-            </article>
-        </section>
+                <h2>Poslední recenze</h2>
+                <div id="reviews">Načítání recenzí…</div>
+            </td>
+            <td class="rightcol" width="220" valign="top">
+                <h4>Rychlé odkazy</h4>
+                <ul class="quick-list">
+                    <li><a href="#">Premiéry</a></li>
+                    <li><a href="#">Festivaly</a></li>
+                    <li><a href="#">Rozhovory</a></li>
+                </ul>
+                <hr>
+                <div class="small-note">
+                    <strong>Hlasování</strong>
+                    <p>Hlasujte za film měsíce v pravém sloupci.</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="footer">&copy; 2002 ČSFD (fanpage) — Retro verze</td>
+        </tr>
+    </table>
 
-        <section id="contact">
-            <h2>Kontakt</h2>
-            <p>Email: <a href="mailto:info@csfd.cz">info@csfd.cz</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2000 ČSFD. Všechna práva vyhrazena.</p>
-    </footer>
+    <script>
+        // Load sample reviews from csfd.json and render
+        function formatDate(d){ const dt=new Date(d); return dt.toLocaleDateString(); }
+        fetch('./csfd.json')
+            .then(r => r.json())
+            .then(data => {
+                const container = document.getElementById('reviews');
+                if(!data || !data.length) { container.innerHTML = '<p>Žádné recenze.</p>'; return; }
+                container.innerHTML = data.map(r => `
+                    <div class="review-item">
+                        <h3>${r.title} <span class="rating">${r.rating}★</span></h3>
+                        <div class="meta">${formatDate(r.date)} — ${r.author}</div>
+                        <p>${r.excerpt}</p>
+                        <a href="#" class="read" data-id="${r.id}">Číst více</a>
+                    </div>
+                `).join('');
+
+                document.querySelectorAll('.read').forEach(a => {
+                    a.addEventListener('click', e => {
+                        e.preventDefault();
+                        const id = a.dataset.id;
+                        const rev = data.find(x=>String(x.id)===String(id));
+                        if(rev){
+                                                        const win = window.open('', '_blank', 'width=700,height=600');
+                                                        win.document.write(`<!doctype html>
+                                                                <html>
+                                                                <head>
+                                                                    <meta charset="utf-8">
+                                                                    <title>${rev.title}</title>
+                                                                    <link rel="stylesheet" href="../../normalize.css">
+                                                                    <link rel="stylesheet" href="./csfd.css">
+                                                                </head>
+                                                                <body style="font-family: Tahoma, Arial, Helvetica; padding:16px;">
+                                                                    <h1>${rev.title} <small>${rev.rating}★</small></h1>
+                                                                    <div class="meta">${formatDate(rev.date)} — ${rev.author}</div>
+                                                                    <div>${rev.content}</div>
+                                                                </body>
+                                                                </html>`);
+                                                        win.document.close();
+                        }
+                    });
+                });
+            })
+            .catch(err => { document.getElementById('reviews').innerHTML = '<p>Chyba při načítání recenzí.</p>'; console.error(err); });
+    </script>
 </body>
 </html>

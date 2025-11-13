@@ -3,55 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bleší Trh</title>    <link rel="stylesheet" href="../../normalize.css">
+    <title>Bleší Trh — Retro 2000</title>
+    <link rel="stylesheet" href="../../normalize.css">
     <link rel="stylesheet" href="./fleemarket.css">
 </head>
 <body>
-    <header>
-        <h1>Bleší Trh</h1>
-        <div id="infoControls" class="info-controls">
-            <button id="infoButton" class="info-button">
-                <img id="infoIcon" class="info-icon" src="../images/profile-icon-new-256x300-90.jpg" alt="Info">
-                <span>Kdy a Kde</span>
-            </button>
-            <div id="infoMenu" class="info-menu" style="display: none;">
-                <p><strong>lokace:</strong> 123 Fleemarket St, Cityville</p>
-                <p><strong>Otevírací doba:</strong> Po-So, 9:00 - 18:00</p>
+</table>
+    <main class="info-page">
+        <header class="info-header">
+            <img src="../images/fleamarket-logo.png" alt="Bleší Trh" class="logo">
+            <div class="intro">
+                <h1>Bleší Trh</h1>
+                <p class="tag">Kdy a kde nás najdete — vše základní na jedné stránce</p>
             </div>
-        </div>
-        <nav>
+        </header>
+
+        <section class="where">
+            <h2>Kde a kdy</h2>
+            <p><strong>Adresa:</strong> Tržní 123, Centrum města</p>
+            <p><strong>Termín konání:</strong> Každá sobota</p>
+            <p><strong>Otevírací doba:</strong> 9:00 — 16:00</p>
+            <p><strong>Vstup:</strong> Zdarma pro návštěvníky, prodejní stánky po rezervaci</p>
+        </section>
+
+        <section class="howto">
+            <h2>Pro návštěvníky</h2>
             <ul>
-                <li><a href="#about">O nás</a></li>
-                <li><a href="#wherecanyoufindus">Kde nás najdete?</a></li>
-                <li><a href="#contact">Kontakt</a></li>
+                <li>Přineste hotovost — někteří prodejci nepřijímají karty.</li>
+                <li>Parkování je omezené, doporučujeme MHD.</li>
+                <li>Respektujte prodejce a okolí tržnice.</li>
             </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="about">
-            <h2>O nás</h2>
-            <p>Nabízíme široký výběr second-hand zboží za dostupné ceny. Naším cílem je podporovat udržitelnost a poskytovat kvalitní produkty naší komunitě.</p>
         </section>
 
-        <section id="wherecanyoufindus">
-            <h2>Kde nás najdete?</h2>
-            <p>Nacházíme se v srdci města, snadno dostupní veřejnou dopravou. Navštivte nás na adrese 123 Fleemarket St, Cityville.</p>
+        <section class="for-sellers">
+            <h2>Pro prodejce</h2>
+            <p>Chcete-li prodávat, napište nám na <a href="mailto:info@fleemarket.com">info@fleemarket.com</a> nebo zavolejte +420 123 456 789. Rezervace stánku je nutná.</p>
         </section>
 
-        <section id="contact">
-            <h2>Kontaktujte nás</h2>
-            <p>Email: <a href="mailto:info@fleemarket.com">info@fleemarket.com</a></p>
-        </section>
+        <footer class="info-footer">&copy; Bleší Trh — Informace pro návštěvníky</footer>
     </main>
-    <footer>
-        <p>&copy; 1990 Bleší Trh. Všechna práva vyhrazena.</p>
-    </footer>
-    <script>
-        // Toggle the info menu
-        document.getElementById('infoButton').addEventListener('click', () => {
-            const menu = document.getElementById('infoMenu');
-            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
+
+    <!-- No interactive hide/show functionality per request -->
 </body>
 </html>

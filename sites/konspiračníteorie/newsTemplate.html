@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Detail</title>
-    <link rel="stylesheet" href="konspir.css">
-<head>
-    <meta charset="UTF-8">
+    <title>Konspirační teorie — Článek</title>
     <link rel="stylesheet" href="../../normalize.css">
-    <title>Zpravodajský web 90. let</title>
-    <script src="konspir.css"></script>
+    <link rel="stylesheet" href="./konspir.css">
 </head>
+<body>
+    <header>
         <a href="./konspirmain.html" class="return-button">
-            <img src="../images/iluminaty.webp" alt="Return to main page" class="return-image">
+            <img src="../images/iluminaty.webp" alt="Zpět" class="return-image">
         </a>
     </header>
-    <main id="newsContent"></main>
+
+    <main id="newsContent" class="container">
+        <!-- Article content will be inserted here by JS -->
+    </main>
+
     <script src="./newsData.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const newsIndex = urlParams.get('newsIndex');
+            const newsContent = document.getElementById('newsContent');
             if (newsIndex !== null && typeof konspiraNewsData !== 'undefined' && konspiraNewsData[newsIndex]) {
                 const newsItem = konspiraNewsData[newsIndex];
-                const newsContent = document.getElementById('newsContent');
                 newsContent.innerHTML = `
                     <h2>${newsItem.title}</h2>
                     <p>${newsItem.content}</p>
                 `;
             } else {
-                document.getElementById('newsContent').innerHTML = '<p>News item not found.</p>';
+                newsContent.innerHTML = '<p>Článek nebyl nalezen.</p>';
             }
         });
     </script>
