@@ -131,25 +131,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function syncToServer() {
         console.log('[History Forum] Attempting to sync', posts.length, 'posts to server...');
+        console.log('[History Forum] Posts data:', JSON.stringify(posts).substring(0, 200));
         try {
+            const payload = {
+                filePath: 'sites/history-enthusiasts/posts.json',
+                posts: posts
+            };
+            console.log('[History Forum] Payload:', payload);
+            
             const response = await fetch(SYNC_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Server-Secret': SERVER_SECRET
                 },
-                body: JSON.stringify({
-                    filePath: 'sites/history-enthusiasts/posts.json',
-                    posts: posts
-                })
+                body: JSON.stringify(payload)
             });
 
+            console.log('[History Forum] Response status:', response.status);
             if (!response.ok) {
                 console.error('[History Forum] Sync failed:', response.status, response.statusText);
                 const errorText = await response.text();
                 console.error('[History Forum] Error details:', errorText);
             } else {
-                console.log('[History Forum] Synced to server successfully');
+                const result = await response.json();
+                console.log('[History Forum] Synced to server successfully:', result);
             }
         } catch (error) {
             console.error('[History Forum] Error syncing to server:', error);
