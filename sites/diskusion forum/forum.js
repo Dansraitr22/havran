@@ -249,7 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Add the comment to the post
                     if (commentMessage) {
-                    posts[postIndex].comments.push({ username: currentUser, message: commentMessage });
+                    const newComment = ensureIdsForComment({ username: currentUser, message: commentMessage, replies: [] });
+                    posts[postIndex].comments.push(newComment);
                     localStorage.setItem('forumPosts', JSON.stringify(posts));
                     scheduleSync();
                     renderPosts(); // Re-render posts
@@ -347,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!posts[postIndex]) { console.error('Post not found for reply'); return; }
         if (!posts[postIndex].comments[commentIndex]) { console.error('Comment not found for reply'); return; }
         if (!posts[postIndex].comments[commentIndex].replies) posts[postIndex].comments[commentIndex].replies = [];
-        posts[postIndex].comments[commentIndex].replies.push(reply);
+        posts[postIndex].comments[commentIndex].replies.push(ensureIdsForReply(reply));
         localStorage.setItem('forumPosts', JSON.stringify(posts));
         scheduleSync();
         renderPosts();
@@ -411,8 +412,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (message) {
-            posts.push({ username: currentUser, message, comments: [] });
+            const newPost = ensureIdsForPost({ username: currentUser, message, comments: [] });
+            posts.push(newPost);
             localStorage.setItem('forumPosts', JSON.stringify(posts));
+            scheduleSync();
             renderPosts();
             postForm.reset();
         }
@@ -455,14 +458,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Merge posts from JSON into our posts array if not already present.
             data.posts.forEach(jsonPost => {
                 // Convert jsonPost.author -> username and ensure comments array exists
-                const candidate = {
+                const candidate = ensureIdsForPost({
                     username: jsonPost.author,
                     message: jsonPost.message,
                     comments: jsonPost.comments || []
-                };
+                });
 
-                // Avoid duplicates by checking for same author+message
-                const exists = posts.some(p => p.username === candidate.username && p.message === candidate.message);
+                // Avoid duplicates by checking id first, then author+message
+                const exists = posts.some(p => (candidate.id && p.id && p.id === candidate.id) || (p.username === candidate.username && p.message === candidate.message));
                 if (!exists) {
                     posts.push(candidate);
                 }
