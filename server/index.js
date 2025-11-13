@@ -77,15 +77,57 @@ app.post('/api/thread', async (req, res) => {
       return res.status(400).json({ error: 'Invalid filePath' });
     }
 
-    // Prepare content
-    const contentObj = {
-      title: payload.title || 'Discussion Thread',
-      posts: payload.posts
-    };
-    const contentBase64 = Buffer.from(JSON.stringify(contentObj, null, 2)).toString('base64');
+    // Helper: signature for deduplication (author + message)
+    function sig(obj) {
+      if (!obj) return '';
+      const a = (obj.author || obj.username || '').toString();
+      const m = (obj.message || obj.msg || '').toString();
+      return `${a}::${m}`;
+    }
 
-    // Get existing file to obtain sha (if exists)
+    // Merge comments/replies arrays by signature
+    function mergeComments(existingComments = [], incomingComments = []) {
+      const map = new Map();
+      (existingComments || []).forEach(c => map.set(sig(c), c));
+      (incomingComments || []).forEach(c => {
+        const key = sig(c);
+        if (!map.has(key)) {
+          map.set(key, c);
+        } else {
+          // merge nested replies
+          const ex = map.get(key);
+          ex.replies = mergeReplies(ex.replies || [], c.replies || []);
+        }
+      });
+      return Array.from(map.values());
+    }
+
+    function mergeReplies(existingReplies = [], incomingReplies = []) {
+      const map = new Map();
+      (existingReplies || []).forEach(r => map.set(sig(r), r));
+      (incomingReplies || []).forEach(r => { if (!map.has(sig(r))) map.set(sig(r), r); });
+      return Array.from(map.values());
+    }
+
+    function mergePosts(existingPosts = [], incomingPosts = []) {
+      const map = new Map();
+      (existingPosts || []).forEach(p => map.set(sig(p), p));
+      (incomingPosts || []).forEach(p => {
+        const key = sig(p);
+        if (!map.has(key)) {
+          map.set(key, p);
+        } else {
+          // Merge comments into existing post
+          const ex = map.get(key);
+          ex.comments = mergeComments(ex.comments || [], p.comments || []);
+        }
+      });
+      return Array.from(map.values());
+    }
+
+    // Get existing file to obtain sha and existing content (if exists)
     let sha = undefined;
+    let existing = null;
     try {
       const getRes = await octokit.repos.getContent({
         owner: GITHUB_OWNER,
@@ -94,10 +136,30 @@ app.post('/api/thread', async (req, res) => {
         ref: GITHUB_BRANCH
       });
       sha = getRes.data.sha;
+      // decode existing content
+      if (getRes.data && getRes.data.content) {
+        const decoded = Buffer.from(getRes.data.content, 'base64').toString('utf8');
+        try { existing = JSON.parse(decoded); } catch (e) { existing = null; }
+      }
     } catch (err) {
       // If not found, we'll create it
       if (err.status !== 404) throw err;
     }
+
+    // Merge incoming posts with existing posts (avoid deleting old posts)
+    const incoming = {
+      title: payload.title || (existing && existing.title) || 'Discussion Thread',
+      posts: Array.isArray(payload.posts) ? payload.posts : []
+    };
+
+    let merged = { title: incoming.title, posts: incoming.posts };
+    if (existing && Array.isArray(existing.posts)) {
+      merged.posts = mergePosts(existing.posts, incoming.posts);
+      // If incoming provided a title prefer it; otherwise keep existing
+      merged.title = payload.title || existing.title || merged.title;
+    }
+
+    const contentBase64 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
 
     // Create or update file
     await octokit.repos.createOrUpdateFileContents({
