@@ -9,7 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
 
     let currentUser = localStorage.getItem('currentUser') || null;
-    const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+    const posts = (JSON.parse(localStorage.getItem('forumPosts')) || []).map(p => {
+        // Normalize legacy objects that used 'author' instead of 'username'
+        if (!p.username && p.author) p.username = p.author;
+        if (Array.isArray(p.comments)) {
+            p.comments.forEach(c => {
+                if (!c.username && c.author) c.username = c.author;
+                if (Array.isArray(c.replies)) {
+                    c.replies.forEach(r => {
+                        if (!r.username && r.author) r.username = r.author;
+                    });
+                }
+            });
+        }
+        return p;
+    });
     // Track deletions so they can be propagated to the server
     let deletedPosts = JSON.parse(localStorage.getItem('deletedPosts')) || [];
     let deletedComments = JSON.parse(localStorage.getItem('deletedComments')) || [];
@@ -220,38 +234,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 post.comments = [];
             }
 
+            // Fallback for legacy field names
+            const displayName = (post.username || post.author || '').trim() || 'Anonymous';
+            const isAdmin = displayName.toLowerCase() === 'admin';
+
             const postElement = document.createElement('div');
             postElement.className = 'post';
             postElement.innerHTML = `
-                <h3>${post.username}</h3>
+                ${isAdmin ? '' : `<h3>${displayName}</h3>`}
                 <p>${post.message}</p>
-                ${post.username === currentUser ? `
+                ${(displayName === currentUser && !isAdmin) ? `
                     <button class="delete-post" data-post-index="${postIndex}">Delete Post</button>
                 ` : ''}
                 <div class="comment-section">
                     <h4>Comments:</h4>
                     <div class="comments">
-                                ${post.comments.map((comment, commentIndex) => `
+                                ${post.comments.map((comment, commentIndex) => {
+                                    const commentName = (comment.username || comment.author || '').trim() || 'Anonymous';
+                                    const commentIsAdmin = commentName.toLowerCase() === 'admin';
+                                    return `
                                         <div class="comment">
-                                            <h4>${comment.username}</h4>
+                                            ${commentIsAdmin ? '' : `<h4>${commentName}</h4>`}
                                             <p>${comment.message}</p>
-                                            ${comment.username === currentUser ? `
+                                            ${(commentName === currentUser && !commentIsAdmin) ? `
                                                 <button class="delete-comment" data-post-index="${postIndex}" data-comment-index="${commentIndex}">Delete Comment</button>
                                             ` : ''}
                                             ${comment.replies && comment.replies.length ? `
                                                 <div class="replies">
-                                                    ${comment.replies.map((reply, replyIndex) => `
+                                                    ${comment.replies.map((reply, replyIndex) => {
+                                                        const replyName = (reply.username || reply.author || '').trim() || 'Anonymous';
+                                                        const replyIsAdmin = replyName.toLowerCase() === 'admin';
+                                                        return `
                                                         <div class="reply">
-                                                            <strong>${reply.username}</strong>: ${reply.message}
-                                                            ${reply.username === currentUser ? `<button class="delete-reply" data-post-index="${postIndex}" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">Delete Reply</button>` : ''}
-                                                        </div>
-                                                    `).join('')}
+                                                            ${replyIsAdmin ? '<strong>System</strong>' : `<strong>${replyName}</strong>`}: ${reply.message}
+                                                            ${(replyName === currentUser && !replyIsAdmin) ? `<button class="delete-reply" data-post-index="${postIndex}" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">Delete Reply</button>` : ''}
+                                                        </div>`;
+                                                    }).join('')}
                                                 </div>
                                             ` : ''}
                                             ${currentUser ? `<button class="reply-button" data-post-index="${postIndex}" data-comment-index="${commentIndex}">Reply</button>` : ''}
                                             <div class="reply-form-container" data-post-index="${postIndex}" data-comment-index="${commentIndex}"></div>
                                         </div>
-                                    `).join('')}
+                                    `; }).join('')}
                     </div>
                     ${currentUser ? `
                         <form class="commentForm" data-post-index="${postIndex}">
@@ -365,7 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to delete a post
     function deletePost(index) {
-        if (posts[index].username === currentUser) {
+        const ownerName = (posts[index].username || posts[index].author || '').trim();
+        if (ownerName === currentUser && ownerName.toLowerCase() !== 'admin') {
             try {
                 const id = posts[index].id;
                 if (id) {
@@ -385,7 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to delete a comment
     function deleteComment(postIndex, commentIndex) {
         if (posts[postIndex] && posts[postIndex].comments[commentIndex]) {
-            if (posts[postIndex].comments[commentIndex].username === currentUser) {
+            const commentName = (posts[postIndex].comments[commentIndex].username || posts[postIndex].comments[commentIndex].author || '').trim();
+            if (commentName === currentUser && commentName.toLowerCase() !== 'admin') {
                 try {
                     const postId = posts[postIndex].id;
                     const commentId = posts[postIndex].comments[commentIndex].id;
@@ -425,7 +451,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const reply = posts[postIndex].comments[commentIndex].replies[replyIndex];
         if (!reply) { console.error('Reply not found.'); return; }
-        if (reply.username === currentUser) {
+        const replyName = (reply.username || reply.author || '').trim();
+        if (replyName === currentUser && replyName.toLowerCase() !== 'admin') {
             try {
                 const postId = posts[postIndex].id;
                 const commentId = posts[postIndex].comments[commentIndex].id;

@@ -3,67 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policie ČR - Veřejné informace</title>    <link rel="stylesheet" href="../../normalize.css">
+    <title>*** CLASSIFIED *** - POLICE INTERNAL SYSTEM</title>
     <link rel="stylesheet" href="policepub.css">
     <script src="policepub.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Policie České republiky</h1>
-        <p>Oficiální stránky pro veřejnost</p>
-    </header>
+    <div class="container">
+        <!-- Header and classified marquee removed per request -->
 
-    <nav>
-        <a href="#about">O nás</a>
-        <a href="#services">Služby</a>
-        <a href="#contact">Kontakt</a>
-    </nav>
-
-    <main>
-        <!-- Lookup Section -->
-        <section id="lookup">
-            <h2>Vyhledávání nejnovějších informací</h2>
-            <input type="text" id="searchInput" placeholder="Zadejte klíčové slovo..." />
-            <button id="searchButton">Vyhledat</button>
-            <div id="searchResults"></div>
-        </section>
-
-        <!-- Local Crimes Section -->
-        <section id="localCrimes">
-            <h2>Místní kriminalita</h2>
-            <div id="crimeList">
-                <p>Načítání nejnovějších zpráv...</p>
+        <!-- Login Screen (shown by default) -->
+        <div id="loginScreen">
+            <div style="padding:40px;">
+                <div class="box" style="max-width:420px;margin:40px auto;">
+                    <h2>OFFICER LOGIN</h2>
+                    <form id="loginForm" style="margin-top:15px;">
+                        <table width="100%" cellpadding="4" cellspacing="0">
+                            <tr>
+                                <td width="130">Officer ID:</td>
+                                <td><input type="text" id="officerId" name="userid" style="width:100%" placeholder="OFFICER-XXXX" /></td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td><input type="password" id="password" name="pwd" style="width:100%" /></td>
+                            </tr>
+                            <tr>
+                                <td>Security Code:</td>
+                                <td><input type="text" id="securityCode" name="code" style="width:100%" placeholder="6-digit code" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-top:14px;">
+                                    <input type="submit" value="● ACCESS SYSTEM" class="btn" style="width:100%;padding:8px 0;font-size:13px;" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div id="loginError" style="display:none;color:#ff0000;text-align:center;margin-top:10px;padding:8px;background:#330000;border:1px solid #ff0000;"></div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2>O nás</h2>
-            <p>Policie České republiky slouží k ochraně občanů, udržování veřejného pořádku a zajištění bezpečnosti. Naše historie sahá až do roku 1990, kdy byla naše organizace založena.</p>
-        </section>
+        <!-- Main System (hidden until login) -->
+        <div id="mainSystem" style="display:none;">
+            <div class="nav">
+                <a href="#dashboard">● DASHBOARD</a> |
+                <a href="#cases">● CASES</a> |
+                <a href="#database">● DATABASE</a> |
+                <a href="#evidence">● EVIDENCE</a> |
+                <a href="#reports">● REPORTS</a> |
+                <a href="#logout" id="logoutBtn">● LOGOUT</a>
+            </div>
 
-        <!-- Services Section -->
-        <section id="services">
-            <h2>Služby</h2>
-            <ul>
-                <li>Hlídání veřejného pořádku</li>
-                <li>Vyšetřování trestných činů</li>
-                <li>Pomoc při mimořádných událostech</li>
-                <li>Prevence kriminality</li>
-            </ul>
-        </section>
+            <table width="100%" cellpadding="0" cellspacing="8">
+                <tr>
+                    <td width="200" valign="top">
+                        <!-- Left Sidebar -->
+                        <div class="box">
+                            <h3>OFFICER INFO</h3>
+                            <p class="small" id="officerInfo">
+                                ID: <span id="displayOfficerId">---</span><br>
+                                Rank: Detective<br>
+                                Department: Investigations<br>
+                                Clearance: LEVEL-3
+                            </p>
+                        </div>
 
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Kontakt</h2>
-            <p><strong>Adresa:</strong> Hlavní 123, Praha, Česká republika</p>
-            <p><strong>Telefon:</strong> +420 123 456 789</p>
-            <p><strong>E-mail:</strong> info@policie.cz</p>
-        </section>
-    </main>
+                        <div class="box">
+                            <h3>QUICK ACCESS</h3>
+                            <div class="menu-item">► <a href="#activecases">Active Cases</a></div>
+                            <div class="menu-item">► <a href="#newcase">New Case</a></div>
+                            <div class="menu-item">► <a href="#search">Search Database</a></div>
+                            <div class="menu-item">► <a href="#evidence">Evidence Log</a></div>
+                            <div class="menu-item">► <a href="#reports">File Report</a></div>
+                        </div>
 
-    <footer>
-        <p>&copy; 1990 Policie České republiky. Všechna práva vyhrazena.</p>
-    </footer>
+                        <div class="box">
+                            <h3>SYSTEM STATUS</h3>
+                            <div class="status-item">Database: <span class="status-ok">ONLINE</span></div>
+                            <div class="status-item">Network: <span class="status-ok">SECURE</span></div>
+                            <div class="status-item">Backup: <span class="status-ok">ACTIVE</span></div>
+                        </div>
+                    </td>
+
+                    <td valign="top">
+                        <!-- Main Content -->
+                        <div class="box" id="dashboard">
+                            <h2>ACTIVE CASES</h2>
+                            <p style="color:#00ffff;">Click on any case to view full details, evidence, and case notes.</p>
+                            <div id="caseList">
+                                <p>Loading case files...</p>
+                            </div>
+                        </div>
+
+                        <div class="box" id="searchBox">
+                            <h2>DATABASE SEARCH</h2>
+                            <input type="text" id="searchInput" placeholder="Search case number, suspect name, location..." style="width:70%" />
+                            <input type="button" id="searchButton" value="SEARCH" class="btn" />
+                            <div id="searchResults" style="margin-top:15px;"></div>
+                        </div>
+                    </td>
+
+                    <td width="220" valign="top">
+                        <!-- Right Sidebar -->
+                        <div class="box">
+                            <h3>SYSTEM TIME</h3>
+                            <p class="small" id="systemTime">
+                                Loading...
+                            </p>
+                        </div>
+
+                        <div class="box">
+                            <h3>EMERGENCY CONTACTS</h3>
+                            <p class="small">
+                                <strong>Dispatch:</strong> EXT 100<br>
+                                <strong>Chief:</strong> EXT 101<br>
+                                <strong>Forensics:</strong> EXT 150<br>
+                                <strong>IT Support:</strong> EXT 199
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Case Detail Modal (hidden by default) -->
+            <div id="caseDetailModal" style="display:none;position:fixed;top:50px;left:50%;transform:translateX(-50%);width:800px;max-height:80vh;overflow-y:auto;z-index:1000;background:#000;border:3px solid #00ff00;box-shadow:0 0 30px #00ff00;">
+                <div style="background:#003366;padding:10px;border-bottom:2px solid #00ff00;">
+                    <h2 style="margin:0;color:#00ff00;display:inline-block;" id="caseDetailTitle">CASE DETAILS</h2>
+                    <button onclick="document.getElementById('caseDetailModal').style.display='none'" style="float:right;background:#cc0000;color:#fff;border:none;padding:5px 15px;cursor:pointer;font-weight:bold;">CLOSE</button>
+                </div>
+                <div id="caseDetailContent" style="padding:20px;">
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="small">
+                    <center>
+                        *** CLASSIFIED GOVERNMENT SYSTEM *** Police Department Internal Operations Portal<br>
+                        &copy; 2001-2025 | All access logged | Unauthorized use prohibited | Security Level: RESTRICTED
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
