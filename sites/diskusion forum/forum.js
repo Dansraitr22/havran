@@ -12,18 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const posts = (JSON.parse(localStorage.getItem('forumPosts')) || []).map(p => {
         // Normalize legacy objects that used 'author' instead of 'username'
         if (!p.username && p.author) p.username = p.author;
+        // Defensive repair: if both missing, set placeholder only (will be replaced on server merge)
+        if (!p.username && !p.author) p.username = 'Anonymous';
         if (Array.isArray(p.comments)) {
             p.comments.forEach(c => {
                 if (!c.username && c.author) c.username = c.author;
+                if (!c.username && !c.author) c.username = 'Anonymous';
                 if (Array.isArray(c.replies)) {
                     c.replies.forEach(r => {
                         if (!r.username && r.author) r.username = r.author;
+                        if (!r.username && !r.author) r.username = 'Anonymous';
                     });
                 }
             });
         }
         return p;
     });
+    // Persist any repairs immediately
+    localStorage.setItem('forumPosts', JSON.stringify(posts));
     // Track deletions so they can be propagated to the server
     let deletedPosts = JSON.parse(localStorage.getItem('deletedPosts')) || [];
     let deletedComments = JSON.parse(localStorage.getItem('deletedComments')) || [];
@@ -235,7 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Fallback for legacy field names
-            const displayName = (post.username || post.author || '').trim() || 'Anonymous';
+            if (!post.username && post.author) post.username = post.author; // late repair
+            const displayNameSource = (post.username || post.author || '').trim();
+            const displayName = displayNameSource !== '' ? displayNameSource : 'Anonymous';
+            console.debug('[renderPosts] index', postIndex, 'user:', displayName, 'raw:', post);
             const isAdmin = displayName.toLowerCase() === 'admin';
 
             const postElement = document.createElement('div');
