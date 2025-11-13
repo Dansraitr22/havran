@@ -30,7 +30,7 @@ Quick start (local)
 
    npm start
 
-The server will listen on port 3000 by default.
+The server will listen on port 10000 by default.
 
 Endpoint
 - POST /api/thread
