@@ -1,32 +1,147 @@
 {
-    "title": "Téma vlákna: Divné věci ve městě poslední dobou?",
-    "posts": [
-        { "author": "Tomik89", "message": "Hele, slyšel jsem, že se něco stalo u nějaký vědmy, co dělala seance. Prej tam byl rámus a pak sanitka. Nevíte někdo víc?" },
-        { "author": "PavlaK", "message": "Já slyšela jen od známý, že tam fakt byla policie. Ale jestli šlo o přepadení nebo něco jinýho, to nikdo pořádně neví." },
-        { "author": "Oli22", "message": "Sousedi prý slyšeli křik a pak sirény. Ale víte jak, lidi si rádi přibarví. Možná to byla jen hádka." },
-        { "author": "GhostFan", "message": "No a co to tělo, co našli minulý týden? Kamarád pracuje v nemocnici a říkal, že se tam povídá něco o fakt divný smrti. Prej to nevypadalo normálně." },
-        { "author": "Zdenek82", "message": "To je ale jen drb. Vždycky se něco stane a hned se vykládají pohádky." },
-        { "author": "LenkaM", "message": "Možná jo, ale divný je, že se tyhle věci dějou tak nějak po sobě. Vědma, pak nějaký chlap a ještě někdo psal, že zvířata v zoo dělala bordel uprostřed noci." },
-        { "author": "Ota23", "message": "Jo, kámoš říkal, že šel kolem a slyšel, jak tam něco vyje. Ale to bych v zoo klidně i čekal :D." },
-        { "author": "MartinaK", "message": "Taky jsem to slyšela, ale spíš bych řekla, že si lidi všechno spojujou. Jedna bába povídala a najednou je z toho celá historka o duchách." },
-        { "author": "david.ghost", "message": "Já teda nevím, ale přijde mi zvláštní, že policie nic pořádně neříká. Kdyby to bylo normální, už to někde oficiálně zveřejní, ne?" },
-        { "author": "Tomik89", "message": "Nebo to nechtějí říct, aby nebyla panika." },
-        { "author": "PavlaK", "message": "Haha, spiknutí! Ale fakt, je to divný. Nikdy se tu toho tolik nedělo a najednou hned několik věcí." },
-        { "author": "GhostFan", "message": "A ještě jsem slyšel, že prý se u nás někdo zajímá o nějaký kult. To už je fakt jak z filmu." },
-        { "author": "Zdenek82", "message": "Kult? To si děláte srandu. Tohle není Amerika, tady žádný sekty s rituálama nejsou." },
-        { "author": "Oli22", "message": "No, a co když jo? Nikdo to nikdy nebere vážně, dokud se něco nestane." },
-        { "author": "Tomik89", "message": "Hele ale kult… nebyl někde článek o nějaký partě, prej něco o divných symbolech? Někdo to sdílel na FB, už to nemůžu najít." },
-        { "author": "PavlaK", "message": "Jojo, taky jsem to zahlídla. Bylo tam něco o „starých znacích“ nebo tak. Ale jestli to byl fakt článek, nebo jen nějakej blázen, těžko říct." },
-        { "author": "Oli22", "message": "To je právě ono. Jeden to napíše, druhej to přepíše, a než se nadějem, tak z toho máme „sekty v našem městě“." },
-        { "author": "GhostFan", "message": "No a co když na tom fakt něco je? Třeba to tělo s těma „podivnejma zraněníma“ (říkejme tomu tak, když nechcete drby). To není normální." },
-        { "author": "Zdenek82", "message": "Podivný zranění má kdekdo. Všechno nemusí být hned konspirace. A navíc, kdyby šlo o něco velkýho, už by to bylo v televizi." },
-        { "author": "LenkaM", "message": "Ale v novinách o tom byla zmínka, jen to bylo napsaný strašně neurčitě. „Incident v soukromém bytě“, „nestandardní okolnosti úmrtí“… To je na zamyšlení." },
-        { "author": "Ota23", "message": "Přesně. A k tomu ta zoo. Zvířata prej byla fakt nervózní. Kdyby to byla jen náhoda, proč tam hned posilovali hlídky?" },
-        { "author": "MartinaK", "message": "To může být cokoliv – od hlučnejch návštěvníků po bouřku. Ale jo, chápu, že když se sečte tolik věcí dohromady, vypadá to zvláštně." },
-        { "author": "david.ghost", "message": "Já si stejně myslím, že nám jenom neříkají všechno. Možná to fakt není pro veřejnost. A nebo je to tak bizarní, že si to sami neumí vysvětlit." },
-        { "author": "Tomik89", "message": "Každopádně já už se po setmění sám nikam netáhnu. 😅" },
-        { "author": "PavlaK", "message": "Haha, hlavně ať z toho nevznikne další městská legenda. Už vidím ty historky pro děti: „nechoď ven, jinak si tě odnese sekta.“" },
-        { "author": "GhostFan", "message": "No, uvidíme, jestli bude další „náhoda“. Jestli jo, tak už to legenda nebude, ale realita." },
-        { "author": "sitebot", "message": "Test post — hello everyone! This post was added as a sample by the local assistant." }
-    ]
+  "title": "Posts",
+  "posts": [
+    {
+      "author": "Tomik89",
+      "message": "Hele, slyšel jsem, že se něco stalo u nějaký vědmy, co dělala seance. Prej tam byl rámus a pak sanitka. Nevíte někdo víc?",
+      "comments": []
+    },
+    {
+      "author": "PavlaK",
+      "message": "Já slyšela jen od známý, že tam fakt byla policie. Ale jestli šlo o přepadení nebo něco jinýho, to nikdo pořádně neví.",
+      "comments": []
+    },
+    {
+      "author": "Oli22",
+      "message": "Sousedi prý slyšeli křik a pak sirény. Ale víte jak, lidi si rádi přibarví. Možná to byla jen hádka.",
+      "comments": []
+    },
+    {
+      "author": "GhostFan",
+      "message": "No a co to tělo, co našli minulý týden? Kamarád pracuje v nemocnici a říkal, že se tam povídá něco o fakt divný smrti. Prej to nevypadalo normálně.",
+      "comments": []
+    },
+    {
+      "author": "Zdenek82",
+      "message": "To je ale jen drb. Vždycky se něco stane a hned se vykládají pohádky.",
+      "comments": []
+    },
+    {
+      "author": "LenkaM",
+      "message": "Možná jo, ale divný je, že se tyhle věci dějou tak nějak po sobě. Vědma, pak nějaký chlap a ještě někdo psal, že zvířata v zoo dělala bordel uprostřed noci.",
+      "comments": []
+    },
+    {
+      "author": "Ota23",
+      "message": "Jo, kámoš říkal, že šel kolem a slyšel, jak tam něco vyje. Ale to bych v zoo klidně i čekal :D.",
+      "comments": []
+    },
+    {
+      "author": "MartinaK",
+      "message": "Taky jsem to slyšela, ale spíš bych řekla, že si lidi všechno spojujou. Jedna bába povídala a najednou je z toho celá historka o duchách.",
+      "comments": []
+    },
+    {
+      "author": "david.ghost",
+      "message": "Já teda nevím, ale přijde mi zvláštní, že policie nic pořádně neříká. Kdyby to bylo normální, už to někde oficiálně zveřejní, ne?",
+      "comments": []
+    },
+    {
+      "author": "Tomik89",
+      "message": "Nebo to nechtějí říct, aby nebyla panika.",
+      "comments": []
+    },
+    {
+      "author": "PavlaK",
+      "message": "Haha, spiknutí! Ale fakt, je to divný. Nikdy se tu toho tolik nedělo a najednou hned několik věcí.",
+      "comments": []
+    },
+    {
+      "author": "GhostFan",
+      "message": "A ještě jsem slyšel, že prý se u nás někdo zajímá o nějaký kult. To už je fakt jak z filmu.",
+      "comments": []
+    },
+    {
+      "author": "Zdenek82",
+      "message": "Kult? To si děláte srandu. Tohle není Amerika, tady žádný sekty s rituálama nejsou.",
+      "comments": []
+    },
+    {
+      "author": "Oli22",
+      "message": "No, a co když jo? Nikdo to nikdy nebere vážně, dokud se něco nestane.",
+      "comments": []
+    },
+    {
+      "author": "Tomik89",
+      "message": "Hele ale kult… nebyl někde článek o nějaký partě, prej něco o divných symbolech? Někdo to sdílel na FB, už to nemůžu najít.",
+      "comments": []
+    },
+    {
+      "author": "PavlaK",
+      "message": "Jojo, taky jsem to zahlídla. Bylo tam něco o „starých znacích“ nebo tak. Ale jestli to byl fakt článek, nebo jen nějakej blázen, těžko říct.",
+      "comments": []
+    },
+    {
+      "author": "Oli22",
+      "message": "To je právě ono. Jeden to napíše, druhej to přepíše, a než se nadějem, tak z toho máme „sekty v našem městě“.",
+      "comments": []
+    },
+    {
+      "author": "GhostFan",
+      "message": "No a co když na tom fakt něco je? Třeba to tělo s těma „podivnejma zraněníma“ (říkejme tomu tak, když nechcete drby). To není normální.",
+      "comments": []
+    },
+    {
+      "author": "Zdenek82",
+      "message": "Podivný zranění má kdekdo. Všechno nemusí být hned konspirace. A navíc, kdyby šlo o něco velkýho, už by to bylo v televizi.",
+      "comments": []
+    },
+    {
+      "author": "LenkaM",
+      "message": "Ale v novinách o tom byla zmínka, jen to bylo napsaný strašně neurčitě. „Incident v soukromém bytě“, „nestandardní okolnosti úmrtí“… To je na zamyšlení.",
+      "comments": []
+    },
+    {
+      "author": "Ota23",
+      "message": "Přesně. A k tomu ta zoo. Zvířata prej byla fakt nervózní. Kdyby to byla jen náhoda, proč tam hned posilovali hlídky?",
+      "comments": []
+    },
+    {
+      "author": "MartinaK",
+      "message": "To může být cokoliv – od hlučnejch návštěvníků po bouřku. Ale jo, chápu, že když se sečte tolik věcí dohromady, vypadá to zvláštně.",
+      "comments": []
+    },
+    {
+      "author": "david.ghost",
+      "message": "Já si stejně myslím, že nám jenom neříkají všechno. Možná to fakt není pro veřejnost. A nebo je to tak bizarní, že si to sami neumí vysvětlit.",
+      "comments": []
+    },
+    {
+      "author": "Tomik89",
+      "message": "Každopádně já už se po setmění sám nikam netáhnu. 😅",
+      "comments": []
+    },
+    {
+      "author": "PavlaK",
+      "message": "Haha, hlavně ať z toho nevznikne další městská legenda. Už vidím ty historky pro děti: „nechoď ven, jinak si tě odnese sekta.“",
+      "comments": []
+    },
+    {
+      "author": "GhostFan",
+      "message": "No, uvidíme, jestli bude další „náhoda“. Jestli jo, tak už to legenda nebude, ale realita.",
+      "comments": []
+    },
+    {
+      "author": "sitebot",
+      "message": "Test post — hello everyone! This post was added as a sample by the local assistant.",
+      "comments": []
+    },
+    {
+      "username": "pepa",
+      "message": "pepa ho og",
+      "comments": [],
+      "id": "p_mhwrradg_n4i0z8t",
+      "createdAt": "2025-11-13T01:47:30.244Z"
+    }
+  ]
 }
