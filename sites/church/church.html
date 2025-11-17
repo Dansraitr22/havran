@@ -90,13 +90,38 @@
                         const article = data.find(x => String(x.id) === String(id));
                         if (article) {
                             const win = window.open('', '_blank');
-                            win.document.write(`<html><head><title>${article.title}</title><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="./church.css"></head><body><h1>${article.title}</h1><div class=\"meta\">${formatDate(article.date)} — ${article.author}</div><div>${article.content}</div></body></html>`);
-                            win.document.close();
+                            const popupHtml = `<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <title>${article.title}</title>
+  <link rel="stylesheet" href="../../normalize.css">
+  <link rel="stylesheet" href="./church.css">
+</head>
+<body>
+  <h1>${article.title}</h1>
+  <div class="meta">${formatDate(article.date)} — ${article.author}</div>
+  <div>${article.content}</div>
+</body>
+</html>`;
+                            if (win && win.document) {
+                                try {
+                                    // open() in case the popup document isn't ready
+                                    win.document.open();
+                                    win.document.write(popupHtml);
+                                } catch (writeErr) {
+                                    console.error('Could not write to popup window', writeErr);
+                                } finally {
+                                    try { win.document.close(); } catch (closeErr) { /* ignore */ }
+                                }
+                            } else {
+                                console.warn('Popup blocked or not available');
+                            }
                         }
                     });
                 });
             })
-            .catch(err => { document.getElementById('newsList').innerHTML = '<p>Failed to load news.</p>'; console.error(err); });
+            .catch(err => { document.getElementById('newsList').innerHTML = '<p>Novinky nelze načíst.</p>'; console.error(err); });
     </script>
 </body>
 </html>
