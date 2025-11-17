@@ -32,7 +32,7 @@
                 </div>
             </td>
             <td class="centercol" valign="top">
-                <marquee class="ticker">Nové recenze dnes: "Návštěva u sousedů" — 4/5 ★ | "Temné vody" — 3/5 ★</marquee>
+                <marquee class="ticker">Nové recenze dnes: "Návštěva u sousedů" — 4/5 &#9733; | "Temné vody" — 3/5 &#9733;</marquee>
 
                 <h2>Poslední recenze</h2>
                 <div id="reviews">Načítání recenzí…</div>
@@ -67,7 +67,7 @@
                 container.innerHTML = data.map(function(r){
                     return ''
                         + '<div class="review-item">'
-                        + '<h3>' + r.title + ' <span class="rating">' + r.rating + '★</span></h3>'
+                        + '<h3>' + r.title + ' <span class="rating">' + r.rating + '\u2605</span></h3>'
                         + '<div class="meta">' + formatDate(r.date) + ' — ' + r.author + '</div>'
                         + '<p>' + r.excerpt + '</p>'
                         + '<a href="#" class="read" data-id="' + r.id + '">Číst více</a>'
@@ -90,7 +90,7 @@
                                                             + '    <link rel="stylesheet" href="./csfd.css">\n'
                                                             + '</head>\n'
                                                             + '<body style="font-family: Tahoma, Arial, Helvetica; padding:16px;">\n'
-                                                            + '    <h1>' + rev.title + ' <small>' + rev.rating + '★</small></h1>\n'
+                                                            + '    <h1>' + rev.title + ' <small>' + rev.rating + '\u2605</small></h1>\n'
                                                             + '    <div class="meta">' + formatDate(rev.date) + ' — ' + rev.author + '</div>\n'
                                                             + '    <div>' + rev.content + '</div>\n'
                                                             + '</body>\n'
