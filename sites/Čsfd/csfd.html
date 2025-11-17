@@ -64,14 +64,15 @@
             .then(data => {
                 const container = document.getElementById('reviews');
                 if(!data || !data.length) { container.innerHTML = '<p>Žádné recenze.</p>'; return; }
-                container.innerHTML = data.map(r => `
-                    <div class="review-item">
-                        <h3>${r.title} <span class="rating">${r.rating}★</span></h3>
-                        <div class="meta">${formatDate(r.date)} — ${r.author}</div>
-                        <p>${r.excerpt}</p>
-                        <a href="#" class="read" data-id="${r.id}">Číst více</a>
-                    </div>
-                `).join('');
+                container.innerHTML = data.map(function(r){
+                    return ''
+                        + '<div class="review-item">'
+                        + '<h3>' + r.title + ' <span class="rating">' + r.rating + '★</span></h3>'
+                        + '<div class="meta">' + formatDate(r.date) + ' — ' + r.author + '</div>'
+                        + '<p>' + r.excerpt + '</p>'
+                        + '<a href="#" class="read" data-id="' + r.id + '">Číst více</a>'
+                        + '</div>';
+                }).join('');
 
                 document.querySelectorAll('.read').forEach(a => {
                     a.addEventListener('click', e => {
@@ -80,21 +81,22 @@
                         const rev = data.find(x=>String(x.id)===String(id));
                         if(rev){
                                                         const win = window.open('', '_blank', 'width=700,height=600');
-                                                        win.document.write(`<!doctype html>
-                                                                <html>
-                                                                <head>
-                                                                    <meta charset="utf-8">
-                                                                    <title>${rev.title}</title>
-                                                                    <link rel="stylesheet" href="../../normalize.css">
-                                                                    <link rel="stylesheet" href="./csfd.css">
-                                                                </head>
-                                                                <body style="font-family: Tahoma, Arial, Helvetica; padding:16px;">
-                                                                    <h1>${rev.title} <small>${rev.rating}★</small></h1>
-                                                                    <div class="meta">${formatDate(rev.date)} — ${rev.author}</div>
-                                                                    <div>${rev.content}</div>
-                                                                </body>
-                                                                </html>`);
-                                                        win.document.close();
+                                                        var popup = '<!doctype html>\n'
+                                                            + '<html>\n'
+                                                            + '<head>\n'
+                                                            + '    <meta charset="utf-8">\n'
+                                                            + '    <title>' + rev.title + '</title>\n'
+                                                            + '    <link rel="stylesheet" href="../../normalize.css">\n'
+                                                            + '    <link rel="stylesheet" href="./csfd.css">\n'
+                                                            + '</head>\n'
+                                                            + '<body style="font-family: Tahoma, Arial, Helvetica; padding:16px;">\n'
+                                                            + '    <h1>' + rev.title + ' <small>' + rev.rating + '★</small></h1>\n'
+                                                            + '    <div class="meta">' + formatDate(rev.date) + ' — ' + rev.author + '</div>\n'
+                                                            + '    <div>' + rev.content + '</div>\n'
+                                                            + '</body>\n'
+                                                            + '</html>';
+                                                        try { win.document.open(); win.document.write(popup); } catch(e) { console.error('popup write failed', e); }
+                                                        try { win.document.close(); } catch(e) { /* ignore */ }
                         }
                     });
                 });
