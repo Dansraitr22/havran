@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('./posts.json');
             if (response.ok) {
-                const serverPosts = await response.json();
+                const serverData = await response.json();
+                // posts.json may be either an array or an object { title, posts: [...] }
+                const serverPosts = Array.isArray(serverData) ? serverData : (Array.isArray(serverData.posts) ? serverData.posts : []);
                 if (serverPosts.length > 0) {
                     // Merge with local posts
                     const merged = mergePosts(posts, serverPosts);

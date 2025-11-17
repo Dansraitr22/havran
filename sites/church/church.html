@@ -18,11 +18,11 @@
         <tr>
             <td class="leftcol" width="180" valign="top">
                 <div class="nav">
-                    <button class="nav-btn">Home</button>
-                    <button class="nav-btn">About Us</button>
-                    <button class="nav-btn">Ministries</button>
-                    <button class="nav-btn">Events</button>
-                    <button class="nav-btn">Contact</button>
+                    <button class="nav-btn">Domů</button>
+                    <button class="nav-btn">O nás</button>
+                    <button class="nav-btn">Služby</button>
+                    <button class="nav-btn">Události</button>
+                    <button class="nav-btn">Kontakt</button>
                 </div>
                 <hr>
                 <div class="small">
@@ -31,16 +31,16 @@
                 </div>
             </td>
             <td class="centercol" valign="top">
-                <marquee class="ticker">Welcome to Grace Community — Vacation Bible School sign-ups open now! Church picnic next Sunday.</marquee>
+                <marquee class="ticker">Vítejte v Grace Community — Přihlášky na Biblickou školu jsou nyní otevřeny! Farní piknik příští neděli.</marquee>
 
                 <div class="content">
-                    <h2>Latest News</h2>
+                    <h2>Aktuality</h2>
                     <div id="newsList">Loading news...</div>
                 </div>
             </td>
             <td class="rightcol" width="200" valign="top">
                 <div class="right-box">
-                    <h4>Upcoming Events</h4>
+                    <h4>Nadcházející události</h4>
                     <ul id="eventsList">
                         <li>Sunday School restart — Aug 10</li>
                         <li>Community Picnic — Aug 17</li>
@@ -49,7 +49,7 @@
                 </div>
                 <hr>
                 <div class="contact">
-                    <strong>Contact</strong>
+                    <strong>Kontakt</strong>
                     <p>Pastor John<br>Phone: (555) 123-4567<br>Email: info@gracechurch.example</p>
                 </div>
             </td>
@@ -78,7 +78,7 @@
                         <h3>${item.title}</h3>
                         <div class="meta">${formatDate(item.date)} — ${item.author}</div>
                         <p>${item.excerpt || (item.content.substring(0,200) + '...')}</p>
-                        <a href="#" class="readmore" data-id="${item.id}">Read more</a>
+                        <a href="#" class="readmore" data-id="${item.id}">Číst více</a>
                     </div>
                 `).join('\n');
                 newsList.innerHTML = html;

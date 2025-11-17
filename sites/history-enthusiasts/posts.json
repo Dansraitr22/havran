@@ -2,11 +2,18 @@
   "title": "History Enthusiasts Thread",
   "posts": [
     {
-      "id": "p_mhxv6mul_5btcbf2",
-      "username": "deron22",
-      "message": "ahoj",
-      "createdAt": "2025-11-13T20:11:11.277Z",
-      "comments": []
+      "id": "p_1a2b3c4d_efgh5678",
+      "username": "Janek",
+      "message": "Ahoj všichni! Nedávno jsem četl o bitvě u Hradce Králové a zajímalo by mě, jaké taktiky byly použity. Máte někdo nějaké zajímavé informace nebo zdroje?",
+      "createdAt": "2025-11-12T10:23:45.130Z",
+      "comments": [
+        {
+          "id": "c_1a2b3c4d_ijkl9012",
+          "username": "Petra",
+          "message": "Ahoj Janek! Bitva u Hradce Králové byla významná kvůli použití dělostřelectva a koordinované pěchoty. Doporučuji knihu 'Dějiny českých válek', která to detailně popisuje.",
+          "createdAt": "2025-11-12T11:00:00.130Z"
+        }
+      ]
     },
     {
       "id": "p_mhytlsay_imu06xz",

@@ -1,24 +1,34 @@
-[{
-	"id": 1,
-	"title": "Community Picnic & Fellowship",
-	"date": "2003-08-17T10:00:00Z",
-	"author": "Pastor John",
-	"excerpt": "Join us for our annual summer picnic at Riverside Park. Food, games, and fellowship for the whole family.",
-	"content": "Everyone is welcome to our annual Community Picnic at Riverside Park. We will have a potluck lunch, games for kids, and an evening of worship. Bring a blanket and a dish to share. Services next Sunday will be at 9:00 and 11:00 as usual."
-},
-{
-	"id": 2,
-	"title": "Vacation Bible School Sign-ups Open",
-	"date": "2003-07-01T09:00:00Z",
-	"author": "Children's Ministry",
-	"excerpt": "VBS this year will be the week of July 21st — register your children today.",
-	"content": "Vacation Bible School will run Monday through Friday, 9am to 12pm. Ages 4-12 welcome. Volunteers needed for crafts and snack station. Contact the church office to register."
-},
-{
-	"id": 3,
-	"title": "Food Drive for Local Shelter",
-	"date": "2003-06-15T08:00:00Z",
-	"author": "Outreach Team",
-	"excerpt": "We're collecting non-perishables for the county shelter — drop-off in the foyer.",
-	"content": "Please bring canned goods and dry staples to church foyer during office hours. Volunteers will sort and deliver items to the shelter on Saturday. Thank you for supporting our neighbors in need."
-}]
+[
+	{
+		"id": 1,
+		"title": "Community Picnic & Fellowship",
+		"date": "2003-08-17T10:00:00Z",
+		"author": "Pastor John",
+		"excerpt": "Join us for our annual summer picnic at Riverside Park. Food, games, and fellowship for the whole family.",
+		"content": "Everyone is welcome to our annual Community Picnic at Riverside Park. We will have a potluck lunch, games for kids, and an evening of worship. Bring a blanket and a dish to share. Services next Sunday will be at 9:00 and 11:00 as usual."
+	},
+	{
+		"id": 2,
+		"title": "Vacation Bible School Sign-ups Open",
+		"date": "2003-07-01T09:00:00Z",
+		"author": "Children's Ministry",
+		"excerpt": "VBS this year will be the week of July 21st — register your children today.",
+		"content": "Vacation Bible School will run Monday through Friday, 9am to 12pm. Ages 4-12 welcome. Volunteers needed for crafts and snack station. Contact the church office to register."
+	},
+	{
+		"id": 3,
+		"title": "Food Drive for Local Shelter",
+		"date": "2003-06-15T08:00:00Z",
+		"author": "Outreach Team",
+		"excerpt": "We're collecting non-perishables for the county shelter — drop-off in the foyer.",
+		"content": "Please bring canned goods and dry staples to church foyer during office hours. Volunteers will sort and deliver items to the shelter on Saturday. Thank you for supporting our neighbors in need."
+	},
+	{
+		"id": 4,
+		"title": "Výzva k modlitbě a útěše",
+		"date": "2025-11-17T12:00:00Z",
+		"author": "Farnost",
+		"excerpt": "Milí bratři a sestry, události, které v posledních dnech otřásly naším městem, naplnily mnohé obavami i neklidem.",
+		"content": "Milí bratři a sestry,\n\nudálosti, které v posledních dnech otřásly naším městem, naplnily mnohé obavami i neklidem. Život člověka, který náhle skončil, nám připomíná křehkost lidské existence a potřebu hledat útěchu a smysl u Pána, který je „cestou, pravdou a životem“ (Jan 14,6).\n\nNení náhodou, že v časech nejistoty a smutku se mezi lidmi objevuje zvýšený zájem o věci temné, tajemné a okultní. Boží slovo nás však opakovaně varuje: „Vystříhejte se falešných proroků, kteří k vám přicházejí v rouchu ovčím, ale uvnitř jsou draví vlci“ (Mt 7,15). Pravý pokoj a naději nenajdeme v prázdných slibech, ale v Kristu, který přemohl smrt.\n\nProto vás vybízíme:\n\n- modlete se za pokoj v našem městě a sílu pro všechny, kdo nesou břemeno bolesti,\n- hledejte pravdu v Písmu a v živém společenství Církve,\n- nenechte se svést lákadly, která slibují rychlé odpovědi, ale odvádějí od světla evangelia.\n\n„A pokoj Boží, který převyšuje každé pomyšlení, bude střežit vaše srdce i vaše mysli v Kristu Ježíši“ (Flp 4,7).\n\nS důvěrou v Boží vedení,\nFarnost"
+	}
+]
