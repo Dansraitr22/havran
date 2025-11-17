@@ -193,6 +193,24 @@ form button:hover {
     border-color: #667eea;
 }
 
+/* Delete buttons styling */
+.post-actions .delete-btn {
+    background: #e74c3c;
+    color: white;
+    border-color: #c0392b;
+}
+.post-actions .delete-btn:hover { background: #c0392b; }
+.comments .delete-comment-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+.comments .delete-comment-btn:hover { background: #c0392b; }
+
 /* Comments */
 .comments {
     margin-left: 30px;

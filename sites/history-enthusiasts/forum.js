@@ -192,12 +192,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 commentBtn.onclick = () => showCommentForm(post.id);
                 postActions.appendChild(commentBtn);
 
-                if (post.username === currentUser) {
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'Delete';
-                    deleteBtn.onclick = () => deletePost(post.id);
-                    postActions.appendChild(deleteBtn);
-                }
+                    // allow owners or moderators to delete
+                    const isAdmin = currentUser && (currentUser.toLowerCase() === 'admin' || currentUser.toLowerCase() === 'moderator');
+                    if (post.username === currentUser || isAdmin) {
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.textContent = 'Delete';
+                        deleteBtn.className = 'delete-btn';
+                        deleteBtn.onclick = () => deletePost(post.id);
+                        postActions.appendChild(deleteBtn);
+                    }
             }
 
             postDiv.appendChild(postHeader);
@@ -219,6 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="post-content">${comment.message}</div>
                     `;
+                    // add delete button for comment owner or admin
+                    if (currentUser) {
+                        const isAdmin = currentUser && (currentUser.toLowerCase() === 'admin' || currentUser.toLowerCase() === 'moderator');
+                        if (comment.username === currentUser || isAdmin) {
+                            const delC = document.createElement('button');
+                            delC.textContent = 'Delete Comment';
+                            delC.className = 'delete-comment-btn';
+                            delC.style.marginTop = '8px';
+                            delC.onclick = () => deleteComment(post.id, comment.id);
+                            commentDiv.appendChild(delC);
+                        }
+                    }
                     commentsDiv.appendChild(commentDiv);
                 });
 
@@ -246,6 +261,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById(`comment-form-${postId}`);
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     };
+
+    function deleteComment(postId, commentId) {
+        if (!confirm('Delete this comment?')) return;
+        const post = posts.find(p => p.id === postId);
+        if (!post || !post.comments) return;
+        post.comments = post.comments.filter(c => c.id !== commentId);
+        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+        syncToServer();
+        renderPosts();
+    }
 
     window.submitComment = function(postId) {
         const input = document.getElementById(`comment-input-${postId}`);
