@@ -1,133 +1,63 @@
+/* Simple 2000s retro styling for ČSFD page */
 body {
   font-family: Tahoma, Arial, Helvetica, sans-serif;
-  background: #efece6;
+  background: #d6d6d6; /* subtle tiled background if present */
   color: #111;
-  margin: 0;
-  padding: 20px;
+  margin: 20px 0;
 }
-.layout { background: #fffbe6; border: 3px solid #8b6a2f; width: 980px; }
-.banner { background: linear-gradient(#ffd27a, #ffb84d); text-align: left; padding: 10px; }
-.logo { height: 60px; vertical-align: middle; margin-right: 12px; }
-.banner-text { display: inline-block; font-family: 'Courier New', monospace; font-size: 20px; color: #2b2b2b; vertical-align: middle; }
-.leftcol { background:#f6f3ef; padding:10px; font-size:14px; }
-.centercol { padding: 12px; }
-.rightcol { background:#f6f3ef; padding:10px; font-size:14px; }
-.search-input { width: 120px; padding: 4px; border:1px solid #aaa; }
-.search-btn { padding:4px 8px; background:#d9d0b6; border:1px solid #8b6a2f; cursor:pointer; }
-.nav-btn { display:block; width:100%; margin:6px 0; padding:6px; background:#fff2d9; border:1px solid #d0b58b; cursor:pointer; text-align:left; }
-.ticker { background:#fff; color:#4a2f00; padding:6px; border:1px solid #e0caa2; }
-h2 { font-family: 'Georgia', serif; color:#2b2b2b; margin-top:0; }
-.review-item { border-bottom:1px dotted #c9b79a; padding:8px 0; }
-.review-item h3 { margin:0 0 4px 0; font-size:18px; }
+
+.layout {
+  width: 980px;
+  margin: 0 auto;
+  background: #fff;
+  border: 4px solid #000;
+}
+
+.banner {
+  background: #900;
+  color: #fff;
+  padding: 8px 12px;
+  overflow: hidden;
+}
+.logo { float: left; height: 72px; margin-right: 12px; }
+.banner-text { font-weight: bold; font-size: 22px; line-height:72px; font-family: 'Arial Black', Gadget, sans-serif; }
+
+.leftcol { width: 200px; background: #f2f2f2; vertical-align: top; padding: 10px; }
+.centercol { padding: 12px; width: 560px; vertical-align: top; }
+.rightcol { width: 200px; background: #f2f2f2; vertical-align: top; padding: 10px; }
+
+/* simple buttons/links */
+.nav-btn { display:block; margin:6px 0; padding:6px; background:#fff; border:1px solid #888; text-align:left; cursor:pointer; }
+.search-input { width: 140px; padding:4px; border:1px solid #888; }
+.search-btn { padding:4px 8px; border:1px solid #444; background:#eee; }
+
+.ticker { background:#fff; color:#333; padding:6px; border:2px inset #ccc; margin-bottom:10px; }
+
+h2 { font-family: 'Times New Roman', Times, serif; font-size:20px; margin:6px 0 12px 0; }
+
+.review-item { padding:8px; border:1px solid #ccc; margin-bottom:10px; background:#fff; }
+.review-item h3 { margin:0 0 6px 0; font-size:16px; }
 .rating { color:#b85c3b; font-weight:bold; margin-left:8px; }
-.meta { color:#666; font-size:12px; margin-bottom:6px; }
+.meta { color:#666; font-size:12px; margin-bottom:8px; }
 .read { color:#0645ad; text-decoration:underline; cursor:pointer; }
-.quick-list { list-style: square; padding-left: 18px; }
-.footer { text-align:center; font-size:12px; color:#555; padding:8px; }
-.small-note { font-size:13px; }
 
-/* Retro touches */
-body, .layout { box-shadow: 0 4px 0 rgba(0,0,0,0.08); }
-.review-item p { margin:6px 0; }
+.quick-list { padding-left:16px; }
 
+.footer { text-align:center; padding:10px; font-size:12px; background:#eee; border-top:1px solid #ccc; }
+
+/* Make table cells act like columns */
+table.layout td { vertical-align: top; }
+
+/* small-screen fallback */
 @media (max-width:1000px){
   .layout { width: 98%; }
-}
-/* General Styles */
-body {
-    font-family: "Times New Roman", serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
+  .leftcol, .rightcol { display:none; }
+  .centercol { width: auto; }
 }
 
-h1, h2 {
-    text-align: center;
-    color: #2c3e50;
-}
+/* Retro small touches */
+.banner { border-bottom: 3px solid #000; }
+.logo { border: 2px solid #fff; padding:2px; }
 
-h1 {
-    font-size: 2.5rem;
-    margin: 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-h2 {
-    font-size: 1.8rem;
-    margin: 15px 0;
-}
-
-/* Header */
-header {
-    background-color: #2c3e50;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-header h1 {
-    margin: 0;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    margin: 10px 0 0;
-}
-
-nav ul li {
-    display: inline-block;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Main Content */
-main {
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 30px;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.review {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.review h3 {
-    margin: 0 0 10px;
-    color: #2c3e50;
-}
-
-.review p {
-    margin: 5px 0;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #2c3e50;
-    color: #fff;
-    font-size: 0.9rem;
-}
+/* keep content readable */
+.centercol p { margin:6px 0; }
