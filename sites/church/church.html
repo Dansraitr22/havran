@@ -73,14 +73,15 @@
                     newsList.innerHTML = '<p>No news available.</p>';
                     return;
                 }
-                const html = data.map(item => `
-                    <div class="news-item">
-                        <h3>${item.title}</h3>
-                        <div class="meta">${formatDate(item.date)} — ${item.author}</div>
-                        <p>${item.excerpt || (item.content.substring(0,200) + '...')}</p>
-                        <a href="#" class="readmore" data-id="${item.id}">Číst více</a>
-                    </div>
-                `).join('\n');
+                const html = data.map(function(item) {
+                    return ''
+                        + '<div class="news-item">'
+                        + '<h3>' + item.title + '</h3>'
+                        + '<div class="meta">' + formatDate(item.date) + ' — ' + item.author + '</div>'
+                        + '<p>' + (item.excerpt || (item.content.substring(0,200) + '...')) + '</p>'
+                        + '<a href="#" class="readmore" data-id="' + item.id + '">Číst více</a>'
+                        + '</div>';
+                }).join('\n');
                 newsList.innerHTML = html;
 
                 document.querySelectorAll('.readmore').forEach(a => {
@@ -90,20 +91,20 @@
                         const article = data.find(x => String(x.id) === String(id));
                         if (article) {
                             const win = window.open('', '_blank');
-                            const popupHtml = `<!doctype html>
-<html lang="cs">
-<head>
-  <meta charset="utf-8">
-  <title>${article.title}</title>
-  <link rel="stylesheet" href="../../normalize.css">
-  <link rel="stylesheet" href="./church.css">
-</head>
-<body>
-  <h1>${article.title}</h1>
-  <div class="meta">${formatDate(article.date)} — ${article.author}</div>
-  <div>${article.content}</div>
-</body>
-</html>`;
+                                                        const popupHtml = '<!doctype html>\n'
+                                                                + '<html lang="cs">\n'
+                                                                + '<head>\n'
+                                                                + '  <meta charset="utf-8">\n'
+                                                                + '  <title>' + article.title + '</title>\n'
+                                                                + '  <link rel="stylesheet" href="../../normalize.css">\n'
+                                                                + '  <link rel="stylesheet" href="./church.css">\n'
+                                                                + '</head>\n'
+                                                                + '<body>\n'
+                                                                + '  <h1>' + article.title + '</h1>\n'
+                                                                + '  <div class="meta">' + formatDate(article.date) + ' — ' + article.author + '</div>\n'
+                                                                + '  <div>' + article.content + '</div>\n'
+                                                                + '</body>\n'
+                                                                + '</html>';
                             if (win && win.document) {
                                 try {
                                     // open() in case the popup document isn't ready
