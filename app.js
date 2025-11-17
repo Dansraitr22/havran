@@ -45,8 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchZpravyNewsData(),
             fetchZooData(),
             fetchBazarData(),
+            fetchDiskusionForumData(),
             fetchHtmlFiles() // Fetch links from htmlFiles.json
-        ]).then(([konspiraData, zpravyData, zooData, bazarData, htmlFiles]) => {
+    ]).then(([konspiraData, zpravyData, zooData, bazarData, diskusionData, htmlFiles]) => {
+            // Note: fetchDiskusionForumData returns an array of items (overview + posts)
             return [
                 ...konspiraData.map(article => ({
                     ...article,
@@ -68,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     source: 'Bazar',
                     tags: ['prodej', 'předměty', 'tržiště', 'nakupování']
                 })),
+                // diskusionData will already contain items; ensure they have a source label
+                ...((Array.isArray(diskusionData) ? diskusionData : [])).map(article => ({
+                    ...article,
+                    source: 'forum rozsectnik',
+                    tags: article.tags || ['forum']
+                })),
                 ...htmlFiles.map(file => ({
                     title: file.name,
                     content: `Tags: ${file.tags.join(', ')}`,
@@ -76,6 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 }))
             ];
         });
+    }
+
+    // Fetch Discussion Forum threads and return an array: overview + individual posts
+    function fetchDiskusionForumData() {
+        return fetch('./sites/diskusion forum/discussionThread.json')
+            .then(res => res.json())
+            .then(data => {
+                const posts = data.posts || [];
+                // Overview item for the main forum
+                const overview = {
+                    title: 'forum rozsectnik',
+                    content: `Diskusní fórum — ${posts.length} příspěvků`,
+                    link: './sites/diskusion forum/forum_index.html',
+                    tags: ['forum', 'diskuse', 'rozsectnik']
+                };
+                // Map a few recent posts as searchable items
+                const postItems = posts.slice(0, 20).map(p => ({
+                    title: `${p.author} — ${p.message.substring(0, 60)}${p.message.length > 60 ? '...' : ''}`,
+                    content: p.message,
+                    link: `./sites/diskusion forum/forum.html?postId=${encodeURIComponent(p.id)}`,
+                    tags: ['forum', 'post']
+                }));
+                return [overview, ...postItems];
+            })
+            .catch(err => {
+                console.error('Failed to load discussionThread.json:', err);
+                return [];
+            });
     }
 
     // Fetch links from htmlFiles.json

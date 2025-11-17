@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchArticleData(articleId) {
-    fetch('newsData.json')
+    fetch('sites/konspiračníteorie/newsData.json')
         .then(response => response.json())
         .then(newsData => {
             const article = newsData.find(news => news.id == articleId);

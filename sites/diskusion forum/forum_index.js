@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Ensure default thread exists pointing to existing single-page forum
   if (!threads.some(t => t.id === 'default')) {
-    threads.push({ id: 'default', title: 'Hlavní Diskuse' });
+    threads.push({ id: 'default', title: 'forum rozsectnik' });
     localStorage.setItem(THREADS_KEY, JSON.stringify(threads));
   }
 

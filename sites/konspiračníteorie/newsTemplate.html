@@ -18,21 +18,28 @@
         <!-- Article content will be inserted here by JS -->
     </main>
 
-    <script src="./newsData.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const newsIndex = urlParams.get('newsIndex');
+            const newsIndex = parseInt(urlParams.get('newsIndex'), 10);
             const newsContent = document.getElementById('newsContent');
-            if (newsIndex !== null && typeof konspiraNewsData !== 'undefined' && konspiraNewsData[newsIndex]) {
-                const newsItem = konspiraNewsData[newsIndex];
-                newsContent.innerHTML = `
-                    <h2>${newsItem.title}</h2>
-                    <p>${newsItem.content}</p>
-                `;
-            } else {
-                newsContent.innerHTML = '<p>Článek nebyl nalezen.</p>';
-            }
+            fetch('./newsData.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (!isNaN(newsIndex) && Array.isArray(data) && data[newsIndex]) {
+                        const newsItem = data[newsIndex];
+                        newsContent.innerHTML = `
+                            <h2>${newsItem.title}</h2>
+                            <p>${newsItem.content}</p>
+                        `;
+                    } else {
+                        newsContent.innerHTML = '<p>Článek nebyl nalezen.</p>';
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading news data:', err);
+                    newsContent.innerHTML = '<p>Článek nebyl nalezen.</p>';
+                });
         });
     </script>
 </body>

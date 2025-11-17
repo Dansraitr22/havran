@@ -12,23 +12,27 @@
         <h1>Konspirační teorie</h1>
     </header>
     <main id="konspiraNewsLinks"></main>
-    <script src="./newsData.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const konspiraNewsLinks = document.getElementById('konspiraNewsLinks');
-            if (konspiraNewsLinks && typeof konspiraNewsData !== 'undefined') {
-                konspiraNewsData.forEach((news, index) => {
-                    const newsElement = document.createElement('div');
-                    newsElement.className = 'news-item';
-                    newsElement.innerHTML = `
-                        <h2><a href="./newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
-                        <p>${news.content.substring(0, 100)}...</p>
-                    `;
-                    konspiraNewsLinks.appendChild(newsElement);
-                });
-            } else {
-                console.error('Element with ID "konspiraNewsLinks" not found or konspiraNewsData is not defined.');
-            }
+            fetch('./newsData.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (konspiraNewsLinks && Array.isArray(data)) {
+                        data.forEach((news, index) => {
+                            const newsElement = document.createElement('div');
+                            newsElement.className = 'news-item';
+                            newsElement.innerHTML = `
+                                <h2><a href="./newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
+                                <p>${news.content.substring(0, 100)}...</p>
+                            `;
+                            konspiraNewsLinks.appendChild(newsElement);
+                        });
+                    } else {
+                        console.error('Element with ID "konspiraNewsLinks" not found or news data is invalid.');
+                    }
+                })
+                .catch(err => console.error('Error loading news data:', err));
         });
     </script>
 </body>
