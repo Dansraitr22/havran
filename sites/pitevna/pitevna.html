@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PITEVNA-sys</title>
+    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="pitevna.css">
+</head>
+<body style="background:#fff; color:#222;">
+    <h1>Městská pitevna</h1>
+    <h2>Pitevní zprávy</h2>
+    <form id="report-form" style="max-width:600px;">
+        <fieldset>
+            <legend>Nová pitevní zpráva</legend>
+            <label>Jméno zemřelého:<br><input type="text" name="deceasedName" required></label><br>
+            <label>Věk:<br><input type="text" name="deceasedAge" required></label><br>
+            <label>Pohlaví:<br><input type="text" name="deceasedSex" required></label><br>
+            <label>Datum pitvy:<br><input type="date" name="date" required></label><br>
+            <label>Čas pitvy:<br><input type="time" name="time" required></label><br>
+            <label>Pitevní lékař:<br><input type="text" name="doctor" required></label><br>
+            <label>Specializace:<br><input type="text" name="specialization" required></label><br>
+            <label>Vnější vyšetření:<br><textarea name="externalExam" required></textarea></label><br>
+            <label>Vnitřní vyšetření:<br><textarea name="internalExam" required></textarea></label><br>
+            <label>Závěr:<br><textarea name="conclusion" required></textarea></label><br>
+            <label>Další doporučení:<br><textarea name="recommendation"></textarea></label><br>
+            <button type="submit">Odeslat zprávu</button>
+        </fieldset>
+    </form>
+    <hr>
+    <div id="report-list"></div>
+    <script src="pitevna.js"></script>
+</body>
+</html>

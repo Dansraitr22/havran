@@ -3,153 +3,141 @@
     "name": "Horský kolo",
     "description": "Horský kolo ve výborném stavu, málo používané.",
     "price": 340.91,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "michael.thompson@gmail.com",
+    "user": "Michael Thompson"
   },
   {
     "name": "Notebook",
     "description": "Notebook s 16GB RAM a 512GB SSD, ideální pro práci i zábavu.",
     "price": 681.82,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "sarah.williams@yahoo.com",
+    "user": "Sarah Williams"
   },
   {
     "name": "Chytrý telefon",
     "description": "Chytrý telefon s 64GB pamětí a výborným fotoaparátem.",
     "price": 227.27,
-    "contact": "+420 123 456 789",
-    "user": "admin"
+    "contact": "james.davis@outlook.com",
+    "user": "James Davis"
   },
   {
     "name": "Televize",
     "description": "LED televize s úhlopříčkou 55 palců, 4K rozlišení.",
     "price": 545.45,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "emily.martinez@gmail.com",
+    "user": "Emily Martinez"
   },
   {
     "name": "Pračka",
     "description": "Automatická pračka s kapacitou 7 kg, energetická třída A++.",
     "price": 363.64,
-    "contact": "+420 987 654 321",
-    "user": "admin"
+    "contact": "robert.johnson@hotmail.com",
+    "user": "Robert Johnson"
   },
   {
     "name": "Lednice",
     "description": "Kombinovaná lednice s mrazákem, objem 300 litrů.",
     "price": 454.55,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "jennifer.brown@gmail.com",
+    "user": "Jennifer Brown"
   },
   {
     "name": "Kávovar",
     "description": "Automatický kávovar na espresso a cappuccino.",
     "price": 136.36,
-    "contact": "+420 111 222 333",
-    "user": "admin"
+    "contact": "david.miller@yahoo.com",
+    "user": "David Miller"
   },
   {
     "name": "Gauč",
     "description": "Rozkládací gauč s úložným prostorem, šedá barva.",
     "price": 272.73,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "jessica.garcia@outlook.com",
+    "user": "Jessica Garcia"
   },
   {
     "name": "Psací stůl",
     "description": "Dřevěný psací stůl s úložnými šuplíky.",
     "price": 113.64,
-    "contact": "+420 444 555 666",
-    "user": "admin"
+    "contact": "christopher.wilson@gmail.com",
+    "user": "Christopher Wilson"
   },
   {
     "name": "Kancelářská židle",
     "description": "Ergonomická kancelářská židle s nastavitelnou výškou.",
     "price": 90.91,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "amanda.taylor@hotmail.com",
+    "user": "Amanda Taylor"
   },
   {
     "name": "Mikrovlnná trouba",
     "description": "Mikrovlnná trouba s grilem, objem 25 litrů.",
     "price": 68.18,
-    "contact": "+420 777 888 999",
-    "user": "admin"
+    "contact": "daniel.anderson@yahoo.com",
+    "user": "Daniel Anderson"
   },
   {
     "name": "Vysavač",
     "description": "Bezsáčkový vysavač s HEPA filtrem.",
     "price": 113.64,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "ashley.thomas@gmail.com",
+    "user": "Ashley Thomas"
   },
   {
     "name": "Herní konzole",
     "description": "Herní konzole s dvěma ovladači a třemi hrami.",
     "price": 363.64,
-    "contact": "+420 222 333 444",
-    "user": "admin"
+    "contact": "matthew.jackson@outlook.com",
+    "user": "Matthew Jackson"
   },
   {
     "name": "Kytara",
     "description": "Akustická kytara, vhodná pro začátečníky.",
     "price": 136.36,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "nicole.white@gmail.com",
+    "user": "Nicole White"
   },
   {
     "name": "Lyže",
     "description": "Sjezdové lyže s vázáním, délka 170 cm.",
     "price": 227.27,
-    "contact": "+420 555 666 777",
-    "user": "admin"
+    "contact": "andrew.harris@yahoo.com",
+    "user": "Andrew Harris"
   },
   {
     "name": "Stan",
     "description": "Rodinný stan pro 4 osoby, voděodolný.",
     "price": 181.82,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "stephanie.martin@hotmail.com",
+    "user": "Stephanie Martin"
   },
   {
     "name": "Kočárek",
     "description": "Dětský kočárek s polohovatelnou sedačkou.",
     "price": 159.09,
-    "contact": "+420 888 999 111",
-    "user": "admin"
+    "contact": "joshua.thompson@gmail.com",
+    "user": "Joshua Thompson"
   },
   {
     "name": "Hodinky",
     "description": "Chytré hodinky s měřením tepu a GPS.",
     "price": 11364,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
+    "contact": "michelle.moore@outlook.com",
+    "user": "Michelle Moore"
   },
   {
     "name": "Kniha",
     "description": "Detektivní román od známého autora.",
     "price": 13.64,
-    "contact": "+420 333 444 555",
-    "user": "admin"
+    "contact": "kevin.lee@yahoo.com",
+    "user": "Kevin Lee"
   },
   {
     "name": "Sluchátka",
     "description": "Bezdrátová sluchátka s potlačením hluku.",
     "price": 90.91,
-    "contact": "admin@bazar.cz",
-    "user": "admin"
-  },
-  {
-    "name": "test",
-    "description": "1423",
-    "price": 100,
-    "contact": "hahaq",
-    "user": "deron22"
-  },
-  {
-    "name": "Fofršpaněl",
-    "description": "Prodám štěňata - jedná se o křížence kokra a neznámého, ale velice rychlého psa, který obskočil mojí Daisy tak rychle, že jsem ho nestihl trefit. Pokud budou štěňata po něm, bude je určitě možné využít na dostizích.",
-    "price": 50,
-    "user": "brambora"
+    "contact": "Johny@cloud.com",
+    "user": "Johny Cloud"
   }
+
 ]
