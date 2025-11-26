@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News</title>
+  <link rel="stylesheet" href="../../normalize.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="return-btn" title="Zpět na Gogol">← GoGol</a>
+    <h1>Aktuální zprávy</h1>
+    <p class="subtitle">Krátké shrnutí dne bez přeplácané grafiky</p>
+  </header>
+
+  <main class="content">
+    <section class="filters">
+      <input id="searchInput" type="search" placeholder="Hledat v titulcích…" />
+      <select id="categorySelect">
+        <option value="">Vše</option>
+        <option value="domácí">Domácí</option>
+        <option value="svět">Svět</option>
+        <option value="ekonomika">Ekonomika</option>
+        <option value="kultura">Kultura</option>
+        <option value="technologie">Technologie</option>
+        <option value="sport">Sport</option>
+      </select>
+    </section>
+
+    <section id="newsContainer" class="news-list" aria-live="polite"></section>
+    <template id="newsItemTemplate">
+      <!-- loaded from newsTemplate.html at runtime as well, kept inline for robustness -->
+      <article class="news-item">
+        <div class="meta">
+          <span class="category"></span>
+          <time class="date"></time>
+        </div>
+        <h2 class="title"></h2>
+        <p class="summary"></p>
+        <a class="link" href="#" target="_blank" rel="noopener noreferrer">Číst více</a>
+      </article>
+    </template>
+
+    <p id="statusMsg" class="status" hidden>Načítání…</p>
+  </main>
+
+  <script src="./news.js" defer></script>
+</body>
+</html>

@@ -15,24 +15,28 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const konspiraNewsLinks = document.getElementById('konspiraNewsLinks');
-            fetch('./newsData.json')
-                .then(res => res.json())
-                .then(data => {
+            const API_BASE = window.SERVER_BASE || '';
+            const load = async () => {
+                try {
+                    let res = await fetch(API_BASE + '/api/konspira');
+                    if (!res.ok) res = await fetch('./newsData.json');
+                    const data = await res.json();
                     if (konspiraNewsLinks && Array.isArray(data)) {
                         data.forEach((news, index) => {
                             const newsElement = document.createElement('div');
                             newsElement.className = 'news-item';
                             newsElement.innerHTML = `
                                 <h2><a href="./newsTemplate.html?newsIndex=${index}">${news.title}</a></h2>
-                                <p>${news.content.substring(0, 100)}...</p>
+                                <p>${(news.content||'').substring(0, 100)}...</p>
                             `;
                             konspiraNewsLinks.appendChild(newsElement);
                         });
-                    } else {
-                        console.error('Element with ID "konspiraNewsLinks" not found or news data is invalid.');
                     }
-                })
-                .catch(err => console.error('Error loading news data:', err));
+                } catch (err) {
+                    console.error('Error loading news data:', err);
+                }
+            };
+            load();
         });
     </script>
 </body>

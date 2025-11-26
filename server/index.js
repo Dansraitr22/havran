@@ -60,6 +60,141 @@ app.get('/api/reports', async (req, res) => {
   }
 });
 
+// News API: returns news items from sites/news/news.json
+app.get('/api/news', async (req, res) => {
+  try {
+    const filePath = 'sites/news/news.json';
+    const getRes = await octokit.repos.getContent({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      ref: GITHUB_BRANCH
+    });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try {
+      const json = JSON.parse(decoded);
+      return res.json(Array.isArray(json) ? json : []);
+    } catch {
+      return res.json([]);
+    }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading news:', err);
+    return res.status(500).json({ error: 'Failed to read news' });
+  }
+});
+
+// Bazar items (GET)
+app.get('/api/bazar', async (req, res) => {
+  try {
+    const filePath = 'sites/bazar/defaultitems.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try { const json = JSON.parse(decoded); return res.json(Array.isArray(json) ? json : []); } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading bazar items:', err);
+    return res.status(500).json({ error: 'Failed to read bazar items' });
+  }
+});
+
+// History-enthusiasts posts (GET)
+app.get('/api/history', async (req, res) => {
+  try {
+    const filePath = 'sites/history-enthusiasts/posts.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try {
+      const json = JSON.parse(decoded);
+      const arr = Array.isArray(json) ? json : (Array.isArray(json.posts) ? json.posts : []);
+      return res.json(arr);
+    } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading history posts:', err);
+    return res.status(500).json({ error: 'Failed to read history' });
+  }
+});
+
+// Leviathan posts (GET)
+app.get('/api/leviathan', async (req, res) => {
+  try {
+    const filePath = 'sites/leviathan.cult/posts.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try { const json = JSON.parse(decoded); return res.json(Array.isArray(json) ? json : []); } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading leviathan posts:', err);
+    return res.status(500).json({ error: 'Failed to read leviathan' });
+  }
+});
+
+// Konspirační teorie news (GET)
+app.get('/api/konspira', async (req, res) => {
+  try {
+    const filePath = 'sites/konspiračníteorie/newsData.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try { const json = JSON.parse(decoded); return res.json(Array.isArray(json) ? json : []); } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading konspira news:', err);
+    return res.status(500).json({ error: 'Failed to read konspira' });
+  }
+});
+
+// Mysticism news (GET)
+app.get('/api/mysticism', async (req, res) => {
+  try {
+    const filePath = 'sites/mysticism/mysticsim.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try { const json = JSON.parse(decoded); return res.json(Array.isArray(json) ? json : []); } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading mysticism news:', err);
+    return res.status(500).json({ error: 'Failed to read mysticism' });
+  }
+});
+
+// Wiki entries (GET)
+app.get('/api/wiki', async (req, res) => {
+  try {
+    const filePath = 'sites/wiki.sub/wiki.json';
+    const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try { const json = JSON.parse(decoded); return res.json(Array.isArray(json) ? json : []); } catch { return res.json([]); }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading wiki entries:', err);
+    return res.status(500).json({ error: 'Failed to read wiki' });
+  }
+});
+// Zpravy.cz-like News API: returns items from sites/zpravy.cz/zpravy-cz-news/src/news.json
+app.get('/api/zpravy', async (req, res) => {
+  try {
+    const filePath = 'sites/zpravy.cz/zpravy-cz-news/src/news.json';
+    const getRes = await octokit.repos.getContent({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      ref: GITHUB_BRANCH
+    });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try {
+      const json = JSON.parse(decoded);
+      return res.json(Array.isArray(json) ? json : []);
+    } catch {
+      return res.json([]);
+    }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading zpravy:', err);
+    return res.status(500).json({ error: 'Failed to read zpravy' });
+  }
+});
+
 app.post('/api/reports', async (req, res) => {
   try {
     

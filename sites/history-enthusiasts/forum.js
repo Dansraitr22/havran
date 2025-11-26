@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/thread';
+    const API_BASE = window.SERVER_BASE || '';
+    const SYNC_ENDPOINT = API_BASE + '/api/thread';
     const SERVER_SECRET = 'ilovekatie';
     
     // Multi-thread support via URL parameter ?thread=<id>
@@ -23,10 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser') || null;
     let posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || [];
 
-    // Load posts from JSON file on first load
+    // Load posts from server (fallback to local JSON) on first load
     async function loadInitialPosts() {
         try {
-            const response = await fetch('./posts.json');
+            let response = await fetch(API_BASE + '/api/history');
+            if (!response.ok) {
+                response = await fetch('./posts.json');
+            }
             if (response.ok) {
                 const serverData = await response.json();
                 // posts.json may be either an array or an object { title, posts: [...] }

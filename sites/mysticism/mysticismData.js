@@ -1,7 +1,10 @@
+const API_BASE = window.SERVER_BASE || '';
 
-fetch('./mysticism.json')
-    .then(response => response.json())
-    .then(data => {
+(async function(){
+    try {
+        let response = await fetch(API_BASE + '/api/mysticism');
+        if (!response.ok) response = await fetch('./mysticsim.json');
+        const data = await response.json();
         const mysticismResultsContainer = document.getElementById('mysticismResultsContainer');
         if (mysticismResultsContainer) {
             data.forEach((news, index) => {
@@ -15,6 +18,8 @@ fetch('./mysticism.json')
             });
         }
         // Store the data globally for use in other pages
-        window.mysticismNewsData = data;
-    })
-    .catch(error => console.error('Error fetching mysticism news data:', error));
+                window.mysticismNewsData = data;
+    } catch (error) {
+        console.error('Error fetching mysticism news data:', error);
+    }
+})();

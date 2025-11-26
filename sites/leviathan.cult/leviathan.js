@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const SYNC_ENDPOINT = 'https://havran.onrender.com/api/leviathan';
+    const API_BASE = window.SERVER_BASE || '';
+    const SYNC_ENDPOINT = API_BASE + '/api/leviathan';
     const SERVER_SECRET = 'ilovekatie';
     
     const loginForm = document.getElementById('loginForm');
@@ -67,10 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || [];
         
-        // Load posts from JSON file
+        // Load posts from server (fallback to local JSON)
         async function loadInitialPosts() {
             try {
-                const response = await fetch('./posts.json');
+                let response = await fetch(API_BASE + '/api/leviathan');
+                if (!response.ok) {
+                    response = await fetch('./posts.json');
+                }
                 if (response.ok) {
                     const serverPosts = await response.json();
                     if (serverPosts.length > 0) {

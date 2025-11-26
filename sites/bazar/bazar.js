@@ -1,4 +1,5 @@
-const SYNC_ENDPOINT = 'https://havran.onrender.com/api/bazar';
+const API_BASE = window.SERVER_BASE || '';
+const SYNC_ENDPOINT = API_BASE + '/api/bazar';
 const SERVER_SECRET = 'ilovekatie';
 
 const itemsForSale = JSON.parse(localStorage.getItem('itemsForSale')) || [];
@@ -89,7 +90,12 @@ function displayItems() {
 
 async function loadDefaultItems() {
     try {
-        const response = await fetch('./defaultitems.json');
+        // Try server first
+        let response = await fetch(API_BASE + '/api/bazar');
+        if (!response.ok) {
+            // Fallback to local file
+            response = await fetch('./defaultitems.json');
+        }
         console.log('Fetch response:', response); // Debugging log
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
