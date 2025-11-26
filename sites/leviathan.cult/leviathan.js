@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_BASE = window.SERVER_BASE || '';
+    const API_BASE = (typeof window !== 'undefined' && window.SERVER_BASE) ? window.SERVER_BASE : 'https://havran.onrender.com';
     const SYNC_ENDPOINT = API_BASE + '/api/leviathan';
     const SERVER_SECRET = 'ilovekatie';
     
