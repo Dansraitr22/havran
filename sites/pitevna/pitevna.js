@@ -22,19 +22,30 @@ function renderReport(report) {
 }
 
 function loadReports() {
-  fetch('/api/reports')
-    .then(res => res.json())
+  const list = document.getElementById('report-list');
+  if (!list) return;
+  const API = (window.SERVER_BASE ? `${window.SERVER_BASE}/api/reports` : '/api/reports');
+  fetch(API)
+    .then(res => {
+      if (!res.ok) throw new Error('API not available');
+      return res.json();
+    })
+    .catch(() => {
+      // Fallback to static JSON if API is not reachable
+      return fetch('./reports.json').then(r => r.json()).catch(() => []);
+    })
     .then(reports => {
-      const list = document.getElementById('report-list');
-      if (!list) return;
       list.innerHTML = '';
-      if (!reports.length) {
+      if (!reports || !reports.length) {
         list.innerHTML = '<i>Žádné pitevní zprávy.</i>';
         return;
       }
       for (const report of reports) {
         list.innerHTML += renderReport(report);
       }
+    })
+    .catch(() => {
+      list.innerHTML = '<i>Zprávy nelze načíst.</i>';
     });
 }
 
