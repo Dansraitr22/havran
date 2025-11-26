@@ -51,14 +51,32 @@ function addItem(name, description, price, contact) {
     displayItems();
 }
 
-function deleteItem(index) {
-    if (itemsForSale[index].user === currentUser) {
-        itemsForSale.splice(index, 1);
-        saveItems();
-        displayItems();
-    } else {
+async function deleteItem(index) {
+    const item = itemsForSale[index];
+    if (!item) return;
+    if (item.user !== currentUser) {
         console.error("You can only delete your own items.");
+        return;
     }
+    try {
+        const res = await fetch(SYNC_ENDPOINT, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Server-Secret': SERVER_SECRET
+            },
+            body: JSON.stringify({ item })
+        });
+        if (!res.ok) {
+            console.error('Server delete failed:', res.status, await res.text());
+        }
+    } catch (e) {
+        console.error('Error calling server delete:', e);
+    }
+    // Always remove locally so UI updates immediately
+    itemsForSale.splice(index, 1);
+    saveItems();
+    displayItems();
 }
 
 function displayItems() {

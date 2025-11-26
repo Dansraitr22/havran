@@ -479,6 +479,68 @@ app.post('/api/bazar', async (req, res) => {
   }
 });
 
+// Delete a bazar item from the server store
+app.delete('/api/bazar', async (req, res) => {
+  try {
+    // Optional server-side secret check
+    if (SERVER_SECRET) {
+      const incoming = req.headers['x-server-secret'];
+      if (!incoming || incoming !== SERVER_SECRET) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
+    const payload = req.body || {};
+    const target = payload.item || payload;
+    if (!target || (!target.name && !target.description)) {
+      return res.status(400).json({ error: 'Invalid payload, expected { item: { name, description, ... } }' });
+    }
+
+    const sig = (item) => `${item.name || ''}::${item.description || ''}`;
+    const targetSig = sig(target);
+
+    const filePath = 'sites/bazar/defaultitems.json';
+
+    // Get existing file
+    let sha = undefined;
+    let existing = [];
+    try {
+      const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+      sha = getRes.data.sha;
+      if (getRes.data && getRes.data.content) {
+        const decoded = Buffer.from(getRes.data.content, 'base64').toString('utf8');
+        try { existing = JSON.parse(decoded); } catch (e) { existing = []; }
+      }
+    } catch (err) {
+      if (err.status === 404) {
+        return res.json({ ok: true, removed: 0 });
+      }
+      throw err;
+    }
+
+    const before = existing.length;
+    const filtered = (existing || []).filter(item => sig(item) !== targetSig);
+    const removed = before - filtered.length;
+
+    // If nothing changed, still return ok
+    const contentBase64 = Buffer.from(JSON.stringify(filtered, null, 2)).toString('base64');
+    await octokit.repos.createOrUpdateFileContents({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      message: `Delete bazar item via sync server`,
+      content: contentBase64,
+      sha,
+      branch: GITHUB_BRANCH
+    });
+
+    return res.json({ ok: true, removed });
+  } catch (err) {
+    console.error('Error deleting bazar item:', err);
+    return res.status(500).json({ error: err.message || String(err) });
+  }
+});
+
 // Endpoint for history-enthusiasts forum
 app.post('/api/forum', async (req, res) => {
   try {
