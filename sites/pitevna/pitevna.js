@@ -1,5 +1,36 @@
 // PITEVNA - Structured Medical Reports Frontend
 
+// Login credentials from hacknet
+const VALID_USER = 'dr_mortis';
+const VALID_PASS = 'autopsy2025';
+
+// Handle login
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  const loginScreen = document.getElementById('loginScreen');
+  const mainContent = document.getElementById('mainContent');
+  const loginError = document.getElementById('loginError');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('pitevnaUser').value;
+      const pass = document.getElementById('pitevnaPass').value;
+      
+      if (user === VALID_USER && pass === VALID_PASS) {
+        loginScreen.style.display = 'none';
+        mainContent.style.display = 'block';
+        loadReports();
+        setupReportForm();
+      } else {
+        loginError.textContent = 'Neplatné přihlašovací údaje';
+        loginError.style.display = 'block';
+        setTimeout(() => { loginError.style.display = 'none'; }, 3000);
+      }
+    });
+  }
+});
+
 function renderReport(report) {
   return `<div style="border:1px solid #ccc; padding:12px; margin-bottom:18px; max-width:600px;">
     <strong>Pitevní zpráva</strong><br>
@@ -68,7 +99,4 @@ function setupReportForm() {
   });
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  loadReports();
-  setupReportForm();
-});
+// Removed duplicate window.addEventListener - login handler now in DOMContentLoaded at top

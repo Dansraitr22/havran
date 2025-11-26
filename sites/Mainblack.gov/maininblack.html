@@ -4,15 +4,63 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../normalize.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Muži v Černém — Interní systém</title>
+    <link rel="stylesheet" href="./maninblack.css">
 </head>
 <body>
-    
+    <header class="mb-header">
+        <a href="../../index.html" class="return-btn" title="Zpět na Gogol">← GoGol</a>
+        <h1>CLASSIFIED: INTERNAL OPERATIONS CONSOLE</h1>
+        <p class="sub">Division: Anomalous & Extraterrestrial Threat Response</p>
+    </header>
+
+    <main class="mb-main">
+        <section id="loginScreen" class="panel">
+            <h2>SECURE LOGIN</h2>
+            <form id="loginForm" class="form">
+                <label for="agentId">Agent ID</label>
+                <input id="agentId" type="text" required>
+                <label for="passcode">Passcode</label>
+                <input id="passcode" type="password" required>
+                <label for="clearance">Clearance Code</label>
+                <input id="clearance" type="text" required>
+                <button type="submit" class="btn">Authorize</button>
+                <div id="loginError" class="error" style="display:none"></div>
+            </form>
+        </section>
+
+        <section id="mainConsole" class="panel" style="display:none">
+            <div class="grid">
+                <div>
+                    <h2>ACTIVE CASES</h2>
+                    <div id="caseList" class="list"></div>
+                </div>
+                <div>
+                    <h2>SEARCH</h2>
+                    <div class="search">
+                        <input id="searchInput" type="search" placeholder="Hledat case id, typ, lokace…">
+                        <button id="searchButton" class="btn">Hledat</button>
+                    </div>
+                    <div id="searchResults" class="list"></div>
+                </div>
+            </div>
+            <div class="bar">
+                <div id="systemTime"></div>
+                <div class="spacer"></div>
+                <button id="logoutBtn" class="btn">Odhlásit</button>
+            </div>
+        </section>
+
+        <div id="caseDetailModal" class="modal" style="display:none">
+            <div class="modal-content">
+                <h3 id="caseDetailTitle"></h3>
+                <div id="caseDetailContent"></div>
+                <button class="btn" onclick="document.getElementById('caseDetailModal').style.display='none'">Zavřít</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="./maininblack.js" defer></script>
 </body>
 </html>
-<style>
-    .return-gogol{position:fixed;right:16px;bottom:16px;background:rgba(32,32,32,.9);color:#fff;text-decoration:none;padding:8px 12px;border-radius:18px;font-size:14px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:9999;opacity:.9}
-    .return-gogol:hover{opacity:1}
-    @media (max-width:480px){.return-gogol{right:10px;bottom:10px;padding:7px 10px;font-size:13px}}
-</style>
-<a class="return-gogol" href="/index.html" title="Zpět na Gogol">← Zpět na Gogol</a>
+ 

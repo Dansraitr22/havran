@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pseudo CMD Hacker</title>
+<style>
+    body {
+        background: #000;
+        color: #0f0;
+        font-family: Consolas, monospace;
+        padding: 10px;
+    }
+    #console {
+        width: 100%;
+        height: 90vh;
+        overflow-y: auto;
+        white-space: pre-wrap;
+    }
+    #input {
+        width: 100%;
+        background: #000;
+        color: #0f0;
+        border: none;
+        outline: none;
+        font-family: Consolas, monospace;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+<div id="console"></div>
+<input id="input" autocomplete="off" autofocus>
+
+<script>
+const consoleDiv = document.getElementById("console");
+const input = document.getElementById("input");
+
+const fakeTargets = {
+    "shopzone.net": {user:"alice", pass:"cobalt-seven"},
+    "videohub.co": {user:"neo", pass:"matrix404"},
+    "catmail.org": {user:"whiskers", pass:"purrfect123"},
+};
+
+print("PseudoCMD HackSim v1.0\nType 'help' to begin.\n");
+
+input.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        input.value = "";
+        handleCommand(cmd);
+    }
+});
+
+function print(text) {
+    consoleDiv.innerHTML += text + "\n";
+    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+}
+
+function hackAnimation(target, callback) {
+    let dots = "";
+    let steps = 0;
+
+    const interval = setInterval(() => {
+        dots += ".";
+        print(`HACKING ${target}${dots}`);
+        steps++;
+        if (steps > 3) {
+            clearInterval(interval);
+            callback();
+        }
+    }, 400);
+}
+
+function handleCommand(cmd) {
+    print("> " + cmd);
+
+    if (cmd === "help") {
+        print("Commands:");
+        print("  targets       – list fake hackable sites");
+        print("  hack <site>   – begin simulated hack");
+        print("  clear         – clear console");
+        print("  help          – show this");
+        return;
+    }
+
+    if (cmd === "clear") {
+        consoleDiv.innerHTML = "";
+        return;
+    }
+
+    if (cmd === "targets") {
+        print("Available targets:");
+        for (const t of Object.keys(fakeTargets)) {
+            print(" - " + t);
+        }
+        return;
+    }
+
+    if (cmd.startsWith("hack ")) {
+        const site = cmd.split(" ")[1];
+        if (!fakeTargets[site]) {
+            print("Unknown target.");
+            return;
+        }
+
+        hackAnimation(site, () => {
+            const info = fakeTargets[site];
+            print("ACCESS GRANTED");
+            print("USERNAME: " + info.user);
+            print("PASSWORD: " + info.pass);
+            print("Mission complete.\n");
+        });
+        return;
+    }
+
+    print("Unknown command. Type 'help'.");
+}
+</script>
+</body>
+</html>

@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('password').value;
             const securityCode = document.getElementById('securityCode').value;
 
-            // Simple authentication (in real system, this would be server-side)
-            if (officerId && password && securityCode) {
+            // Validate credentials from hacknet
+            if (officerId === 'officer_id_12345' && password === 'securepass123' && securityCode === 'CODE-ALPHA') {
                 // Log successful login
                 console.log('[SYSTEM] Login attempt - SUCCESS');
                 console.log(`[SYSTEM] Officer ID: ${officerId}`);

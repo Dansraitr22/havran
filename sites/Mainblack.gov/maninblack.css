@@ -1,0 +1,29 @@
+:root{--bg:#0a0a0a;--fg:#e6f1ff;--accent:#00ffff;--warn:#ffcc00;--border:#003366}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+.mb-header{padding:16px;border-bottom:2px solid var(--border)}
+.mb-header h1{margin:0;font-size:22px}
+.mb-header .sub{margin:4px 0 0;color:#8ab6ff}
+.return-btn{color:#8ab6ff;text-decoration:none;margin-right:10px}
+.mb-main{max-width:1000px;margin:0 auto;padding:16px}
+.panel{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px}
+.form label{display:block;font-size:14px;margin-top:8px}
+.form input{width:100%;padding:8px;border:1px solid #1b2840;border-radius:6px;background:#0f1624;color:var(--fg)}
+.btn{background:#113a5a;color:#fff;border:none;border-radius:6px;padding:8px 14px;cursor:pointer}
+.btn:hover{background:#14507d}
+.error{color:#ff6666;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.list .case-item{border:1px solid #1b2840;border-radius:8px;padding:12px;margin-bottom:10px;background:#0f1624}
+.row{display:flex;justify-content:space-between;color:#8ab6ff;font-size:12px}
+.meta{color:#b3c7e6;font-size:12px;margin:6px 0}
+.badges{display:flex;gap:8px;margin:6px 0}
+.status.active{color:#00ff88}.status.investigation{color:#ffaa00}.status.review{color:#cccccc}
+.priority.high{color:#ff6666}.priority.medium{color:#ffaa00}.priority.low{color:#8ab6ff}
+.bar{display:flex;align-items:center;gap:12px;margin-top:12px}
+.bar .spacer{flex:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+.modal .modal-content{background:#0f1624;border:1px solid #1b2840;border-radius:10px;padding:16px;max-width:720px;width:90%}
+.kv td{padding:4px 8px;border-bottom:1px solid #1b2840;color:#cfe3ff}
+.block{margin:10px 0;padding:10px;border:1px solid #1b2840;border-radius:8px}
+.block h4{margin:0 0 6px;color:var(--accent)}
+.block.warn{border-color:#664400;background:#1a1200}

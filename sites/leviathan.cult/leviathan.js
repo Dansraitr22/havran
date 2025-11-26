@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainForum = document.getElementById('mainForum');
     const loginError = document.getElementById('loginError');
     
-    // Password protection - "leviathan" is the access code
+    // Password protection from hacknet
+    const VALID_USER = 'agent_leviathan';
     const VALID_CODE = 'leviathan';
     
     // Check if already logged in
@@ -20,11 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle login
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const username = document.getElementById('username') ? document.getElementById('username').value : '';
         const code = document.getElementById('accessCode').value;
         
-        if (code === VALID_CODE) {
+        if (username === VALID_USER && code === VALID_CODE) {
             sessionStorage.setItem('leviathan_auth', 'true');
-            sessionStorage.setItem('leviathan_user', 'Agent-' + Math.floor(Math.random() * 9999));
+            sessionStorage.setItem('leviathan_user', username);
             showMainForum();
         } else {
             loginError.textContent = '⚠ INVALID ACCESS CODE - ACCESS DENIED ⚠';
