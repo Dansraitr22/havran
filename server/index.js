@@ -39,6 +39,77 @@ const rateMap = new Map();
 // Simple health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
+// Reports API for pitevna: read/write reports.json in the repo
+app.get('/api/reports', async (req, res) => {
+  try {
+    const filePath = 'sites/pitevna/reports.json';
+    const getRes = await octokit.repos.getContent({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      ref: GITHUB_BRANCH
+    });
+    const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+    try {
+      const json = JSON.parse(decoded);
+      return res.json(Array.isArray(json) ? json : []);
+    } catch {
+      return res.json([]);
+    }
+  } catch (err) {
+    if (err && err.status === 404) return res.json([]);
+    console.error('Error reading reports:', err);
+    return res.status(500).json({ error: 'Failed to read reports' });
+  }
+});
+
+app.post('/api/reports', async (req, res) => {
+  try {
+    // Optional server-side secret check
+    if (SERVER_SECRET) {
+      const incoming = req.headers['x-server-secret'];
+      if (!incoming || incoming !== SERVER_SECRET) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
+    const report = req.body || {};
+    // Basic field validation to avoid malformed entries
+    const required = ['deceasedName','deceasedAge','deceasedSex','date','time','doctor','specialization','externalExam','internalExam','conclusion'];
+    for (const key of required) {
+      if (!(key in report)) return res.status(400).json({ error: `Missing field: ${key}` });
+    }
+
+    const filePath = 'sites/pitevna/reports.json';
+    let sha = undefined;
+    let existing = [];
+    try {
+      const getRes = await octokit.repos.getContent({ owner: GITHUB_OWNER, repo: GITHUB_REPO, path: filePath, ref: GITHUB_BRANCH });
+      sha = getRes.data.sha;
+      const decoded = Buffer.from(getRes.data.content || '', 'base64').toString('utf8');
+      try { existing = JSON.parse(decoded); } catch { existing = []; }
+    } catch (err) {
+      if (err.status !== 404) throw err;
+    }
+
+    const updated = [ report, ...(Array.isArray(existing) ? existing : []) ];
+    const contentBase64 = Buffer.from(JSON.stringify(updated, null, 2)).toString('base64');
+    await octokit.repos.createOrUpdateFileContents({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      path: filePath,
+      message: 'Update pitevna reports via sync server',
+      content: contentBase64,
+      sha,
+      branch: GITHUB_BRANCH
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Error writing reports:', err);
+    return res.status(500).json({ error: 'Failed to write reports' });
+  }
+});
+
 // Endpoint to update a discussion thread file in the repo (per-site)
 app.post('/api/thread', async (req, res) => {
   try {
