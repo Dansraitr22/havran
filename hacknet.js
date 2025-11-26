@@ -4,37 +4,59 @@
   window.__hackConsoleLoaded = true;
 
   const targets = {
-    'police.sub': { 
+    '192.168.42.10': { 
+      hostname: 'police.sub',
       user: 'officer_id_12345', 
       pass: 'securepass123', 
       code: 'CODE-ALPHA',
-      ip: '192.168.42.10',
-      difficulty: 3,
-      ports: [22, 80, 443, 8080]
+      ports: {
+        22: { service: 'SSH', vulnerable: false },
+        80: { service: 'HTTP', vulnerable: false },
+        443: { service: 'HTTPS', vulnerable: false },
+        8080: { service: 'HTTP-PROXY', vulnerable: true }
+      },
+      folders: ['/var/www', '/etc/config', '/home/users', '/var/log', '/opt/secure'],
+      passwordFile: '/opt/secure/credentials.db'
     },
-    'leviathan.cult': { 
+    '10.0.13.37': { 
+      hostname: 'leviathan.cult',
       user: 'agent_leviathan', 
       pass: 'leviathan', 
       code: '',
-      ip: '10.0.13.37',
-      difficulty: 2,
-      ports: [443, 3000, 8443]
+      ports: {
+        443: { service: 'HTTPS', vulnerable: false },
+        3000: { service: 'NODE-API', vulnerable: true },
+        8443: { service: 'HTTPS-ALT', vulnerable: false }
+      },
+      folders: ['/srv/data', '/usr/share', '/etc/secrets', '/var/backup', '/home/agent'],
+      passwordFile: '/etc/secrets/auth.key'
     },
-    'pitevna': { 
+    '172.16.99.5': { 
+      hostname: 'pitevna',
       user: 'dr_mortis', 
       pass: 'autopsy2025', 
       code: '',
-      ip: '172.16.99.5',
-      difficulty: 2,
-      ports: [80, 443, 5432]
+      ports: {
+        80: { service: 'HTTP', vulnerable: false },
+        443: { service: 'HTTPS', vulnerable: false },
+        5432: { service: 'PostgreSQL', vulnerable: true }
+      },
+      folders: ['/var/database', '/home/mortis', '/usr/local/app', '/var/reports', '/etc/auth'],
+      passwordFile: '/etc/auth/users.enc'
     },
-    'mainblack.gov': { 
+    '198.51.100.42': { 
+      hostname: 'mainblack.gov',
       user: 'agent_k_001', 
       pass: 'blackops', 
       code: 'CLEARANCE-7',
-      ip: '198.51.100.42',
-      difficulty: 4,
-      ports: [22, 443, 9000, 31337]
+      ports: {
+        22: { service: 'SSH', vulnerable: false },
+        443: { service: 'HTTPS', vulnerable: false },
+        9000: { service: 'CUSTOM-SVC', vulnerable: false },
+        31337: { service: 'BACKDOOR', vulnerable: true }
+      },
+      folders: ['/classified', '/var/cases', '/home/agents', '/tmp/cache', '/opt/intel', '/etc/clearance'],
+      passwordFile: '/etc/clearance/level7.dat'
     }
   };
 
@@ -42,8 +64,12 @@
   let modalEl = null;
   let consoleEl = null;
   let inputEl = null;
-  let currentHack = null;
-  let hackProgress = { scanned: false, exploited: false, decrypted: false };
+  let currentTarget = null;
+  let scannedPorts = [];
+  let selectedPort = null;
+  let breached = false;
+  let currentFolder = null;
+  let discoveredIPs = [];
 
   function openHackConsole() {
     if (gameActive) return;
@@ -106,8 +132,11 @@
       document.body.removeChild(modalEl);
       modalEl = null;
     }
-    currentHack = null;
-    hackProgress = { scanned: false, exploited: false, decrypted: false };
+    currentTarget = null;
+    scannedPorts = [];
+    selectedPort = null;
+    breached = false;
+    currentFolder = null;
     document.removeEventListener('keydown', escHandler);
   }
 
@@ -136,50 +165,54 @@
 
     switch(command) {
       case 'help':
-      case 'manual':
         printManual();
         break;
-      case 'targets':
-        listTargets();
-        break;
-      case 'hack':
+      case 'nmap':
         if (args.length === 0) {
-          print('[ERROR] Usage: hack <target>');
-          print('Type "targets" to see available targets.');
+          print('[ERROR] Usage: nmap <IP address>');
         } else {
-          selectTarget(args[0]);
+          nmapScan(args[0]);
         }
         break;
-      case 'scan':
-        if (!currentHack) {
-          print('[ERROR] No target selected. Use: hack <target>');
+      case 'connect':
+        if (args.length === 0) {
+          print('[ERROR] Usage: connect <port>');
         } else {
-          scanTarget();
+          connectPort(args[0]);
         }
         break;
       case 'exploit':
-        if (!currentHack) {
-          print('[ERROR] No target selected. Use: hack <target>');
-        } else if (!hackProgress.scanned) {
-          print('[ERROR] Run "scan" first to map the target network.');
+        exploitVulnerability();
+        break;
+      case 'ls':
+        listFiles();
+        break;
+      case 'cd':
+        if (args.length === 0) {
+          print('[ERROR] Usage: cd <folder>');
         } else {
-          exploitTarget();
+          changeDirectory(args.join(' '));
         }
         break;
-      case 'decrypt':
-        if (!currentHack) {
-          print('[ERROR] No target selected. Use: hack <target>');
-        } else if (!hackProgress.exploited) {
-          print('[ERROR] Run "exploit" first to gain system access.');
+      case 'cat':
+        if (args.length === 0) {
+          print('[ERROR] Usage: cat <filename>');
         } else {
-          decryptCredentials();
+          readFile(args.join(' '));
         }
         break;
-      case 'status':
-        showStatus();
+      case 'crack':
+        if (args.length === 0) {
+          print('[ERROR] Usage: crack <file>');
+        } else {
+          crackPassword(args.join(' '));
+        }
         break;
-      case 'about':
-        printAbout();
+      case 'hint':
+        giveHint();
+        break;
+      case 'reset':
+        resetProgress();
         break;
       case 'clear':
         consoleEl.innerHTML = '';
@@ -199,180 +232,313 @@
     print('HACKNET MANUAL');
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     print('');
-    print('BASIC COMMANDS:');
-    print('  help/manual   - Display this manual');
-    print('  targets       - List all secured targets');
-    print('  about         - Display system information');
-    print('  status        - Show current hack progress');
-    print('  clear         - Clear console output');
-    print('  close/exit    - Close HACKNET console');
+    print('RECONNAISSANCE:');
+    print('  nmap <IP>     - Scan target IP for open ports');
     print('');
-    print('HACKING WORKFLOW:');
-    print('  1. hack <target>  - Select target system');
-    print('     Example: hack name.ofsite');
+    print('EXPLOITATION:');
+    print('  connect <port> - Connect to specific port');
+    print('  exploit        - Exploit vulnerable service');
     print('');
-    print('  2. scan           - Port scan & network mapping');
-    print('     Identifies open ports and services');
+    print('FILE SYSTEM:');
+    print('  ls             - List files in current directory');
+    print('  cd <folder>    - Change directory');
+    print('  cat <file>     - Read file contents');
+    print('  crack <file>   - Crack encrypted password file');
     print('');
-    print('  3. exploit        - Execute vulnerability exploit');
-    print('     Gains system access via discovered services');
+    print('UTILITY:');
+    print('  hint           - Get a hint about next step');
+    print('  reset          - Reset current target progress');
+    print('  clear          - Clear console output');
+    print('  close/exit     - Close HACKNET console');
     print('');
-    print('  4. decrypt        - Crack encrypted credentials');
-    print('     Reveals usernames, passwords, and codes');
-    print('');
-    print('NOTES:');
-    print('  - Commands must be executed in order');
-    print('  - Each target has different difficulty levels');
-    print('  - Press ESC to close console at any time');
+    print('NOTE: You must discover target IPs on your own.');
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
   }
 
-  function listTargets() {
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    print('SECURED TARGETS');
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    for (const [name, info] of Object.entries(targets)) {
-      const stars = '★'.repeat(info.difficulty);
-      print(`  ${name.padEnd(20)} ${info.ip.padEnd(15)} ${stars}`);
-    }
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-  }
-
-  function selectTarget(site) {
-    if (!targets[site]) {
-      print('[ERROR] Unknown target: ' + site);
-      print('Type "targets" to see available targets.');
-      return;
-    }
-    currentHack = site;
-    hackProgress = { scanned: false, exploited: false, decrypted: false };
-    const info = targets[site];
-    print('[INFO] Target selected: ' + site);
-    print('[INFO] IP Address: ' + info.ip);
-    print('[INFO] Difficulty: ' + '★'.repeat(info.difficulty));
-    print('[INFO] Type "scan" to begin reconnaissance.\n');
-  }
-
-  function scanTarget() {
-    if (hackProgress.scanned) {
-      print('[WARNING] Target already scanned.\n');
+  function nmapScan(ip) {
+    if (!targets[ip]) {
+      print('[ERROR] No response from ' + ip);
+      print('[INFO] Host appears to be down or unreachable.');
       return;
     }
 
-    const info = targets[currentHack];
-    print('[SCAN] Initiating port scan on ' + info.ip + '...');
+    if (!discoveredIPs.includes(ip)) {
+      discoveredIPs.push(ip);
+    }
+
+    currentTarget = ip;
+    scannedPorts = [];
+    selectedPort = null;
+    breached = false;
+    currentFolder = null;
+
+    const targetData = targets[ip];
+    print('[NMAP] Starting scan on ' + ip + '...');
     
+    let portList = Object.keys(targetData.ports);
     let portIndex = 0;
+    
     const scanInterval = setInterval(() => {
-      if (portIndex < info.ports.length) {
-        const port = info.ports[portIndex];
-        print('[SCAN] Port ' + port + ' ...... OPEN');
+      if (portIndex < portList.length) {
+        const port = portList[portIndex];
+        const portInfo = targetData.ports[port];
+        scannedPorts.push(port);
+        print('[NMAP] ' + port + '/tcp  OPEN  ' + portInfo.service);
         portIndex++;
       } else {
         clearInterval(scanInterval);
-        print('[SCAN] Scan complete. ' + info.ports.length + ' open ports found.');
-        print('[INFO] Type "exploit" to attempt intrusion.\n');
-        hackProgress.scanned = true;
+        print('[NMAP] Scan complete. ' + portList.length + ' ports open.');
+        print('');
       }
-    }, 400);
+    }, 500);
   }
 
-  function exploitTarget() {
-    if (hackProgress.exploited) {
-      print('[WARNING] Target already exploited.\n');
+  function connectPort(port) {
+    if (!currentTarget) {
+      print('[ERROR] No target selected. Use "nmap <IP>" first.');
       return;
     }
 
-    const info = targets[currentHack];
-    print('[EXPLOIT] Analyzing vulnerabilities...');
+    if (!scannedPorts.includes(port)) {
+      print('[ERROR] Port ' + port + ' not found in scan results.');
+      return;
+    }
+
+    const targetData = targets[currentTarget];
+    const portInfo = targetData.ports[port];
+
+    selectedPort = port;
+    print('[CONNECT] Connecting to ' + currentTarget + ':' + port + '...');
     
     setTimeout(() => {
-      print('[EXPLOIT] Buffer overflow detected on port ' + info.ports[0]);
-    }, 600);
+      print('[CONNECT] Connection established.');
+      print('[INFO] Service: ' + portInfo.service);
+      if (portInfo.vulnerable) {
+        print('[VULN] Vulnerability detected! Service appears exploitable.');
+      } else {
+        print('[INFO] Service appears secure. Try other ports.');
+      }
+      print('');
+    }, 800);
+  }
+
+  function exploitVulnerability() {
+    if (!selectedPort) {
+      print('[ERROR] No active connection. Use "connect <port>" first.');
+      return;
+    }
+
+    if (breached) {
+      print('[INFO] System already breached.');
+      return;
+    }
+
+    const targetData = targets[currentTarget];
+    const portInfo = targetData.ports[selectedPort];
+
+    if (!portInfo.vulnerable) {
+      print('[ERROR] This service is not vulnerable to known exploits.');
+      print('[INFO] Try connecting to a different port.');
+      return;
+    }
+
+    print('[EXPLOIT] Analyzing ' + portInfo.service + ' for vulnerabilities...');
+    
+    setTimeout(() => {
+      print('[EXPLOIT] Found CVE-2024-' + Math.floor(Math.random() * 10000));
+    }, 700);
 
     setTimeout(() => {
-      print('[EXPLOIT] Injecting payload...');
-    }, 1200);
+      print('[EXPLOIT] Preparing payload...');
+    }, 1400);
+
+    setTimeout(() => {
+      print('[EXPLOIT] Injecting shellcode...');
+    }, 2100);
 
     setTimeout(() => {
       print('[EXPLOIT] Escalating privileges...');
-    }, 1800);
+    }, 2800);
 
     setTimeout(() => {
       print('[EXPLOIT] *** ROOT ACCESS GRANTED ***');
-      print('[INFO] Type "decrypt" to extract credentials.\n');
-      hackProgress.exploited = true;
-    }, 2400);
+      print('[INFO] You now have shell access to the system.');
+      print('[INFO] Current directory: /');
+      breached = true;
+      currentFolder = '/';
+      print('');
+    }, 3500);
   }
 
-  function decryptCredentials() {
-    if (hackProgress.decrypted) {
-      print('[WARNING] Credentials already decrypted.\n');
+  function listFiles() {
+    if (!breached) {
+      print('[ERROR] No system access. Exploit a vulnerability first.');
       return;
     }
 
-    const info = targets[currentHack];
-    print('[DECRYPT] Locating encrypted database...');
+    const targetData = targets[currentTarget];
+    
+    if (currentFolder === '/') {
+      print('[LS] Contents of /:');
+      targetData.folders.forEach(folder => {
+        print('  ' + folder + '/');
+      });
+    } else if (targetData.folders.includes(currentFolder)) {
+      print('[LS] Contents of ' + currentFolder + ':');
+      if (currentFolder === targetData.passwordFile.substring(0, targetData.passwordFile.lastIndexOf('/'))) {
+        const filename = targetData.passwordFile.substring(targetData.passwordFile.lastIndexOf('/') + 1);
+        print('  ' + filename);
+        print('  config.txt');
+        print('  logs.dat');
+      } else {
+        print('  data.tmp');
+        print('  readme.txt');
+        print('  system.log');
+      }
+    } else {
+      print('[ERROR] Invalid directory.');
+    }
+    print('');
+  }
+
+  function changeDirectory(folder) {
+    if (!breached) {
+      print('[ERROR] No system access. Exploit a vulnerability first.');
+      return;
+    }
+
+    const targetData = targets[currentTarget];
+    
+    if (folder === '/' || folder === '~') {
+      currentFolder = '/';
+      print('[CD] Changed to /');
+    } else if (folder.startsWith('/')) {
+      if (targetData.folders.includes(folder)) {
+        currentFolder = folder;
+        print('[CD] Changed to ' + folder);
+      } else {
+        print('[ERROR] Directory not found: ' + folder);
+      }
+    } else {
+      const newPath = currentFolder === '/' ? '/' + folder : currentFolder + '/' + folder;
+      if (targetData.folders.includes(newPath)) {
+        currentFolder = newPath;
+        print('[CD] Changed to ' + newPath);
+      } else {
+        print('[ERROR] Directory not found: ' + folder);
+      }
+    }
+    print('');
+  }
+
+  function readFile(filename) {
+    if (!breached) {
+      print('[ERROR] No system access. Exploit a vulnerability first.');
+      return;
+    }
+
+    const targetData = targets[currentTarget];
+    const fullPath = currentFolder === '/' ? '/' + filename : currentFolder + '/' + filename;
+
+    if (fullPath === targetData.passwordFile) {
+      print('[CAT] Reading ' + filename + '...');
+      print('');
+      print('██▓▒░▄▀■□▪▫◊○●◘◙♠♣♥♦♪♫☼►◄');
+      print('░▒▓█▀▄─│┌┐└┘├┤┬┴┼═║╔╗╚╝╠');
+      print('▓█░▒░█▓▒░▄▀■□▪▫◊○●◘◙♠♣♥♦');
+      print('');
+      print('[INFO] File appears to be encrypted.');
+      print('[INFO] Use "crack ' + filename + '" to decrypt.');
+      print('');
+    } else {
+      print('[ERROR] File not found: ' + filename);
+      print('[INFO] Use "ls" to see available files.');
+      print('');
+    }
+  }
+
+  function crackPassword(filename) {
+    if (!breached) {
+      print('[ERROR] No system access. Exploit a vulnerability first.');
+      return;
+    }
+
+    const targetData = targets[currentTarget];
+    const fullPath = currentFolder === '/' ? '/' + filename : currentFolder + '/' + filename;
+
+    if (fullPath !== targetData.passwordFile) {
+      print('[ERROR] File not found or not an encrypted password file.');
+      return;
+    }
+
+    print('[CRACK] Initializing password cracker...');
     
     setTimeout(() => {
-      print('[DECRYPT] Database found: /etc/shadow.db');
-    }, 500);
+      print('[CRACK] Analyzing encryption scheme...');
+    }, 600);
 
     setTimeout(() => {
-      print('[DECRYPT] Applying brute-force algorithm...');
-    }, 1000);
+      print('[CRACK] Detected: AES-256-CBC');
+    }, 1200);
 
-    let crackProgress = 0;
+    setTimeout(() => {
+      print('[CRACK] Running dictionary attack...');
+    }, 1800);
+
+    let progress = 0;
     const crackInterval = setInterval(() => {
-      crackProgress += 25;
-      print('[DECRYPT] Progress: ' + crackProgress + '%');
+      progress += 20;
+      print('[CRACK] Progress: ' + progress + '%');
       
-      if (crackProgress >= 100) {
+      if (progress >= 100) {
         clearInterval(crackInterval);
         setTimeout(() => {
           print('');
           print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-          print('*** CREDENTIALS DECRYPTED ***');
+          print('*** DECRYPTION SUCCESSFUL ***');
           print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-          print('TARGET: ' + currentHack);
-          print('USERNAME: ' + info.user);
-          print('PASSWORD: ' + info.pass);
-          if (info.code) print('CLEARANCE: ' + info.code);
+          print('HOST: ' + targetData.hostname);
+          print('USERNAME: ' + targetData.user);
+          print('PASSWORD: ' + targetData.pass);
+          if (targetData.code) print('ACCESS CODE: ' + targetData.code);
           print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-          print('[SUCCESS] Breach complete!\n');
-          hackProgress.decrypted = true;
+          print('[SUCCESS] Credentials extracted!\n');
         }, 500);
       }
-    }, 600);
+    }, 700);
   }
 
-  function showStatus() {
-    if (!currentHack) {
-      print('[STATUS] No active target.');
-      print('Use "hack <target>" to select a target.\n');
-      return;
+  function giveHint() {
+    if (!currentTarget) {
+      print('[HINT] Start by scanning IP addresses on the network.');
+      print('[HINT] Try common private IP ranges like 192.168.x.x, 10.0.x.x, 172.16.x.x');
+    } else if (scannedPorts.length === 0) {
+      print('[HINT] You\'ve found a target! Scan it with: nmap ' + currentTarget);
+    } else if (!selectedPort) {
+      print('[HINT] Connect to one of the open ports to investigate services.');
+      print('[HINT] Look for services that might be vulnerable.');
+    } else if (!breached) {
+      print('[HINT] Try to exploit the vulnerable service you found.');
+    } else if (currentFolder === '/') {
+      const targetData = targets[currentTarget];
+      const passDir = targetData.passwordFile.substring(0, targetData.passwordFile.lastIndexOf('/'));
+      print('[HINT] Look for password files in system folders.');
+      print('[HINT] Try checking: ' + passDir);
+    } else {
+      const targetData = targets[currentTarget];
+      const filename = targetData.passwordFile.substring(targetData.passwordFile.lastIndexOf('/') + 1);
+      print('[HINT] Found any encrypted files? Try: cat ' + filename);
     }
-
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    print('HACK PROGRESS: ' + currentHack);
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    print('[1] SCAN     ' + (hackProgress.scanned ? '[✓] COMPLETE' : '[ ] PENDING'));
-    print('[2] EXPLOIT  ' + (hackProgress.exploited ? '[✓] COMPLETE' : '[ ] PENDING'));
-    print('[3] DECRYPT  ' + (hackProgress.decrypted ? '[✓] COMPLETE' : '[ ] PENDING'));
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    print('');
   }
 
-  function printAbout() {
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    print('HACKNET v2.5');
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    print('Network Penetration Framework');
-    print('Developed by: UNKNOWN');
-    print('Build: 2025.01.R3');
-    print('');
-    print('This tool is for educational purposes only.');
-    print('Unauthorized access is illegal.');
-    print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  function resetProgress() {
+    currentTarget = null;
+    scannedPorts = [];
+    selectedPort = null;
+    breached = false;
+    currentFolder = null;
+    print('[RESET] Progress cleared. Starting fresh.\n');
   }
 
   // Expose global hack() function
