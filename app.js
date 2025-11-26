@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Fetch Konspirační Teorie articles
     function fetchKonspiraNewsData() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');

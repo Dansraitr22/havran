@@ -22,24 +22,21 @@ const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
 app.use(bodyParser.json({ limit: '1mb' }));
 
-// Configure CORS to allow a specific origin via ALLOWED_ORIGIN env var (defaults to '*').
+
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow if ALLOWED_ORIGIN is '*' or if origin matches configured value or if origin is undefined (server-to-server)
+   
     if (!ALLOWED_ORIGIN || ALLOWED_ORIGIN === '*' || !origin || origin === ALLOWED_ORIGIN) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   }
 }));
 
-// Simple in-memory rate limiter: per-IP request count within window
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX = parseInt(process.env.RATE_LIMIT_MAX || '120', 10); // requests per window per IP
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; 
+const RATE_LIMIT_MAX = parseInt(process.env.RATE_LIMIT_MAX || '120', 10); 
 const rateMap = new Map();
 
-// Simple health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-// Reports API for pitevna: read/write reports.json in the repo
 app.get('/api/reports', async (req, res) => {
   try {
     const filePath = 'sites/pitevna/reports.json';
@@ -65,7 +62,7 @@ app.get('/api/reports', async (req, res) => {
 
 app.post('/api/reports', async (req, res) => {
   try {
-    // Optional server-side secret check
+    
     if (SERVER_SECRET) {
       const incoming = req.headers['x-server-secret'];
       if (!incoming || incoming !== SERVER_SECRET) {
@@ -74,7 +71,7 @@ app.post('/api/reports', async (req, res) => {
     }
 
     const report = req.body || {};
-    // Basic field validation to avoid malformed entries
+  
     const required = ['deceasedName','deceasedAge','deceasedSex','date','time','doctor','specialization','externalExam','internalExam','conclusion'];
     for (const key of required) {
       if (!(key in report)) return res.status(400).json({ error: `Missing field: ${key}` });
@@ -110,10 +107,10 @@ app.post('/api/reports', async (req, res) => {
   }
 });
 
-// Endpoint to update a discussion thread file in the repo (per-site)
+
 app.post('/api/thread', async (req, res) => {
   try {
-    // Rate limiting by IP
+  
     const ip = req.ip || req.connection.remoteAddress || 'unknown';
     const now = Date.now();
     const entry = rateMap.get(ip) || { count: 0, first: now };
@@ -126,7 +123,6 @@ app.post('/api/thread', async (req, res) => {
       return res.status(429).json({ error: 'Rate limit exceeded' });
     }
 
-    // Optional server-side secret check to prevent abuse
     if (SERVER_SECRET) {
       const incoming = req.headers['x-server-secret'];
       if (!incoming || incoming !== SERVER_SECRET) {
@@ -139,16 +135,16 @@ app.post('/api/thread', async (req, res) => {
       return res.status(400).json({ error: 'Invalid payload, expected { posts: [] }' });
     }
 
-    // Determine target file path. Client should send `filePath` (e.g. "sites/diskusion forum/discussionThread.json").
+  
     const filePath = typeof payload.filePath === 'string' ? payload.filePath.trim() : '';
     if (!filePath) return res.status(400).json({ error: 'Missing filePath in payload' });
 
-    // Sanitize and validate the file path - only allow files under the `sites/` folder and .json files.
+
     if (filePath.includes('..') || !filePath.startsWith('sites/') || !filePath.endsWith('.json')) {
       return res.status(400).json({ error: 'Invalid filePath' });
     }
 
-    // Helper: signature for deduplication (author + message)
+
     function sig(obj) {
       if (!obj) return '';
       const a = (obj.author || obj.username || '').toString();
@@ -156,7 +152,7 @@ app.post('/api/thread', async (req, res) => {
       return `${a}::${m}`;
     }
 
-    // Merge comments/replies arrays by signature
+
     function mergeComments(existingComments = [], incomingComments = []) {
       const map = new Map();
       (existingComments || []).forEach(c => map.set(sig(c), c));
@@ -165,7 +161,7 @@ app.post('/api/thread', async (req, res) => {
         if (!map.has(key)) {
           map.set(key, c);
         } else {
-          // merge nested replies
+  
           const ex = map.get(key);
           ex.replies = mergeReplies(ex.replies || [], c.replies || []);
         }
@@ -188,7 +184,7 @@ app.post('/api/thread', async (req, res) => {
         if (!map.has(key)) {
           map.set(key, p);
         } else {
-          // Merge comments into existing post
+        
           const ex = map.get(key);
           ex.comments = mergeComments(ex.comments || [], p.comments || []);
         }
