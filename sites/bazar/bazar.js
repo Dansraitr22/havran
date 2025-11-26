@@ -1,4 +1,5 @@
-const API_BASE = window.SERVER_BASE || '';
+// Use configured server base if provided; otherwise default to hosted server
+const API_BASE = (typeof window !== 'undefined' && window.SERVER_BASE) ? window.SERVER_BASE : 'https://havran.onrender.com';
 const SYNC_ENDPOINT = API_BASE + '/api/bazar';
 const SERVER_SECRET = 'ilovekatie';
 
@@ -59,6 +60,7 @@ async function deleteItem(index) {
         return;
     }
     try {
+        console.log('[Bazar] Deleting item via server:', item);
         const res = await fetch(SYNC_ENDPOINT, {
             method: 'DELETE',
             headers: {
@@ -68,7 +70,8 @@ async function deleteItem(index) {
             body: JSON.stringify({ item })
         });
         if (!res.ok) {
-            console.error('Server delete failed:', res.status, await res.text());
+            const txt = await res.text();
+            console.error('Server delete failed:', res.status, txt);
         }
     } catch (e) {
         console.error('Error calling server delete:', e);
