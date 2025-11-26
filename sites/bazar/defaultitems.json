@@ -139,17 +139,13 @@
     "contact": "Johny@cloud.com",
     "user": "Johny Cloud"
   },
-  {
-    "name": "test",
-    "description": "1423",
-    "price": 100,
-    "contact": "hahaq",
-    "user": "deron22"
-  },
+
   {
     "name": "Fofršpaněl",
     "description": "Prodám štěňata - jedná se o křížence kokra a neznámého, ale velice rychlého psa, který obskočil mojí Daisy tak rychle, že jsem ho nestihl trefit. Pokud budou štěňata po něm, bude je určitě možné využít na dostizích.",
     "price": 50,
-    "user": "brambora"
+    "user": "brambora",
+    "contact": "fofr.spanel@gmail.com"
   }
+
 ]
