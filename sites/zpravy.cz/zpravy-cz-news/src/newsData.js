@@ -2,20 +2,33 @@
 (function(){
     const API_BASE = window.SERVER_BASE || '';
     const NEWS_API = API_BASE + '/api/zpravy';
-    const container = document.getElementById('zpravyResultsContainer');
-    if (!container) return;
+    const containerA = document.getElementById('zpravyResultsContainer');
+    const containerB = document.getElementById('zpravyNewsContent');
 
     const render = (items) => {
-        container.innerHTML = '';
-        (items || []).forEach(news => {
-            const el = document.createElement('div');
-            el.className = 'news-item';
-            el.innerHTML = `
-                <h2>${news.title || ''}</h2>
-                <p>${news.content || ''}</p>
-            `;
-            container.appendChild(el);
-        });
+        if (containerA) {
+            containerA.innerHTML = '';
+            (items || []).forEach(news => {
+                const el = document.createElement('div');
+                el.className = 'news-item';
+                el.innerHTML = `
+                    <h2>${news.title || ''}</h2>
+                    <p>${news.content || ''}</p>
+                `;
+                containerA.appendChild(el);
+            });
+        } else if (containerB) {
+            containerB.innerHTML = '';
+            (items || []).forEach((news, index) => {
+                const el = document.createElement('div');
+                el.className = 'news-item';
+                el.innerHTML = `
+                    <h2><a href="./newsTemplate.html?newsIndex=${index}">${news.title || ''}</a></h2>
+                    <p>${(news.content||'').substring(0,100)}...</p>
+                `;
+                containerB.appendChild(el);
+            });
+        }
     };
 
     const fetchNews = async () => {
@@ -35,6 +48,6 @@
         }
     };
 
-    fetchNews().then(render);
+    fetchNews().then(data => { window.zpravyNewsData = data; render(data); });
 })();
 

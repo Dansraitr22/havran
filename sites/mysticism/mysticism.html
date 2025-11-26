@@ -11,32 +11,54 @@
     <header>
         <h1>Mysticism News</h1>
     </header>
-    <main id="newsContent"></main>
-    <script>
-        // Corrected fetch path to mysticsim.json
-        fetch('./mysticsim.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const newsIndex = urlParams.get('newsIndex');
-                if (newsIndex !== null && data[newsIndex]) {
-                    const newsItem = data[newsIndex];
-                    const newsContent = document.getElementById('newsContent');
-                    newsContent.innerHTML = `
-                        <h2>${newsItem.title}</h2>
-                        <p>${newsItem.content}</p>
-                    `;
-                } else {
-                    document.getElementById('newsContent').innerHTML = '<p>News item not found.</p>';
-                }
-            })
-            .catch(error => console.error('Error fetching mysticism news data:', error));
-    </script>
+        <main id="newsContent" style="max-width:960px;margin:0 auto;padding:20px;"></main>
+        <script>
+                (function(){
+                    const API_BASE = window.SERVER_BASE || '';
+                    const container = document.getElementById('newsContent');
+                    const params = new URLSearchParams(window.location.search);
+                    const idx = params.get('newsIndex');
+
+                    const renderList = (items=[]) => {
+                        container.innerHTML = '';
+                        if (!items.length) { container.innerHTML = '<p>Žádné články k zobrazení.</p>'; return; }
+                        items.forEach((it, i) => {
+                            const div = document.createElement('article');
+                            div.innerHTML = `
+                                <h2><a href="./mysticism.html?newsIndex=${i}">${it.title||''}</a></h2>
+                                <p>${(it.content||'').substring(0,140)}...</p>
+                            `;
+                            container.appendChild(div);
+                        });
+                    };
+
+                    const renderDetail = (items=[]) => {
+                        const i = parseInt(idx, 10);
+                        if (!Number.isFinite(i) || !items[i]) { renderList(items); return; }
+                        const it = items[i];
+                        container.innerHTML = `
+                            <article>
+                                <h2>${it.title||''}</h2>
+                                <p>${it.content||''}</p>
+                                <p><a href="./mysticism.html">← Zpět na přehled</a></p>
+                            </article>
+                        `;
+                    };
+
+                    const init = async () => {
+                        try {
+                            let res = await fetch(API_BASE + '/api/mysticism');
+                            if (!res.ok) res = await fetch('./mysticsim.json');
+                            const data = await res.json();
+                            const items = Array.isArray(data) ? data : [];
+                            if (idx !== null) renderDetail(items); else renderList(items);
+                        } catch (e) {
+                            container.innerHTML = '<p>Nepodařilo se načíst data.</p>';
+                        }
+                    };
+                    init();
+                })();
+        </script>
 </body>
 </html>
 <style>
