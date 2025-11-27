@@ -223,9 +223,6 @@
           crackPassword(args.join(' '));
         }
         break;
-      case 'hint':
-        giveHint();
-        break;
       case 'reset':
         resetProgress();
         break;
@@ -300,10 +297,6 @@
     print('    Example: crack credentials.db');
     print('');
     print('UTILITY COMMANDS:');
-    print('');
-    print('  hint');
-    print('    Provides contextual guidance based on progress.');
-    print('    Suggests next steps without revealing solutions.');
     print('');
     print('  reset');
     print('    Clears all progress on current target.');
@@ -650,30 +643,6 @@
         }, 500);
       }
     }, 700);
-  }
-
-  function giveHint() {
-    if (!currentTarget) {
-      print('[HINT] Start by running "scan" to discover network hosts.');
-      print('[HINT] Once you find IPs, use nmap to scan their ports.');
-    } else if (scannedPorts.length === 0) {
-      print('[HINT] You\'ve found a target! Scan it with: nmap ' + currentTarget);
-    } else if (!selectedPort) {
-      print('[HINT] Connect to one of the open ports to investigate services.');
-      print('[HINT] Look for services that might be vulnerable.');
-    } else if (!breached) {
-      print('[HINT] Try to exploit the vulnerable service you found.');
-    } else if (currentFolder === '/') {
-      const targetData = targets[currentTarget];
-      const passDir = targetData.passwordFile.substring(0, targetData.passwordFile.lastIndexOf('/'));
-      print('[HINT] Look for password files in system folders.');
-      print('[HINT] Try checking: ' + passDir);
-    } else {
-      const targetData = targets[currentTarget];
-      const filename = targetData.passwordFile.substring(targetData.passwordFile.lastIndexOf('/') + 1);
-      print('[HINT] Found any encrypted files? Try: cat ' + filename);
-    }
-    print('');
   }
 
   function resetProgress() {
