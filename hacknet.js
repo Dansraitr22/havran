@@ -318,30 +318,52 @@
   }
 
   function networkScan() {
+    // Detect which site the user is currently on
+    const currentPath = window.location.pathname;
+    let currentSiteIP = null;
+    let currentHostname = null;
+    
+    // Map paths to hostnames
+    if (currentPath.includes('police.sub') || currentPath.includes('policepub')) {
+      currentHostname = 'police.sub';
+    } else if (currentPath.includes('leviathan')) {
+      currentHostname = 'leviathan.cult';
+    } else if (currentPath.includes('pitevna')) {
+      currentHostname = 'pitevna';
+    } else if (currentPath.includes('mainblack') || currentPath.includes('Mainblack')) {
+      currentHostname = 'mainblack.gov';
+    }
+    
+    // Find the IP for the current hostname
+    if (currentHostname) {
+      for (const [ip, data] of Object.entries(targets)) {
+        if (data.hostname === currentHostname) {
+          currentSiteIP = ip;
+          break;
+        }
+      }
+    }
+    
+    if (!currentSiteIP) {
+      print('[ERROR] No network interface detected on this host.');
+      print('[INFO] Scan command not available from this location.');
+      print('');
+      return;
+    }
+    
     print('[SCAN] Initiating network sweep...');
     print('[SCAN] Scanning local subnet ranges...');
     
-    let ips = Object.keys(targets);
-    let index = 0;
+    setTimeout(() => {
+      print('[SCAN] Host found: ' + currentSiteIP + ' (' + currentHostname + ')');
+    }, 800);
     
-    const scanInterval = setInterval(() => {
-      if (index < ips.length) {
-        const ip = ips[index];
-        const hostname = targets[ip].hostname;
-        setTimeout(() => {
-          print('[SCAN] Host found: ' + ip + ' (' + hostname + ')');
-        }, Math.random() * 300);
-        index++;
-      } else {
-        clearInterval(scanInterval);
-        setTimeout(() => {
-          print('[SCAN] Network sweep complete.');
-          print('[SCAN] Found ' + ips.length + ' active host(s).');
-          print('[INFO] Use "nmap <IP>" to scan individual hosts.');
-          print('');
-        }, 400);
-      }
-    }, 600);
+    setTimeout(() => {
+      print('[SCAN] Network sweep complete.');
+      print('[SCAN] Found 1 active host(s).');
+      print('[INFO] Use "nmap <IP>" to scan individual hosts.');
+      print('');
+    }, 1400);
   }
 
   function nmapScan(ip) {

@@ -1,0 +1,60 @@
+/* Vatican Corporation - Year 2000 Styling */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+}
+
+/* Links - Classic blue underlined style */
+a {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551A8B;
+}
+
+a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* Navigation links in gold bar */
+a[href^="#"] font {
+    text-decoration: none;
+}
+
+a[href^="#"]:hover font {
+    color: #FFD700 !important;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Scrolling marquee */
+marquee {
+    font-weight: bold;
+}
+
+/* Center alignment helper */
+center {
+    display: block;
+    text-align: center;
+}
+
+/* Make sure old-school elements work */
+font {
+    display: inline;
+}
+
+/* Responsive adjustments for modern screens while keeping year 2000 feel */
+@media screen and (max-width: 800px) {
+    table[width="760"] {
+        width: 100% !important;
+    }
+}
