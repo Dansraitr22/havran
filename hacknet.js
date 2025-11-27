@@ -3,62 +3,9 @@
   if (window.__hackConsoleLoaded) return;
   window.__hackConsoleLoaded = true;
 
-  const targets = {
-    '192.168.42.10': { 
-      hostname: 'police.sub',
-      user: 'officer_id_12345', 
-      pass: 'securepass123', 
-      code: 'CODE-ALPHA',
-      ports: {
-        22: { service: 'SSH', vulnerable: false },
-        80: { service: 'HTTP', vulnerable: false },
-        443: { service: 'HTTPS', vulnerable: false },
-        8080: { service: 'HTTP-PROXY', vulnerable: true }
-      },
-      folders: ['/var/www', '/etc/config', '/home/users', '/var/log', '/opt/secure'],
-      passwordFile: '/opt/secure/credentials.db'
-    },
-    '10.0.13.37': { 
-      hostname: 'leviathan.cult',
-      user: 'agent_leviathan', 
-      pass: 'leviathan', 
-      code: '',
-      ports: {
-        443: { service: 'HTTPS', vulnerable: false },
-        3000: { service: 'NODE-API', vulnerable: true },
-        8443: { service: 'HTTPS-ALT', vulnerable: false }
-      },
-      folders: ['/srv/data', '/usr/share', '/etc/secrets', '/var/backup', '/home/agent'],
-      passwordFile: '/etc/secrets/auth.key'
-    },
-    '172.16.99.5': { 
-      hostname: 'pitevna',
-      user: 'dr_mortis', 
-      pass: 'autopsy2025', 
-      code: '',
-      ports: {
-        80: { service: 'HTTP', vulnerable: false },
-        443: { service: 'HTTPS', vulnerable: false },
-        5432: { service: 'PostgreSQL', vulnerable: true }
-      },
-      folders: ['/var/database', '/home/mortis', '/usr/local/app', '/var/reports', '/etc/auth'],
-      passwordFile: '/etc/auth/users.enc'
-    },
-    '198.51.100.42': { 
-      hostname: 'mainblack.gov',
-      user: 'agent_k_001', 
-      pass: 'blackops', 
-      code: 'CLEARANCE-7',
-      ports: {
-        22: { service: 'SSH', vulnerable: false },
-        443: { service: 'HTTPS', vulnerable: false },
-        9000: { service: 'CUSTOM-SVC', vulnerable: false },
-        31337: { service: 'BACKDOOR', vulnerable: true }
-      },
-      folders: ['/classified', '/var/cases', '/home/agents', '/tmp/cache', '/opt/intel', '/etc/clearance'],
-      passwordFile: '/etc/clearance/level7.dat'
-    }
-  };
+  // Obfuscated target data - decoded at runtime
+  const _enc = atob('eyIxOTIuMTY4LjQyLjEwIjp7Imhvc3RuYW1lIjoicG9saWNlLnN1YiIsInVzZXIiOiJvZmZpY2VyX2lkXzEyMzQ1IiwicGFzcyI6InNlY3VyZXBhc3MxMjMiLCJjb2RlIjoiQ09ERS1BTFBIQSIsInBvcnRzIjp7IjIyIjp7InNlcnZpY2UiOiJTU0giLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjgwIjp7InNlcnZpY2UiOiJIVFRQIiwidnVsbmVyYWJsZSI6ZmFsc2V9LCI0NDMiOnsic2VydmljZSI6IkhUVFBTIiwidnVsbmVyYWJsZSI6ZmFsc2V9LCI4MDgwIjp7InNlcnZpY2UiOiJIVFRQLVBST1hZIiwidnVsbmVyYWJsZSI6dHJ1ZX19LCJmb2xkZXJzIjpbIi92YXIvd3d3IiwiL2V0Yy9jb25maWciLCIvaG9tZS91c2VycyIsIi92YXIvbG9nIiwiL29wdC9zZWN1cmUiXSwicGFzc3dvcmRGaWxlIjoiL29wdC9zZWN1cmUvY3JlZGVudGlhbHMuZGIifSwiMTAuMC4xMy4zNyI6eyJob3N0bmFtZSI6ImxldmlhdGhhbi5jdWx0IiwidXNlciI6ImFnZW50X2xldmlhdGhhbiIsInBhc3MiOiJsZXZpYXRoYW4iLCJjb2RlIjoiIiwicG9ydHMiOnsiNDQzIjp7InNlcnZpY2UiOiJIVFRQUyIsInZ1bG5lcmFibGUiOmZhbHNlfSwiMzAwMCI6eyJzZXJ2aWNlIjoiTk9ERS1BUEkiLCJ2dWxuZXJhYmxlIjp0cnVlfSwiODQ0MyI6eyJzZXJ2aWNlIjoiSFRUUFMtQUxUIiwidnVsbmVyYWJsZSI6ZmFsc2V9fSwiZm9sZGVycyI6WyIvc3J2L2RhdGEiLCIvdXNyL3NoYXJlIiwiL2V0Yy9zZWNyZXRzIiwiL3Zhci9iYWNrdXAiLCIvaG9tZS9hZ2VudCJdLCJwYXNzd29yZEZpbGUiOiIvZXRjL3NlY3JldHMvYXV0aC5rZXkifSwiMTcyLjE2Ljk5LjUiOnsiาG9zdG5hbWUiOiJwaXRldm5hIiwidXNlciI6ImRyX21vcnRpcyIsInBhc3MiOiJhdXRvcHN5MjAyNSIsImNvZGUiOiIiLCJwb3J0cyI6eyI4MCI6eyJzZXJ2aWNlIjoiSFRUUCIsInZ1bG5lcmFibGUiOmZhbHNlfSwiNDQzIjp7InNlcnZpY2UiOiJIVFRQUyIsInZ1bG5lcmFibGUiOmZhbHNlfSwiNTQzMiI6eyJzZXJ2aWNlIjoiUG9zdGdyZVNRTCIsInZ1bG5lcmFibGUiOnRydWV9fSwiZm9sZGVycyI6WyIvdmFyL2RhdGFiYXNlIiwiL2hvbWUvbW9ydGlzIiwiL3Vzci9sb2NhbC9hcHAiLCIvdmFyL3JlcG9ydHMiLCIvZXRjL2F1dGgiXSwicGFzc3dvcmRGaWxlIjoiL2V0Yy9hdXRoL3VzZXJzLmVuYyJ9LCIxOTguNTEuMTAwLjQyIjp7Imhvc3RuYW1lIjoibWFpbmJsYWNrLmdvdiIsInVzZXIiOiJhZ2VudF9rXzAwMSIsInBhc3MiOiJibGFja29wcyIsImNvZGUiOiJDTEVBUkFOQ0UtNyIsInBvcnRzIjp7IjIyIjp7InNlcnZpY2UiOiJTU0giLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjQ0MyI6eyJzZXJ2aWNlIjoiSFRUUFMiLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjkwMDAiOnsic2VydmljZSI6IkNVU1RPTS1TVkMiLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjMxMzM3Ijp7InNlcnZpY2UiOiJCQUNLRE9PUiIsInZ1bG5lcmFibGUiOnRydWV9fSwiZm9sZGVycyI6WyIvY2xhc3NpZmllZCIsIi92YXIvY2FzZXMiLCIvaG9tZS9hZ2VudHMiLCIvdG1wL2NhY2hlIiwiL29wdC9pbnRlbCIsIi9ldGMvY2xlYXJhbmNlIl0sInBhc3N3b3JkRmlsZSI6Ii9ldGMvY2xlYXJhbmNlL2xldmVsNy5kYXQifX0=');
+  const targets = JSON.parse(_enc);
 
   let gameActive = false;
   let modalEl = null;
@@ -70,9 +17,42 @@
   let breached = false;
   let currentFolder = null;
   let discoveredIPs = [];
+  let failedAttempts = 0;
+  let lockoutUntil = null;
+
+  function checkLockout() {
+    const locked = localStorage.getItem('hacknet_lockout');
+    if (locked) {
+      const unlockTime = parseInt(locked);
+      if (Date.now() < unlockTime) {
+        lockoutUntil = unlockTime;
+        return true;
+      } else {
+        localStorage.removeItem('hacknet_lockout');
+        lockoutUntil = null;
+      }
+    }
+    return false;
+  }
+
+  function triggerLockout() {
+    const lockTime = Date.now() + (5 * 60 * 1000); // 5 minutes
+    localStorage.setItem('hacknet_lockout', lockTime.toString());
+    lockoutUntil = lockTime;
+    failedAttempts = 0;
+  }
 
   function openHackConsole() {
     if (gameActive) return;
+    
+    if (checkLockout()) {
+      const remainingMs = lockoutUntil - Date.now();
+      const remainingMin = Math.ceil(remainingMs / 60000);
+      console.log('%c[LOCKOUT] System locked. Remaining time: ' + remainingMin + ' minutes', 'color:#f00;font-weight:bold;');
+      alert('SYSTEM LOCKED\n\nIntrusion detected. Access denied.\nLockout expires in ' + remainingMin + ' minutes.');
+      return;
+    }
+    
     gameActive = true;
 
     modalEl = document.createElement('div');
@@ -159,6 +139,16 @@
     print('> ' + cmd);
     if (!cmd) return;
 
+    // Check lockout before processing any command
+    if (checkLockout()) {
+      const remainingMs = lockoutUntil - Date.now();
+      const remainingMin = Math.ceil(remainingMs / 60000);
+      print('[LOCKOUT] System access denied.');
+      print('[LOCKOUT] Intrusion countermeasures active.');
+      print('[LOCKOUT] Time remaining: ' + remainingMin + ' minutes.');
+      return;
+    }
+
     const parts = cmd.split(' ');
     const command = parts[0].toLowerCase();
     const args = parts.slice(1);
@@ -166,6 +156,9 @@
     switch(command) {
       case 'help':
         printManual();
+        break;
+      case 'scan':
+        networkScan();
         break;
       case 'nmap':
         if (args.length === 0) {
@@ -234,6 +227,11 @@
     print('');
     print('NETWORK RECONNAISSANCE:');
     print('');
+    print('  scan');
+    print('    Performs network sweep to discover active hosts.');
+    print('    Lists all accessible IP addresses on the network.');
+    print('    Run this first to find targets.');
+    print('');
     print('  nmap <IP address>');
     print('    Performs a port scan on the specified IP address.');
     print('    Discovers open ports and running services.');
@@ -295,6 +293,33 @@
     print('  close / exit');
     print('    Closes the HACKNET console.');
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  }
+
+  function networkScan() {
+    print('[SCAN] Initiating network sweep...');
+    print('[SCAN] Scanning local subnet ranges...');
+    
+    let ips = Object.keys(targets);
+    let index = 0;
+    
+    const scanInterval = setInterval(() => {
+      if (index < ips.length) {
+        const ip = ips[index];
+        const hostname = targets[ip].hostname;
+        setTimeout(() => {
+          print('[SCAN] Host found: ' + ip + ' (' + hostname + ')');
+        }, Math.random() * 300);
+        index++;
+      } else {
+        clearInterval(scanInterval);
+        setTimeout(() => {
+          print('[SCAN] Network sweep complete.');
+          print('[SCAN] Found ' + ips.length + ' active host(s).');
+          print('[INFO] Use "nmap <IP>" to scan individual hosts.');
+          print('');
+        }, 400);
+      }
+    }, 600);
   }
 
   function nmapScan(ip) {
@@ -459,7 +484,18 @@
         currentFolder = folder;
         print('[CD] Changed to ' + folder);
       } else {
+        failedAttempts++;
         print('[ERROR] Directory not found: ' + folder);
+        print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
+        if (failedAttempts >= 3) {
+          print('');
+          print('[ALERT] Multiple failed attempts detected!');
+          print('[ALERT] Intrusion countermeasures activated!');
+          print('[ALERT] System locked for 5 minutes.');
+          triggerLockout();
+          setTimeout(() => closeHackConsole(), 2000);
+          return;
+        }
       }
     } else {
       const newPath = currentFolder === '/' ? '/' + folder : currentFolder + '/' + folder;
@@ -467,7 +503,18 @@
         currentFolder = newPath;
         print('[CD] Changed to ' + newPath);
       } else {
+        failedAttempts++;
         print('[ERROR] Directory not found: ' + folder);
+        print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
+        if (failedAttempts >= 3) {
+          print('');
+          print('[ALERT] Multiple failed attempts detected!');
+          print('[ALERT] Intrusion countermeasures activated!');
+          print('[ALERT] System locked for 5 minutes.');
+          triggerLockout();
+          setTimeout(() => closeHackConsole(), 2000);
+          return;
+        }
       }
     }
     print('');
@@ -493,7 +540,18 @@
       print('[INFO] Use "crack ' + filename + '" to decrypt.');
       print('');
     } else {
+      failedAttempts++;
       print('[ERROR] File not found: ' + filename);
+      print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
+      if (failedAttempts >= 3) {
+        print('');
+        print('[ALERT] Multiple failed attempts detected!');
+        print('[ALERT] Intrusion countermeasures activated!');
+        print('[ALERT] System locked for 5 minutes.');
+        triggerLockout();
+        setTimeout(() => closeHackConsole(), 2000);
+        return;
+      }
       print('[INFO] Use "ls" to see available files.');
       print('');
     }
@@ -552,8 +610,8 @@
 
   function giveHint() {
     if (!currentTarget) {
-      print('[HINT] Start by scanning IP addresses on the network.');
-      print('[HINT] Try common private IP ranges like 192.168.x.x, 10.0.x.x, 172.16.x.x');
+      print('[HINT] Start by running "scan" to discover network hosts.');
+      print('[HINT] Once you find IPs, use nmap to scan their ports.');
     } else if (scannedPorts.length === 0) {
       print('[HINT] You\'ve found a target! Scan it with: nmap ' + currentTarget);
     } else if (!selectedPort) {
@@ -580,6 +638,7 @@
     selectedPort = null;
     breached = false;
     currentFolder = null;
+    failedAttempts = 0;
     print('[RESET] Progress cleared. Starting fresh.\n');
   }
 
