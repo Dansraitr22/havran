@@ -4,8 +4,30 @@
   window.__hackConsoleLoaded = true;
 
   // Obfuscated target data - decoded at runtime
-  const _enc = atob('eyIxOTIuMTY4LjQyLjEwIjp7Imhvc3RuYW1lIjoicG9saWNlLnN1YiIsInVzZXIiOiJvZmZpY2VyX2lkXzEyMzQ1IiwicGFzcyI6InNlY3VyZXBhc3MxMjMiLCJjb2RlIjoiQ09ERS1BTFBIQSIsInBvcnRzIjp7IjIyIjp7InNlcnZpY2UiOiJTU0giLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjgwIjp7InNlcnZpY2UiOiJIVFRQIiwidnVsbmVyYWJsZSI6ZmFsc2V9LCI0NDMiOnsic2VydmljZSI6IkhUVFBTIiwidnVsbmVyYWJsZSI6ZmFsc2V9LCI4MDgwIjp7InNlcnZpY2UiOiJIVFRQLVBST1hZIiwidnVsbmVyYWJsZSI6dHJ1ZX19LCJmb2xkZXJzIjpbIi92YXIvd3d3IiwiL2V0Yy9jb25maWciLCIvaG9tZS91c2VycyIsIi92YXIvbG9nIiwiL29wdC9zZWN1cmUiXSwicGFzc3dvcmRGaWxlIjoiL29wdC9zZWN1cmUvY3JlZGVudGlhbHMuZGIifSwiMTAuMC4xMy4zNyI6eyJob3N0bmFtZSI6ImxldmlhdGhhbi5jdWx0IiwidXNlciI6ImFnZW50X2xldmlhdGhhbiIsInBhc3MiOiJsZXZpYXRoYW4iLCJjb2RlIjoiIiwicG9ydHMiOnsiNDQzIjp7InNlcnZpY2UiOiJIVFRQUyIsInZ1bG5lcmFibGUiOmZhbHNlfSwiMzAwMCI6eyJzZXJ2aWNlIjoiTk9ERS1BUEkiLCJ2dWxuZXJhYmxlIjp0cnVlfSwiODQ0MyI6eyJzZXJ2aWNlIjoiSFRUUFMtQUxUIiwidnVsbmVyYWJsZSI6ZmFsc2V9fSwiZm9sZGVycyI6WyIvc3J2L2RhdGEiLCIvdXNyL3NoYXJlIiwiL2V0Yy9zZWNyZXRzIiwiL3Zhci9iYWNrdXAiLCIvaG9tZS9hZ2VudCJdLCJwYXNzd29yZEZpbGUiOiIvZXRjL3NlY3JldHMvYXV0aC5rZXkifSwiMTcyLjE2Ljk5LjUiOnsiาG9zdG5hbWUiOiJwaXRldm5hIiwidXNlciI6ImRyX21vcnRpcyIsInBhc3MiOiJhdXRvcHN5MjAyNSIsImNvZGUiOiIiLCJwb3J0cyI6eyI4MCI6eyJzZXJ2aWNlIjoiSFRUUCIsInZ1bG5lcmFibGUiOmZhbHNlfSwiNDQzIjp7InNlcnZpY2UiOiJIVFRQUyIsInZ1bG5lcmFibGUiOmZhbHNlfSwiNTQzMiI6eyJzZXJ2aWNlIjoiUG9zdGdyZVNRTCIsInZ1bG5lcmFibGUiOnRydWV9fSwiZm9sZGVycyI6WyIvdmFyL2RhdGFiYXNlIiwiL2hvbWUvbW9ydGlzIiwiL3Vzci9sb2NhbC9hcHAiLCIvdmFyL3JlcG9ydHMiLCIvZXRjL2F1dGgiXSwicGFzc3dvcmRGaWxlIjoiL2V0Yy9hdXRoL3VzZXJzLmVuYyJ9LCIxOTguNTEuMTAwLjQyIjp7Imhvc3RuYW1lIjoibWFpbmJsYWNrLmdvdiIsInVzZXIiOiJhZ2VudF9rXzAwMSIsInBhc3MiOiJibGFja29wcyIsImNvZGUiOiJDTEVBUkFOQ0UtNyIsInBvcnRzIjp7IjIyIjp7InNlcnZpY2UiOiJTU0giLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjQ0MyI6eyJzZXJ2aWNlIjoiSFRUUFMiLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjkwMDAiOnsic2VydmljZSI6IkNVU1RPTS1TVkMiLCJ2dWxuZXJhYmxlIjpmYWxzZX0sIjMxMzM3Ijp7InNlcnZpY2UiOiJCQUNLRE9PUiIsInZ1bG5lcmFibGUiOnRydWV9fSwiZm9sZGVycyI6WyIvY2xhc3NpZmllZCIsIi92YXIvY2FzZXMiLCIvaG9tZS9hZ2VudHMiLCIvdG1wL2NhY2hlIiwiL29wdC9pbnRlbCIsIi9ldGMvY2xlYXJhbmNlIl0sInBhc3N3b3JkRmlsZSI6Ii9ldGMvY2xlYXJhbmNlL2xldmVsNy5kYXQifX0=');
-  const targets = JSON.parse(_enc);
+  const _t = {
+    'a': {'h':'police.sub','u':'officer_id_12345','p':'securepass123','c':'CODE-ALPHA','po':{'22':{'s':'SSH','v':false},'80':{'s':'HTTP','v':false},'443':{'s':'HTTPS','v':false},'8080':{'s':'HTTP-PROXY','v':true}},'f':['/var/www','/etc/config','/home/users','/var/log','/opt/secure'],'pf':'/opt/secure/credentials.db'},
+    'b': {'h':'leviathan.cult','u':'agent_leviathan','p':'leviathan','c':'','po':{'443':{'s':'HTTPS','v':false},'3000':{'s':'NODE-API','v':true},'8443':{'s':'HTTPS-ALT','v':false}},'f':['/srv/data','/usr/share','/etc/secrets','/var/backup','/home/agent'],'pf':'/etc/secrets/auth.key'},
+    'c': {'h':'pitevna','u':'dr_mortis','p':'autopsy2025','c':'','po':{'80':{'s':'HTTP','v':false},'443':{'s':'HTTPS','v':false},'5432':{'s':'PostgreSQL','v':true}},'f':['/var/database','/home/mortis','/usr/local/app','/var/reports','/etc/auth'],'pf':'/etc/auth/users.enc'},
+    'd': {'h':'mainblack.gov','u':'agent_k_001','p':'blackops','c':'CLEARANCE-7','po':{'22':{'s':'SSH','v':false},'443':{'s':'HTTPS','v':false},'9000':{'s':'CUSTOM-SVC','v':false},'31337':{'s':'BACKDOOR','v':true}},'f':['/classified','/var/cases','/home/agents','/tmp/cache','/opt/intel','/etc/clearance'],'pf':'/etc/clearance/level7.dat'}
+  };
+  const _ip = {'a':'192.168.42.10','b':'10.0.13.37','c':'172.16.99.5','d':'198.51.100.42'};
+  const targets = {};
+  Object.keys(_t).forEach(k => {
+    const t = _t[k];
+    const ports = {};
+    Object.keys(t.po).forEach(p => {
+      ports[p] = {service: t.po[p].s, vulnerable: t.po[p].v};
+    });
+    targets[_ip[k]] = {
+      hostname: t.h,
+      user: t.u,
+      pass: t.p,
+      code: t.c,
+      ports: ports,
+      folders: t.f,
+      passwordFile: t.pf
+    };
+  });
 
   let gameActive = false;
   let modalEl = null;
