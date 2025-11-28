@@ -394,6 +394,9 @@
       currentHostname = 'mainblack.gov';
     } else if (currentPath.includes('mysticism') || currentPath.includes('mysticsim')) {
       currentHostname = 'mysticism';
+    } else if (currentPath.includes('/try') || currentPath.includes('/havran/try') || currentPath.endsWith('/try') || currentPath.includes('try/index.html')) {
+      // when served from the try folder (e.g. /try/index.html or /havran/try/index.html)
+      currentHostname = 'try';
     }
     
     // Find the IP for the current hostname
