@@ -173,5 +173,12 @@
     "price": -15,
     "contact": "Chevy67@email.com",
     "user": "Autorádio"
+  },
+  {
+    "name": "Rádio Blaupunkt ",
+    "description": "Hodí se do Škody Felicia",
+    "price": 100,
+    "contact": "Dezo6666",
+    "user": "Dežo Deleter"
   }
 ]
