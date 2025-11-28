@@ -19,6 +19,4 @@ You can open the interactive hacking console by invoking the global `hack()` fun
   - `close` or `exit` — Close the HACKNET console.
 
 Notes:
-- The console prints warnings on repeated failed attempts and can temporarily lock access (stored in `localStorage`) to simulate countermeasures.
-- For the best experience, run the server and open `http://localhost:10000/try` so the console can fetch `hacking/MANUAL.md` and other assets.
-
+- The console prints warnings on repeated failed attempts and can temporarily lock access 

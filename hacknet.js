@@ -8,9 +8,11 @@
     'a': {'h':'police.sub','u':'officer_id_12345','p':'securepass123','c':'CODE-ALPHA','po':{'22':{'s':'SSH','v':false},'80':{'s':'HTTP','v':false},'443':{'s':'HTTPS','v':false},'8080':{'s':'HTTP-PROXY','v':true}},'f':['/var/www','/etc/config','/home/users','/var/log','/opt/secure'],'pf':'/opt/secure/credentials.db'},
     'b': {'h':'leviathan.cult','u':'agent_leviathan','p':'leviathan','c':'','po':{'443':{'s':'HTTPS','v':false},'3000':{'s':'NODE-API','v':true},'8443':{'s':'HTTPS-ALT','v':false}},'f':['/srv/data','/usr/share','/etc/secrets','/var/backup','/home/agent'],'pf':'/etc/secrets/auth.key'},
     'c': {'h':'pitevna','u':'dr_mortis','p':'autopsy2025','c':'','po':{'80':{'s':'HTTP','v':false},'443':{'s':'HTTPS','v':false},'5432':{'s':'PostgreSQL','v':true}},'f':['/var/database','/home/mortis','/usr/local/app','/var/reports','/etc/auth'],'pf':'/etc/auth/users.enc'},
-    'd': {'h':'mainblack.gov','u':'agent_k_001','p':'blackops','c':'CLEARANCE-7','po':{'22':{'s':'SSH','v':false},'443':{'s':'HTTPS','v':false},'9000':{'s':'CUSTOM-SVC','v':false},'31337':{'s':'BACKDOOR','v':true}},'f':['/classified','/var/cases','/home/agents','/tmp/cache','/opt/intel','/etc/clearance'],'pf':'/etc/clearance/level7.dat'}
-  };
+    'd': {'h':'mainblack.gov','u':'agent_k_001','p':'blackops','c':'CLEARANCE-7','po':{'22':{'s':'SSH','v':false},'443':{'s':'HTTPS','v':false},'9000':{'s':'CUSTOM-SVC','v':false},'31337':{'s':'BACKDOOR','v':true}},'f':['/classified','/var/cases','/home/agents','/tmp/cache','/opt/intel','/etc/clearance'],'pf':'/etc/clearance/level7.dat'},
+    'e': {'h':'try','u':'demo_user','p':'demopass','c':'DEMO','po':{'80':{'s':'HTTP','v':true},'8080':{'s':'HTTP-PROXY','v':false}},'f':['/','/try','/public'],'pf':'/try/secret.txt'},
+    };
   const _ip = {'a':'192.168.42.10','b':'10.0.13.37','c':'172.16.99.5','d':'198.51.100.42'};
+  _ip['e'] = '203.0.113.77';
   const targets = {};
   Object.keys(_t).forEach(k => {
     const t = _t[k];
@@ -388,6 +390,8 @@
       currentHostname = 'pitevna';
     } else if (currentPath.includes('mainblack') || currentPath.includes('Mainblack')) {
       currentHostname = 'mainblack.gov';
+    } else if (currentPath.includes('mysticism') || currentPath.includes('mysticsim')) {
+      currentHostname = 'mysticism';
     }
     
     // Find the IP for the current hostname
@@ -575,47 +579,59 @@
     }
 
     const targetData = targets[currentTarget];
-    
-    if (folder === '/' || folder === '~') {
+    // Resolve paths more robustly: support absolute (/), relative, ~, . and ..
+    function resolvePath(input, base) {
+      if (!input) return base || '/';
+      if (input === '/' || input === '~') return '/';
+      // If input is absolute, start from it; otherwise, build from base
+      const start = input.startsWith('/') ? input : (base === '/' ? '/' + input : base + '/' + input);
+      const parts = start.split('/');
+      const stack = [];
+      for (let i = 0; i < parts.length; i++) {
+        const p = parts[i];
+        if (!p || p === '.') continue;
+        if (p === '..') {
+          if (stack.length > 0) stack.pop();
+          continue;
+        }
+        stack.push(p);
+      }
+      return '/' + stack.join('/');
+    }
+
+    const newPath = resolvePath(folder, currentFolder || '/');
+
+    // Root always allowed
+    if (newPath === '/') {
       currentFolder = '/';
+      failedAttempts = 0;
       print('[CD] Changed to /');
-    } else if (folder.startsWith('/')) {
-      if (targetData.folders.includes(folder)) {
-        currentFolder = folder;
-        print('[CD] Changed to ' + folder);
-      } else {
-        failedAttempts++;
-        print('[ERROR] Directory not found: ' + folder);
-        print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
-        if (failedAttempts >= 3) {
-          print('');
-          print('[ALERT] Multiple failed attempts detected!');
-          print('[ALERT] Intrusion countermeasures activated!');
-          print('[ALERT] System locked for 5 minutes.');
-          triggerLockout();
-          setTimeout(() => closeHackConsole(), 2000);
-          return;
-        }
-      }
-    } else {
-      const newPath = currentFolder === '/' ? '/' + folder : currentFolder + '/' + folder;
-      if (targetData.folders.includes(newPath)) {
-        currentFolder = newPath;
-        print('[CD] Changed to ' + newPath);
-      } else {
-        failedAttempts++;
-        print('[ERROR] Directory not found: ' + folder);
-        print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
-        if (failedAttempts >= 3) {
-          print('');
-          print('[ALERT] Multiple failed attempts detected!');
-          print('[ALERT] Intrusion countermeasures activated!');
-          print('[ALERT] System locked for 5 minutes.');
-          triggerLockout();
-          setTimeout(() => closeHackConsole(), 2000);
-          return;
-        }
-      }
+      print('');
+      return;
+    }
+
+    // Valid directory if listed in targetData.folders
+    if (targetData.folders.includes(newPath)) {
+      currentFolder = newPath;
+      failedAttempts = 0;
+      print('[CD] Changed to ' + newPath);
+      print('');
+      return;
+    }
+
+    // If not found, provide helpful hints (try root or list)
+    failedAttempts++;
+    print('[ERROR] Directory not found: ' + folder + ' (resolved: ' + newPath + ')');
+    print('[INFO] Use "ls" to view available folders. Try absolute paths like /etc/config');
+    print('[WARNING] Invalid access attempt logged. (' + failedAttempts + '/3)');
+    if (failedAttempts >= 3) {
+      print('');
+      print('[ALERT] Multiple failed attempts detected!');
+      print('[ALERT] Intrusion countermeasures activated!');
+      print('[ALERT] System locked for 5 minutes.');
+      triggerLockout();
+      setTimeout(() => closeHackConsole(), 2000);
+      return;
     }
     print('');
   }
