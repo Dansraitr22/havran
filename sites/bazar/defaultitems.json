@@ -159,5 +159,61 @@
     "price": 20,
     "contact": "Gulasodbabicky@seznam.cz",
     "user": "Guláš"
+  },
+  {
+    "name": "Dřevo z elfského lesa",
+    "description": "červotoč zaručen. \ndřevo na otop, dal mi ho soused",
+    "price": 160,
+    "contact": "Aglarana@gmail.com",
+    "user": "Aglarana"
+  },
+  {
+    "name": "Autorádio Chevrolet Impala",
+    "description": "pasuje do Impaly 67'",
+    "price": -15,
+    "contact": "Chevy67@email.com",
+    "user": "Autorádio"
+  },
+  {
+    "name": "Rádio Blaupunkt ",
+    "description": "Hodí se do Škody Felicia",
+    "price": 100,
+    "contact": "Dezo6666",
+    "user": "Dežo Deleter"
+  },
+  {
+    "name": "Pneumatiky zimní",
+    "description": "Na Škodu Felicia. Trochu sjeté (2,1 mm)",
+    "price": 300,
+    "contact": "Dezo666@email.com",
+    "user": "Dežo Deleter"
+  },
+  {
+    "name": "Pneumatiky letní",
+    "description": "Na Škodu Felicia. Jako nové (0,8 mm)",
+    "price": 250,
+    "contact": "Dezo666@email.com",
+    "user": "Dežo Deleter"
+  },
+  {
+    "name": "Volant",
+    "description": "Na Škodu Felicia. Jako nový. Rok výroby 1985.",
+    "price": 170,
+    "contact": "Dezo666@email.com",
+    "user": "Dežo Deleter"
+  },
+  {
+    "name": "Králíci",
+    "description": "Prodám králíky. Narozené 10.11.1999. Doporučuju na smetaně nebo jako mazlíčky",
+    "price": 1,
+    "contact": "bunnies@email.com",
+    "user": "Jenda"
+  },
+  {
+    "name": "Pernik",
+    "description": "fakt kvalitny zbozi. soused doporučuje. pro tebe i kamoše skoro zadáčo",
+    "price": 150,
+    "contact": "křyžovatka u tunelu blanka",
+    "user": "Finančník"
   }
 ]
