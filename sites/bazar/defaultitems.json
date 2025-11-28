@@ -201,5 +201,12 @@
     "price": 170,
     "contact": "Dezo666@email.com",
     "user": "Dežo Deleter"
+  },
+  {
+    "name": "Králíci",
+    "description": "Prodám králíky. Narozené 10.11.1999. Doporučuju na smetaně nebo jako mazlíčky",
+    "price": 1,
+    "contact": "bunnies@email.com",
+    "user": "Jenda"
   }
 ]
