@@ -39,4 +39,105 @@
     "title": "Sportovní Události",
     "content": "Dnes se po celé zemi konají významné sportovní události, které přitahují miliony fanoušků. V NBA probíhají napínavé play-off zápasy, v nichž týmy bojují o postup do finále a předvádějí špičkové výkony. V MLB zároveň začíná nová sezóna, která slibuje dramatické souboje mezi tradičními rivaly. Fotbalové a hokejové ligy rovněž hlásí zvýšený zájem diváků a mnohá utkání jsou vyprodána týdny dopředu. Sportovní komentátoři očekávají, že dnešní den přinese řadu překvapení i rekordních výkonů, které budou tématem diskusí ještě dlouho po skončení zápasů."
   }
+,
+    {
+      "id": 2001,
+      "title": "Nejvyšší soud USA zastavil přepočítávání hlasů na Floridě",
+      "date": "2000-12-12",
+      "author": "Archiv",
+      "category": "World / US",
+      "tags": ["elections","Bush v Gore","Florida","2000"],
+      "source": "historical_record",
+      "content": "Nejvyšší soud USA v prosinci 2000 bezprecedentně nařídil zastavení ručního přepočítávání hlasů na Floridě, které probíhalo kvůli extrémně těsnému výsledku prezidentských voleb. Rozhodnutí, známé jako Bush vs. Gore, de facto určilo konečného vítěze voleb. Soud uvedl, že neexistuje jednotná metodika pro přepočítávání, což by porušovalo princip rovného zacházení s voliči. Verdikt šokoval širokou veřejnost i média a stal se jedním z nejkontroverznějších právních zásahů do volebního procesu v moderní historii USA."
+    },
+    {
+      "id": 2002,
+      "title": "Al Gore uznal porážku a pogratuloval Bushovi",
+      "date": "2000-12-13",
+      "author": "Archiv",
+      "category": "World / US",
+      "tags": ["elections","concession","2000","Gore"],
+      "source": "historical_record",
+      "content": "Po týdnech právních bitev Al Gore vystoupil v televizi a oznámil, že uznává porážku, přestože získal více hlasů v celonárodním součtu. Jeho projev byl považován za státnický, vyzval k uklidnění společnosti a k podpoře legitimity nového prezidenta. Pro mnoho Američanů to symbolizovalo návrat k politické stabilitě po turbulentním povolebním období."
+    },
+    {
+      "id": 2003,
+      "title": "Kauza Eliána Gonzáleze: chlapec se vrací na Kubu",
+      "date": "2000-04-22",
+      "author": "Archiv",
+      "category": "World / US",
+      "tags": ["Elian Gonzalez","immigration","2000"],
+      "source": "historical_record",
+      "content": "Dramatická kauza šestiletého Eliána Gonzáleze zasáhla USA v roce 2000 naplno. Po jeho zázračném přežití útěku z Kuby vypukl spor mezi příbuznými v Miami a jeho otcem na Kubě. Federální agenti během rychlého zásahu odebrali chlapce americkým příbuzným a rozhodli o jeho návratu k otci. Zásah vyvolal vlnu protestů, bouřlivé debaty o imigrační politice i národní identitě Kubánců v USA."
+    },
+    {
+      "id": 2004,
+      "title": "Splasknutí internetové bubliny",
+      "date": "2000-03-10",
+      "author": "Ekonom",
+      "category": "Business",
+      "tags": ["dotcom","NASDAQ","economy","2000"],
+      "source": "financial_news",
+      "content": "Americké trhy zažily kolaps řady technologických firem, které byly předtím nadhodnoceny v rámci internetové horečky. Mnoho startupů s neudržitelným byznys modelem zkrachovalo. NASDAQ spadl téměř o polovinu hodnoty. Investoři začali ztrácet důvěru v projekty, které měly více slibů než skutečných výsledků. Ekonomiku to zasáhlo na několik let a mělo to dlouhodobý dopad na investiční strategie a přístup k technologickým inovacím."
+    },
+    {
+      "id": 2005,
+      "title": "Pokrok v projektu lidského genomu",
+      "date": "2000-06-26",
+      "author": "Věda Today",
+      "category": "Science",
+      "tags": ["human genome","research","2000"],
+      "source": "scientific_journal",
+      "content": "Američtí vědci ohlásili zásadní milník v mapování lidského genomu. Bylo oznámeno, že se podařilo vytvořit předběžnou verzi sekvence lidské DNA. Tento průlom měl hluboký dopad na medicínu, genetiku a výzkum nemocí. Očekávání byla obrovská – od personalizované medicíny až po nové způsoby léčby rakoviny. Výsledky otevřely možnosti pro vývoj cílených léků a zlepšení diagnostických metod."
+    },
+    {
+      "id": 2006,
+      "title": "Microsoft čelí antimonopolnímu rozsudku",
+      "date": "2000-04-03",
+      "author": "Tech právník",
+      "category": "Business / Tech",
+      "tags": ["Microsoft","antitrust","2000"],
+      "source": "legal_report",
+      "content": "Federální soud označil Microsoft za společnost jednající v rozporu s antimonopolními zákony, zejména kvůli praktikám spojeným s operačním systémem Windows a prohlížečem Internet Explorer. Navrženo bylo dokonce rozdělení firmy na dvě části. Rozsudek vyvolal obrovskou debatu o roli megakorporací a inovací na digitálním trhu a ovlivnil regulaci technologických firem na následující desetiletí."
+    },
+    {
+      "id": 2007,
+      "title": "Kalifornské lesní požáry devastují oblast",
+      "date": "2000-10-15",
+      "author": "Zprávy Kalifornie",
+      "category": "Environment",
+      "tags": ["wildfires","California","2000","climate"],
+      "source": "local_report",
+      "content": "Extrémní sucho a silné větry způsobily stovky požárů napříč Kalifornií. Tisíce lidí musely uprchnout ze svých domovů. Požáry pohltily obrovské plochy lesa a zemědělské půdy. Situace ukázala na rostoucí problém klimatických změn a nepřipravenost záchranných složek na podobné katastrofy, což vedlo k přehodnocení prevence a plánování pohotovostních opatření v budoucnu."
+    },
+    {
+      "id": 2008,
+      "title": "Obavy z Y2K se nakonec nenaplnily",
+      "date": "2000-01-01",
+      "author": "IT Historie",
+      "category": "Technology",
+      "tags": ["Y2K","millennium","2000"],
+      "source": "retrospective",
+      "content": "Přestože americké firmy i vláda investovaly miliardy do příprav na možný kolaps systémů způsobený přechodem na rok 2000, většina obávaných problémů nenastala. Po půlnoci 1. 1. 2000 nedošlo k žádným velkým poruchám. Přesto se debata vedla o tom, zda šlo o úspěšná preventivní opatření, nebo přehnanou paniku, a vznikly první standardy pro audit a bezpečnost IT systémů."
+    },
+    {
+      "id": 2009,
+      "title": "Madeleine Albrightová potvrzena v čele diplomacie",
+      "date": "1997-01-23",
+      "author": "Archiv",
+      "category": "World / Politics",
+      "tags": ["Madeleine Albright","diplomacy","history"],
+      "source": "historical_record",
+      "content": "Senát znovu potvrdil Madeleine Albrightovou jako ministryni zahraničí. Stala se první ženou, která zastávala tak vysoký post v novém tisíciletí. Hrála klíčovou roli v mezinárodních vztazích, zejména v otázkách Balkánu, Blízkého východu a Ruska. Její potvrzení bylo považováno za historický krok pro roli žen v diplomacii a posílilo postavení USA na globální scéně."
+    },
+    {
+      "id": 2010,
+      "title": "Lékaři varují před 'epidemií obezity'",
+      "date": "2000-09-01",
+      "author": "Zdraví",
+      "category": "Health",
+      "tags": ["obesity","public health","2000"],
+      "source": "health_report",
+      "content": "Američtí lékaři vydali zásadní zprávu o rychle rostoucím problému obezity. Upozornili na dramatický nárůst cukrovky 2. typu, srdečních chorob a vysokého krevního tlaku. Zpráva šokovala veřejnost, protože ukázala, že více než polovina dospělých Američanů má nadváhu, a vyvolala nové kampaně na podporu zdravé výživy a fyzické aktivity."
+    }
 ]
