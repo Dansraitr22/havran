@@ -9,7 +9,7 @@
     'b': {'h':'leviathan.cult','u':'agent_leviathan','p':'leviathan','c':'','po':{'443':{'s':'HTTPS','v':false},'3000':{'s':'NODE-API','v':true},'8443':{'s':'HTTPS-ALT','v':false}},'f':['/srv/data','/usr/share','/etc/secrets','/var/backup','/home/agent'],'pf':'/etc/secrets/auth.key'},
     'c': {'h':'pitevna','u':'dr_mortis','p':'autopsy2025','c':'','po':{'80':{'s':'HTTP','v':false},'443':{'s':'HTTPS','v':false},'5432':{'s':'PostgreSQL','v':true}},'f':['/var/database','/home/mortis','/usr/local/app','/var/reports','/etc/auth'],'pf':'/etc/auth/users.enc'},
     'd': {'h':'mainblack.gov','u':'agent_k_001','p':'blackops','c':'CLEARANCE-7','po':{'22':{'s':'SSH','v':false},'443':{'s':'HTTPS','v':false},'9000':{'s':'CUSTOM-SVC','v':false},'31337':{'s':'BACKDOOR','v':true}},'f':['/classified','/var/cases','/home/agents','/tmp/cache','/opt/intel','/etc/clearance'],'pf':'/etc/clearance/level7.dat'},
-    'e': {'h':'try','u':'demo_user','p':'demopass','c':'DEMO','po':{'80':{'s':'HTTP','v':true},'8080':{'s':'HTTP-PROXY','v':false}},'f':['/','/try','/public'],'pf':'/try/secret.txt'},
+    'e': {'h':'try','u':'demo_user','p':'demopass','c':'DEMO','po':{'80':{'s':'HTTP','v':true},'8080':{'s':'HTTP-PROXY','v':false}},'f':['/','/try','/public','/havran/try'],'pf':'/havran/try/secret.txt'},
     };
   const _ip = {'a':'192.168.42.10','b':'10.0.13.37','c':'172.16.99.5','d':'198.51.100.42'};
   _ip['e'] = '203.0.113.77';
@@ -360,8 +360,8 @@
   // Open the /try demo site in a new tab (or same window if blocked)
   function openTry() {
     try {
-      // Point to the actual index.html inside the try folder
-      const url = '/try/index.html';
+      // Point to the actual index.html inside the try folder (site base path)
+      const url = '/havran/try/index.html';
       const w = window.open(url, '_blank');
       if (w) {
         print('[TRY] Opened ' + url + ' in a new tab/window.');
