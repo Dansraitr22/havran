@@ -6,6 +6,7 @@
   <title>Havran — Try</title>
   <link rel="stylesheet" href="/normalize.css">
   <link rel="stylesheet" href="/gogol.css">
+  <script src="../hacknet.js"></script>
   <style>body{font-family:Segoe UI, Arial, sans-serif;padding:20px;line-height:1.4} h1{margin-top:0} .notice{background:#fff6d6;border-left:4px solid #ffd54d;padding:8px 12px;margin-bottom:12px}</style>
 </head>
 <body>
@@ -26,7 +27,7 @@
       return res.text();
     }).then(embed).catch(function(){
       // Fallback: load common entry points from project root (up one level)
-      loadScript('../hacknet.js');
+      // `hacknet.js` is loaded in the page head already; do not reload it here
       loadScript('../app.js');
       loadScript('../article.js');
       app.innerHTML = '<p>Loaded JS fallbacks. Check console for errors.</p>';

@@ -360,14 +360,16 @@
   // Open the /try demo site in a new tab (or same window if blocked)
   function openTry() {
     try {
-      const w = window.open('/havran/try/try.html', '_blank');
+      // Point to the actual index.html inside the try folder
+      const url = '/try/index.html';
+      const w = window.open(url, '_blank');
       if (w) {
-        print('[TRY] Opened /try in a new tab/window.');
+        print('[TRY] Opened ' + url + ' in a new tab/window.');
         w.focus();
       } else {
         // Popup blocked — navigate current window instead
-        print('[TRY] Popup blocked, navigating current tab to /try');
-        window.location.href = '/try';
+        print('[TRY] Popup blocked, navigating current tab to ' + url);
+        window.location.href = url;
       }
     } catch (e) {
       print('[ERROR] Could not open /try: ' + (e && e.message ? e.message : e));
