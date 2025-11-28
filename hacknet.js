@@ -179,6 +179,9 @@
       case 'help':
         printManual();
         break;
+      case 'manual':
+        fetchManual();
+        break;
       case 'scan':
         networkScan();
         break;
@@ -308,6 +311,26 @@
     print('  close / exit');
     print('    Closes the HACKNET console.');
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  }
+
+  // Try to fetch a richer manual from the repository (hacking/MANUAL.md)
+  function fetchManual() {
+    // Attempt to fetch the markdown manual and print it; fall back to built-in manual on error
+    fetch('/hacking/MANUAL.md').then(function(res) {
+      if (!res.ok) throw new Error('Manual not available');
+      return res.text();
+    }).then(function(text) {
+      // Simple rendering: split by lines and print
+      const lines = text.replace(/\r\n/g,'\n').split('\n');
+      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      print('HACK CONSOLE — Remote Manual (from hacking/MANUAL.md)');
+      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      lines.forEach(function(l){ print(l); });
+      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    }).catch(function() {
+      print('[INFO] Could not load remote MANUAL.md — showing local quick manual.');
+      printManual();
+    });
   }
 
   function networkScan() {

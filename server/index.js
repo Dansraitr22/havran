@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const { Octokit } = require('@octokit/rest');
 const app = express();
 
@@ -711,6 +712,15 @@ app.post('/api/leviathan', async (req, res) => {
     console.error('Error syncing leviathan:', err);
     return res.status(500).json({ error: err.message || String(err) });
   }
+});
+
+// Serve repository files as static for demo/try purposes (after API endpoints)
+app.use('/', express.static(path.join(__dirname, '..')));
+
+// Provide a simple /try demo route that serves the `try` folder's index
+app.use('/try', express.static(path.join(__dirname, '..', 'try')));
+app.get(['/try', '/try/*'], (req, res) => {
+  return res.sendFile(path.join(__dirname, '..', 'try', 'index.html'));
 });
 
 app.listen(PORT, () => {

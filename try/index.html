@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Havran — Try</title>
+  <link rel="stylesheet" href="/normalize.css">
+  <link rel="stylesheet" href="/gogol.css">
+  <style>body{font-family:Segoe UI, Arial, sans-serif;padding:20px;line-height:1.4} h1{margin-top:0} .notice{background:#fff6d6;border-left:4px solid #ffd54d;padding:8px 12px;margin-bottom:12px}</style>
+</head>
+<body>
+  <h1>Havran — Try Demo</h1>
+  <div class="notice">This is a small demo page to try the hacking UI. It will attempt to embed <code>/hacking/hacking.html</code> or load root JS files as a fallback.</div>
+
+  <div id="app">Loading demo…</div>
+
+  <script>
+  (function(){
+    var app = document.getElementById('app');
+    function embed(text){ app.innerHTML = text; }
+    function loadScript(src){ var s = document.createElement('script'); s.src = src; s.async = false; s.onerror = function(){ console.warn('Failed to load', src); }; document.head.appendChild(s); }
+
+    // Try to fetch full hacking HTML from site root
+    fetch('/hacking/hacking.html').then(function(res){
+      if(!res.ok) throw new Error('no html');
+      return res.text();
+    }).then(embed).catch(function(){
+      // Fallback: load common entry points from project root
+      loadScript('/hacknet.js');
+      loadScript('/app.js');
+      loadScript('/article.js');
+      app.innerHTML = '<p>Loaded JS fallbacks. Check console for errors.</p>';
+    });
+  })();
+  </script>
+</body>
+</html>
