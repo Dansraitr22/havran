@@ -197,7 +197,35 @@
         if (args.length === 0) {
           print('[ERROR] Usage: nmap <IP address>');
         } else {
-          nmapScan(args[0]);
+          // Allow passing hostname or filenames (e.g., index.html) and resolve to a known target IP
+          const raw = args[0];
+          // direct IP match first
+          if (targets[raw]) {
+            nmapScan(raw);
+            break;
+          }
+          // try to resolve hostname (strip .html if provided)
+          let candidate = raw.replace(/\.html?$/i, '');
+          let foundIp = null;
+          for (const ip of Object.keys(targets)) {
+            if (targets[ip].hostname === candidate) { foundIp = ip; break; }
+          }
+          // special-case: if user passed an HTML filename like 'index.html' and we're on /try, map to 'try'
+          if (!foundIp) {
+            const path = (window.location && window.location.pathname) ? window.location.pathname : '';
+            if ((raw.toLowerCase().endsWith('.html') || candidate.toLowerCase() === 'index') && (path.includes('/try') || path.includes('/havran/try'))) {
+              for (const ip of Object.keys(targets)) {
+                if (targets[ip].hostname === 'try') { foundIp = ip; break; }
+              }
+            }
+          }
+
+          if (foundIp) {
+            nmapScan(foundIp);
+          } else {
+            print('[ERROR] No response from ' + raw);
+            print('[INFO] Host appears to be down or unreachable.');
+          }
         }
         break;
       case 'connect':
