@@ -325,22 +325,34 @@
 
   // Try to fetch a richer manual from the repository (hacking/MANUAL.md)
   function fetchManual() {
-    // Attempt to fetch the markdown manual and print it; fall back to built-in manual on error
-    fetch('/hacking/MANUAL.md').then(function(res) {
-      if (!res.ok) throw new Error('Manual not available');
-      return res.text();
-    }).then(function(text) {
-      // Simple rendering: split by lines and print
-      const lines = text.replace(/\r\n/g,'\n').split('\n');
-      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      print('HACK CONSOLE — Remote Manual (from hacking/MANUAL.md)');
-      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      lines.forEach(function(l){ print(l); });
-      print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-    }).catch(function() {
-      print('[INFO] Could not load remote MANUAL.md — showing local quick manual.');
-      printManual();
-    });
+    // Try common candidate locations for the manual so it works when served from /try or root
+    const candidates = [
+      '../hacking/MANUAL.md',
+      '/hacking/MANUAL.md',
+      'hacking/MANUAL.md'
+    ];
+
+    (function tryNext(i){
+      if (i >= candidates.length) {
+        print('[INFO] Could not load remote MANUAL.md — showing local quick manual.');
+        printManual();
+        return;
+      }
+      const url = candidates[i];
+      fetch(url).then(function(res){
+        if (!res.ok) throw new Error('not ok');
+        return res.text();
+      }).then(function(text){
+        const lines = text.replace(/\r\n/g,'\n').split('\n');
+        print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        print('HACK CONSOLE — Remote Manual (' + url + ')');
+        print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        lines.forEach(function(l){ print(l); });
+        print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      }).catch(function(){
+        tryNext(i+1);
+      });
+    })(0);
   }
 
   // Open the /try demo site in a new tab (or same window if blocked)

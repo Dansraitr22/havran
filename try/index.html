@@ -20,15 +20,15 @@
     function embed(text){ app.innerHTML = text; }
     function loadScript(src){ var s = document.createElement('script'); s.src = src; s.async = false; s.onerror = function(){ console.warn('Failed to load', src); }; document.head.appendChild(s); }
 
-    // Try to fetch full hacking HTML from site root
-    fetch('/hacking/hacking.html').then(function(res){
+    // Try to fetch full hacking HTML from repository root (try is served from /try)
+    fetch('../hacking/hacking.html').then(function(res){
       if(!res.ok) throw new Error('no html');
       return res.text();
     }).then(embed).catch(function(){
-      // Fallback: load common entry points from project root
-      loadScript('/hacknet.js');
-      loadScript('/app.js');
-      loadScript('/article.js');
+      // Fallback: load common entry points from project root (up one level)
+      loadScript('../hacknet.js');
+      loadScript('../app.js');
+      loadScript('../article.js');
       app.innerHTML = '<p>Loaded JS fallbacks. Check console for errors.</p>';
     });
   })();
