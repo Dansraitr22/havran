@@ -358,7 +358,7 @@
   // Open the /try demo site in a new tab (or same window if blocked)
   function openTry() {
     try {
-      const w = window.open('/try', '_blank');
+      const w = window.open('/havran/try/try.html', '_blank');
       if (w) {
         print('[TRY] Opened /try in a new tab/window.');
         w.focus();
