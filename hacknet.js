@@ -182,6 +182,12 @@
       case 'manual':
         fetchManual();
         break;
+      case 'man':
+        fetchManual();
+        break;
+      case 'try':
+        openTry();
+        break;
       case 'scan':
         networkScan();
         break;
@@ -308,6 +314,10 @@
     print('  clear');
     print('    Clears console output for better visibility.');
     print('');
+    print('  manual / man');
+    print('    Loads the full hacking manual from `hacking/MANUAL.md` into the console.');
+    print('  try');
+    print('    Opens the demo site available at /try in a new tab (or navigates current tab if blocked).');
     print('  close / exit');
     print('    Closes the HACKNET console.');
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
@@ -331,6 +341,24 @@
       print('[INFO] Could not load remote MANUAL.md — showing local quick manual.');
       printManual();
     });
+  }
+
+  // Open the /try demo site in a new tab (or same window if blocked)
+  function openTry() {
+    try {
+      const w = window.open('/try', '_blank');
+      if (w) {
+        print('[TRY] Opened /try in a new tab/window.');
+        w.focus();
+      } else {
+        // Popup blocked — navigate current window instead
+        print('[TRY] Popup blocked, navigating current tab to /try');
+        window.location.href = '/try';
+      }
+    } catch (e) {
+      print('[ERROR] Could not open /try: ' + (e && e.message ? e.message : e));
+    }
+    print('');
   }
 
   function networkScan() {
