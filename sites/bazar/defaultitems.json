@@ -152,5 +152,12 @@
     "price": 100,
     "contact": "hahaq",
     "user": "deron22"
+  },
+  {
+    "name": "Guláš s knedlíkem",
+    "description": "Nabízím k adopci sedmnáct porcí guláše s kendlíkem od babičky.",
+    "price": 20,
+    "contact": "Gulasodbabicky@seznam.cz",
+    "user": "Guláš"
   }
 ]
