@@ -208,5 +208,12 @@
     "price": 1,
     "contact": "bunnies@email.com",
     "user": "Jenda"
+  },
+  {
+    "name": "Pernik",
+    "description": "fakt kvalitny zbozi. soused doporučuje. pro tebe i kamoše skoro zadáčo",
+    "price": 150,
+    "contact": "křyžovatka u tunelu blanka",
+    "user": "Finančník"
   }
 ]
