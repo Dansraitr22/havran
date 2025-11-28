@@ -18,6 +18,7 @@
     { "path": "./sites/bordel.sup/bordel.html", "name": "Bordel", "tags": ["bordel", "zábava", "noční život", "služby", "dospělí", "večer", "klub", "relaxace", "diskrétní"] },
     { "path": "./sites/history-enthusiasts/forum.html", "name": "Historické Fórum", "tags": ["historie", "diskuze", "minulost", "události", "výzkum", "kultura", "civilizace", "epochy", "památky"] },
     { "path": "./sites/ufoexistuje/ufoexistuje.html", "name": "UFO Existuje", "tags": ["ufo", "mimozemšťané", "záhady", "vesmír", "létající talíře", "pozorování", "teorie", "kontakt", "nebeská tělesa"] },
+    { "path": "./sites/marnice/marnice.html", "name": "Márnice — informace", "tags": ["márnice", "hřbitov", "pohřeb", "tělo", "odvoz", "úřady", "kontakt", "pohřební služba", "otevírací doba", "adresa"] },
     { "path": "./sites/mysticism/mysticism.html", "name": "Mystika a Tajemství", "tags": ["mystika", "duchovní", "tajemství", "esoterismus", "okultismus", "magie", "spiritualita", "rituály", "paranormální", "věštba","věštby"] },
     { "path": "./sites/church/church.html", "name": "Církev", "tags": ["církev", "náboženství", "víra", "bohoslužby", "křesťanství", "duchovní", "modlitba", "komunita", "svatost"] },
     { "path": "./sites/stonemasons/stomesons.html", "name": "Zednáři", "tags": ["zednáři", "bratrstvo", "tajné společnosti", "rituály", "symboly", "stavitelé", "tradice", "mystérium", "lóže"] },
