@@ -126,12 +126,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Search articles based on query
+    // Levenshtein distance for fuzzy matching
+    function levenshtein(a, b) {
+        if (a === b) return 0;
+        const alen = a.length, blen = b.length;
+        if (alen === 0) return blen;
+        if (blen === 0) return alen;
+        const matrix = [];
+        for (let i = 0; i <= blen; i++) {
+            matrix[i] = [i];
+        }
+        for (let j = 0; j <= alen; j++) {
+            matrix[0][j] = j;
+        }
+        for (let i = 1; i <= blen; i++) {
+            for (let j = 1; j <= alen; j++) {
+                const cost = b.charAt(i - 1) === a.charAt(j - 1) ? 0 : 1;
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j - 1] + cost
+                );
+            }
+        }
+        return matrix[blen][alen];
+    }
+
+    // Fuzzy match: returns true if query approximately appears in text (allow up to 2 edits)
+    function fuzzyMatch(text, query) {
+        if (!text || !query) return false;
+        const q = query.toLowerCase();
+        const t = text.toLowerCase();
+        // direct substring match is always ok
+        if (t.includes(q)) return true;
+        // check tokens (words) for small edit distance
+        const tokens = t.split(/\W+/).filter(Boolean);
+        for (const tok of tokens) {
+            // quick length filter: if length difference is too big skip
+            if (Math.abs(tok.length - q.length) > 3) continue;
+            if (levenshtein(tok, q) <= 2) return true;
+        }
+        return false;
+    }
+
     function searchArticles(query, allData) {
-        const normalizedQuery = query.toLowerCase();
+        const normalizedQuery = (query || '').toString().trim();
+        if (!normalizedQuery) return [];
         return allData.filter(article =>
-            article.title.toLowerCase().includes(normalizedQuery) ||
-            article.content.toLowerCase().includes(normalizedQuery) ||
-            (article.tags && article.tags.some(tag => tag.toLowerCase().includes(normalizedQuery)))
+            fuzzyMatch(article.title, normalizedQuery) ||
+            fuzzyMatch(article.content, normalizedQuery) ||
+            (article.tags && article.tags.some(tag => fuzzyMatch(tag, normalizedQuery)))
         );
     }
 
