@@ -20,7 +20,16 @@
       "createdAt": "2025-11-13T00:00:03Z",
       "author": "Oli22",
       "message": "Sousedi prý slyšeli křik a pak sirény. Ale víte jak, lidi si rádi přibarví. Možná to byla jen hádka.",
-      "comments": []
+      "comments": [
+        {
+          "username": "Sam",
+          "message": "Borci, slyšel jsem, že to bylo někde v Kansas City. víte někdo kde přesně? Ta vědma...",
+          "replies": [],
+          "id": "c_mij8gh9p_wp0hyrq",
+          "createdAt": "2025-11-28T19:05:55.309Z",
+          "author": "Sam"
+        }
+      ]
     },
     {
       "id": "p_init_04",
@@ -34,14 +43,32 @@
       "createdAt": "2025-11-13T00:00:05Z",
       "author": "Zdenek82",
       "message": "To je ale jen drb. Vždycky se něco stane a hned se vykládají pohádky.",
-      "comments": []
+      "comments": [
+        {
+          "username": "Sam",
+          "message": "Zdenooooo!!!!",
+          "replies": [],
+          "id": "c_mij8jxmf_q12ddwg",
+          "createdAt": "2025-11-28T19:08:36.471Z",
+          "author": "Sam"
+        }
+      ]
     },
     {
       "id": "p_init_06",
       "createdAt": "2025-11-13T00:00:06Z",
       "author": "LenkaM",
       "message": "Možná jo, ale divný je, že se tyhle věci dějou tak nějak po sobě. Vědma, pak nějaký chlap a ještě někdo psal, že zvířata v zoo dělala bordel uprostřed noci. slyšela jsem že má tohle číslo  Číslo:+420 774 852 026",
-      "comments": []
+      "comments": [
+        {
+          "username": "Sam",
+          "message": "Leni, víš kde ta Cucumvědma bydlí?",
+          "replies": [],
+          "id": "c_mijasq2r_2ylwc8m",
+          "createdAt": "2025-11-28T20:11:25.828Z",
+          "author": "Sam"
+        }
+      ]
     },
     {
       "id": "p_init_07",
@@ -162,6 +189,14 @@
       "id": "p_mij8f94e_6268bgv",
       "createdAt": "2025-11-28T19:04:58.094Z",
       "author": "Sam"
+    },
+    {
+      "username": "LenkaM",
+      "message": "Možná jo, ale divný je, že se tyhle věci dějou tak nějak po sobě. Vědma, pak nějaký chlap a ještě někdo psal, že zvířata v zoo dělala bordel uprostřed noci.",
+      "comments": [],
+      "id": "p_mij8a6ri_0p550sf",
+      "createdAt": "2025-11-28T19:01:01.758Z",
+      "author": "LenkaM"
     }
   ]
 }
