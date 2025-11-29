@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const VALID_USER = 'agent_leviathan';
     const VALID_CODE = 'leviathan';
     
+    // Thread and storage keys (must be available before any forum initialization)
+    const THREAD_ID = getThreadId();
+    const POSTS_KEY = 'leviathan_posts_' + THREAD_ID;
+    
     // Check if already logged in
     const isLoggedIn = sessionStorage.getItem('leviathan_auth') === 'true';
     if (isLoggedIn) {
@@ -85,8 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { return 'default'; }
     }
     
-    const THREAD_ID = getThreadId();
-    const POSTS_KEY = 'leviathan_posts_' + THREAD_ID;
     
     function initializeForum() {
         const postForm = document.getElementById('newPostForm');
