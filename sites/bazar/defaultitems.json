@@ -215,5 +215,12 @@
     "price": 150,
     "contact": "křyžovatka u tunelu blanka",
     "user": "Finančník"
+  },
+  {
+    "name": "\"práce všeho druhu\"",
+    "description": "jsme profesionální organizace zbavý me se čeho nebo koho potřebujete",
+    "price": 10000,
+    "contact": "Jaromírova 245/53",
+    "user": "pepa"
   }
 ]
