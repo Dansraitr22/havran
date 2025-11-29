@@ -398,6 +398,43 @@ body {
     margin: 5px 0;
 }
 
+/* Improved login readability: light box with dark text and high-contrast inputs */
+#loginScreen .box {
+    background: #f6f6f6;
+    color: #0a0a0a;
+    border: 2px solid #cccccc;
+}
+
+#loginScreen .box h2 {
+    background: #e6e6e6;
+    color: #002244;
+    border-bottom: 1px solid #cccccc;
+}
+
+#loginScreen input[type="text"],
+#loginScreen input[type="password"] {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #999999;
+    padding: 6px;
+}
+
+#loginScreen input::placeholder {
+    color: #666666;
+}
+
+#loginScreen .btn {
+    background: #002244;
+    color: #ffffff;
+    border: 2px solid #004080;
+}
+
+#loginError {
+    background: #ffeeee;
+    color: #990000;
+    border: 1px solid #ffcccc;
+}
+
 /* Input Fields */
 input[type="text"],
 input[type="password"],
