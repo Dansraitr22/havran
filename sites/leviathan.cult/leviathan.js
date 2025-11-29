@@ -91,11 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     function initializeForum() {
+        // compute a local posts key here to avoid any TDZ / ordering issues
+        const postsKey = 'leviathan_posts_' + getThreadId();
         const postForm = document.getElementById('newPostForm');
         const postList = document.getElementById('postList');
         const currentUser = sessionStorage.getItem('leviathan_user');
         
-        let posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || [];
+        let posts = JSON.parse(localStorage.getItem(postsKey)) || [];
         
         // Load posts from server (fallback to local JSON)
         async function loadInitialPosts() {
@@ -109,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (serverPosts.length > 0) {
                         const merged = mergePosts(posts, serverPosts);
                         posts = merged;
-                        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                        localStorage.setItem(postsKey, JSON.stringify(posts));
                     }
                 }
             } catch (error) {
@@ -148,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 
                 posts.unshift(newPost);
-                localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+                localStorage.setItem(postsKey, JSON.stringify(posts));
                 syncToServer();
                 document.getElementById('message').value = '';
                 renderPosts();
