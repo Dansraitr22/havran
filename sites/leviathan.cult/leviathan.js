@@ -45,12 +45,37 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeForum();
     }
     
-    // Logout
-    document.getElementById('logoutButton').addEventListener('click', () => {
-        sessionStorage.removeItem('leviathan_auth');
-        sessionStorage.removeItem('leviathan_user');
-        location.reload();
-    });
+    // Logout - robust handler (only attach if element exists)
+    const logoutButtonEl = document.getElementById('logoutButton');
+    if (logoutButtonEl) {
+        logoutButtonEl.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Clear authentication state
+            sessionStorage.removeItem('leviathan_auth');
+            sessionStorage.removeItem('leviathan_user');
+
+            // Hide forum and show login screen
+            try {
+                if (mainForum) mainForum.style.display = 'none';
+                if (loginScreen) loginScreen.style.display = 'block';
+                // Clear login inputs for safety
+                const usernameInput = document.getElementById('username');
+                const accessInput = document.getElementById('accessCode');
+                if (usernameInput) usernameInput.value = '';
+                if (accessInput) accessInput.value = '';
+                // Friendly feedback
+                const loginErr = document.getElementById('loginError');
+                if (loginErr) {
+                    loginErr.textContent = 'You have been logged out.';
+                    loginErr.style.display = 'block';
+                    setTimeout(() => { loginErr.style.display = 'none'; }, 3000);
+                }
+            } catch (err) {
+                // fallback to reload if DOM manipulation fails
+                location.reload();
+            }
+        });
+    }
     
     // Forum functionality (multi-thread support)
     function getThreadId() {
