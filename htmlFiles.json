@@ -14,7 +14,7 @@
     { "path": "./sites/zoo/zoo.html", "name": "Zoo", "tags": ["zvířata", "příroda", "zoo", "fauna", "savci", "expozice", "živočichové", "biologie", "ochrana"] },
     { "path": "./sites/zoo/zootemplate.html", "name": "Zoo Template", "tags": ["zvířata", "šablona", "zoo", "profily", "druhy", "informace", "expozice", "katalog"] },
     { "path": "./sites/Čsfd/csfd.html", "name": "ČSFD - Filmové Recenze", "tags": ["filmy", "recenze", "čsfd", "hodnocení", "kino", "databáze", "filmografie", "herci", "kritiky"] },
-    { "path": "./sites/fleemarket.sup/fleemarket.html", "name": "Fleemarket", "tags": ["bleší trh", "prodej", "zboží", "starožitnosti", "bazaar", "vintage", "použité", "sběratelství", "rariety"] },
+    { "path": "./sites/fleemarket.sup/fleemarket.html", "name": "Fleemarket", "tags": ["bleší trh", "prodej", "zboží", "starožitnosti", "bazar", "vintage", "použité", "sběratelství", "rariety","blešák","bleší"] },
     { "path": "./sites/bordel.sup/bordel.html", "name": "Bordel", "tags": ["bordel", "zábava", "noční život", "služby", "dospělí", "večer", "klub", "relaxace", "diskrétní"] },
     { "path": "./sites/history-enthusiasts/forum.html", "name": "Historické Fórum", "tags": ["historie", "diskuze", "minulost", "události", "výzkum", "kultura", "civilizace", "epochy", "památky"] },
     { "path": "./sites/ufoexistuje/ufoexistuje.html", "name": "UFO Existuje", "tags": ["ufo", "mimozemšťané", "záhady", "vesmír", "létající talíře", "pozorování", "teorie", "kontakt", "nebeská tělesa"] },
