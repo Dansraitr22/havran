@@ -6,7 +6,16 @@
       "createdAt": "2025-11-13T00:00:01Z",
       "author": "Tomik89",
       "message": "Hele, slyšel jsem, že se něco stalo u nějaký vědmy, co dělala seance. Prej tam byl rámus a pak sanitka. Nevíte někdo víc?",
-      "comments": []
+      "comments": [
+        {
+          "username": "deron22",
+          "message": "ahoj",
+          "replies": [],
+          "id": "c_mhxua81p_clif24r",
+          "createdAt": "2025-11-13T19:45:59.101Z",
+          "author": "deron22"
+        }
+      ]
     },
     {
       "id": "p_init_02",
@@ -220,6 +229,13 @@
               "id": "r_mika90qj_w318npn",
               "createdAt": "2025-11-29T12:43:52.699Z",
               "author": "Jarda"
+            },
+            {
+              "username": "pepa",
+              "message": "hele já na jednoho mám číslo 607 791 493",
+              "id": "r_mikaebn0_8fy3x5w",
+              "createdAt": "2025-11-29T12:48:00.108Z",
+              "author": "pepa"
             }
           ],
           "id": "c_mika7nzk_grpvy0n",
@@ -230,6 +246,22 @@
       "id": "p_mika5mm8_tqih5mo",
       "createdAt": "2025-11-29T12:41:14.432Z",
       "author": "Anna"
+    },
+    {
+      "username": "daw",
+      "message": "awfawf",
+      "comments": [],
+      "id": "p_mi3bxhia_eoo1dzq",
+      "createdAt": "2025-11-17T15:58:48.802Z",
+      "author": "daw"
+    },
+    {
+      "username": "deron22",
+      "message": "agfas",
+      "comments": [],
+      "id": "p_mi3bxhia_6ft2pmq",
+      "createdAt": "2025-11-17T15:58:48.802Z",
+      "author": "deron22"
     }
   ]
 }
