@@ -100,3 +100,5 @@ function setupReportForm() {
 }
 
 // Removed duplicate window.addEventListener - login handler now in DOMContentLoaded at top
+
+// Removed duplicate window.addEventListener - login handler now in DOMContentLoaded at top

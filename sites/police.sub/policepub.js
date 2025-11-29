@@ -8,178 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const systemTime = document.getElementById('systemTime');
     const activityLog = document.getElementById('activityLog');
 
-    // Case database with detailed information
-    const cases = [
-        {
-            id: "8821",
-            title: "ORGANIZED CRIME RING",
-            type: "ORGANIZED CRIME",
-            status: "ACTIVE",
-            priority: "HIGH",
-            date: "2025-11-13",
-            location: "DOWNTOWN DISTRICT",
-            officer: "DET. JOHNSON",
-            description: "Multi-agency investigation into suspected trafficking network operating in the downtown district.",
-            evidence: [
-                "Surveillance footage from 5 locations",
-                "Financial records - Bank transfers",
-                "Witness statements (3 individuals)",
-                "Phone records - 15 suspects"
-            ],
-            suspects: [
-                "REDACTED - Primary suspect, male, 45",
-                "REDACTED - Associate, female, 32",
-                "REDACTED - Driver, male, 28"
-            ],
-            timeline: [
-                "2025-10-01: Initial tip received",
-                "2025-10-15: Surveillance initiated",
-                "2025-11-01: Search warrant obtained",
-                "2025-11-13: Active monitoring"
-            ],
-            notes: "Case requires coordination with federal agencies. Maintain strict operational security."
-        },
-        {
-            id: "8819",
-            title: "NARCOTICS OPERATION",
-            type: "NARCOTICS",
-            status: "ACTIVE",
-            priority: "HIGH",
-            date: "2025-11-12",
-            location: "SECTOR 7-B",
-            officer: "DET. MARTINEZ",
-            description: "Undercover operation targeting drug distribution network. Multiple assets deployed.",
-            evidence: [
-                "Undercover recordings",
-                "Product samples - Lab analysis pending",
-                "Transaction records",
-                "Location surveillance"
-            ],
-            suspects: [
-                "SUSPECT-A: Male, 38, known dealer",
-                "SUSPECT-B: Male, 25, distributor",
-                "SUSPECT-C: Female, 30, courier"
-            ],
-            timeline: [
-                "2025-09-20: Investigation opened",
-                "2025-10-10: Undercover insertion",
-                "2025-11-05: First controlled buy",
-                "2025-11-12: Ongoing operations"
-            ],
-            notes: "DO NOT APPROACH without backup. Suspects considered armed and dangerous."
-        },
-        {
-            id: "8815",
-            title: "VEHICLE THEFT RING",
-            type: "THEFT",
-            status: "INVESTIGATION",
-            priority: "MEDIUM",
-            date: "2025-11-11",
-            location: "PARKING DISTRICT 3",
-            officer: "DET. CHEN",
-            description: "Series of vehicle thefts. Pattern identified across 3 districts.",
-            evidence: [
-                "CCTV footage - 8 incidents",
-                "Vehicle descriptions and VINs",
-                "Witness descriptions",
-                "GPS tracking data (2 vehicles recovered)"
-            ],
-            suspects: [
-                "Unknown male, approx 30-35 years",
-                "Possible accomplice - vehicle make/model identified"
-            ],
-            timeline: [
-                "2025-10-15: First theft reported",
-                "2025-10-28: Pattern identified",
-                "2025-11-03: Task force assembled",
-                "2025-11-11: Ongoing investigation"
-            ],
-            notes: "Suspects appear to target high-end vehicles. Increase patrols in affected areas."
-        },
-        {
-            id: "8812",
-            title: "BURGLARY SERIES",
-            type: "BURGLARY",
-            status: "ACTIVE",
-            priority: "MEDIUM",
-            date: "2025-11-10",
-            location: "RESIDENTIAL ZONE 3",
-            officer: "DET. WILLIAMS",
-            description: "Pattern of residential burglaries. 7 incidents in past 3 weeks. Similar MO.",
-            evidence: [
-                "Fingerprints - Partial match in system",
-                "Forced entry points photographed",
-                "Stolen items list",
-                "Neighborhood canvas results"
-            ],
-            suspects: [
-                "Possible match: Known offender, male, 42",
-                "DNA sample collected - Analysis pending"
-            ],
-            timeline: [
-                "2025-10-20: First incident",
-                "2025-10-25: Second incident",
-                "2025-11-01: Pattern recognized",
-                "2025-11-10: Forensics processing"
-            ],
-            notes: "Entry method consistent - rear window access. Recommend security awareness campaign."
-        },
-        {
-            id: "8807",
-            title: "FRAUD INVESTIGATION",
-            type: "FRAUD",
-            status: "REVIEW",
-            priority: "LOW",
-            date: "2025-11-08",
-            location: "FINANCIAL DISTRICT",
-            officer: "DET. ANDERSON",
-            description: "Financial fraud investigation. Elderly victims targeted. Total loss: $125,000.",
-            evidence: [
-                "Bank statements and wire transfers",
-                "Phone records from victims",
-                "Email correspondence",
-                "IP address traces"
-            ],
-            suspects: [
-                "Unknown - Operating from overseas location",
-                "Multiple phone numbers identified"
-            ],
-            timeline: [
-                "2025-10-01: First victim report",
-                "2025-10-15: Additional victims identified",
-                "2025-10-25: Federal agencies contacted",
-                "2025-11-08: Evidence compilation"
-            ],
-            notes: "International cooperation required. Victims require support services."
-        },
-        {
-            id: "8801",
-            title: "ASSAULT CASE",
-            type: "ASSAULT",
-            status: "CLOSED",
-            priority: "LOW",
-            date: "2025-11-05",
-            location: "BAR DISTRICT",
-            officer: "DET. THOMPSON",
-            description: "Assault case - Suspect identified and arrested. Case closed pending prosecution.",
-            evidence: [
-                "Witness statements (4 individuals)",
-                "Bar security footage",
-                "Medical reports",
-                "Arrest report"
-            ],
-            suspects: [
-                "ARRESTED: Male, 28, charged with assault"
-            ],
-            timeline: [
-                "2025-11-01: Incident occurred",
-                "2025-11-02: Suspect identified",
-                "2025-11-03: Arrest made",
-                "2025-11-05: Case closed"
-            ],
-            notes: "Case forwarded to prosecutor. Victim recovering."
-        }
-    ];
+    // Cases are now provided as downloadable documents; keep inline list empty
+    const cases = [];
 
     // Handle login
     if (loginForm) {
@@ -202,9 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Set officer ID in display
                 document.getElementById('displayOfficerId').textContent = officerId;
                 
-                // Load cases
+                // Load cases (none inline) and available documents
                 displayCases();
-                
+                loadDocuments();
+
                 // Add login activity
                 addActivity(`Officer ${officerId} logged in`);
                 
@@ -380,8 +211,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add activity to log
     function addActivity(message) {
-        // Activity logging disabled (RECENT ACTIVITY panel removed)
-        return;
+        console.log(`[ACTIVITY] ${message}`);
+        try {
+            const activityLogEl = document.getElementById('activityLog');
+            if (activityLogEl) {
+                const entry = document.createElement('div');
+                entry.textContent = `${new Date().toLocaleString()} - ${message}`;
+                entry.style.color = '#cccccc';
+                activityLogEl.prepend(entry);
+            }
+        } catch (e) {
+            // ignore
+        }
+    }
+
+    // Load documents metadata from the docs folder and render download links
+    function loadDocuments() {
+        const docsList = document.getElementById('docsList');
+        if (!docsList) return;
+
+        fetch('docs/documents.json')
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
+            .then(list => {
+                if (!Array.isArray(list) || list.length === 0) {
+                    docsList.innerHTML = '<p style="color:#ffaa00;">No documents available.</p>';
+                    return;
+                }
+
+                docsList.innerHTML = list.map(d => {
+                    const title = d.title || d.filename || 'Document';
+                    const desc = d.description ? `<div style="color:#cccccc;font-size:12px;margin-top:4px;">${d.description}</div>` : '';
+                    const file = d.filename;
+                    return `
+                        <div class="doc-item" style="margin-bottom:10px;padding:8px;border:1px solid #003366;background:#070707;">
+                            <strong style="color:#00ffff;">${title}</strong>
+                            <div style="color:#cccccc;font-size:12px;">${d.id || ''}</div>
+                            ${desc}
+                            <div style="margin-top:8px;"><a class="btn" href="docs/${file}" download onclick="try{addActivity('Downloaded ${file}');}catch(e){}">DOWNLOAD</a></div>
+                        </div>
+                    `;
+                }).join('');
+            })
+            .catch(err => {
+                docsList.innerHTML = '<p style="color:#ff0000;">Error loading documents</p>';
+                console.error('Error loading documents.json', err);
+            });
     }
 
     // Initialize
