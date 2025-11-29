@@ -209,7 +209,16 @@
     {
       "username": "Anna",
       "message": "Manžel neplatí alimenty nevíte někdo o někom kdo by ho \"popostrčil\"",
-      "comments": [],
+      "comments": [
+        {
+          "username": "Honza",
+          "message": "Hele slyšel jsme že takovýhle capci se schází u tý Hospody midgard před otvíračkou",
+          "replies": [],
+          "id": "c_mika7nzk_grpvy0n",
+          "createdAt": "2025-11-29T12:42:49.520Z",
+          "author": "Honza"
+        }
+      ],
       "id": "p_mika5mm8_tqih5mo",
       "createdAt": "2025-11-29T12:41:14.432Z",
       "author": "Anna"
