@@ -213,7 +213,15 @@
         {
           "username": "Honza",
           "message": "Hele slyšel jsme že takovýhle capci se schází u tý Hospody midgard před otvíračkou",
-          "replies": [],
+          "replies": [
+            {
+              "username": "Jarda",
+              "message": "Jo ty toho dělaj spoustu od \"nehod\" až po praní",
+              "id": "r_mika90qj_w318npn",
+              "createdAt": "2025-11-29T12:43:52.699Z",
+              "author": "Jarda"
+            }
+          ],
           "id": "c_mika7nzk_grpvy0n",
           "createdAt": "2025-11-29T12:42:49.520Z",
           "author": "Honza"
